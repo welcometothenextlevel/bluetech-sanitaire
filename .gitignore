@@ -1,0 +1,6 @@
+# client source files (screenshots show other browser tabs) — never publish
+_src/
+_og/
+_build/__pycache__/
+.DS_Store
+docs/_review/
