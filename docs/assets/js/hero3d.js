@@ -118,7 +118,7 @@ function init() {
   function line(points, r, hot, ord) {
     const curve = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(p[0], p[1], p[2])), false, 'centripetal');
     const L = curve.getLength();
-    const seg = Math.round(L * (mob() ? 18 : 26));
+    const seg = Math.round(L * (mob() ? 12 : 18));
     const outer = new THREE.Mesh(new THREE.TubeGeometry(curve, seg, r, mob() ? 14 : 20, false), glass);
     const mat = waterMat(L, hot);
     const inner = new THREE.Mesh(new THREE.TubeGeometry(curve, seg, r * 0.6, 10, false), mat);
@@ -134,7 +134,7 @@ function init() {
     add(cyl(0.095, 0.34, 16, brass), x, -0.36, 0);
     add(cyl(0.14, 0.13, 6, brassDark), x, -0.56, 0);
     const sp = (i - 2);
-    line([[x, -0.62, 0], [x, -1.3, 0], [x + sp * 0.18, -2.3, 0.45], [x + sp * 0.62 + 0.35, -3.7, 1.25], [x + sp * 1.05 + 0.8, -6.4, 2.3]], 0.11, i % 2 === 1, i + 1);
+    line([[x, -0.62, 0], [x, -1.3, 0], [x + sp * 0.22, -2.5, 0.45], [x + sp * 0.42, -4.4, 0.85], [x + sp * 0.48, -7, 1.0], [x + sp * 0.4, -10, 0.8], [x + sp * 0.32, -13.5, 0.6], [x + sp * 0.26, -19, 0.45], [x + sp * 0.22, -25, 0.35], [x + sp * 0.2, -31, 0.3]], 0.11, i % 2 === 1, i + 1);
   });
   // colour caps on outlets (blue = cold, red = hot)
   outX.forEach((x, i) => add(cyl(0.075, 0.08, 20, i % 2 === 1 ? red : blue), x, -0.17, 0.2).rotation.x = Math.PI / 2);
@@ -176,7 +176,7 @@ function init() {
   /* ---------- state ---------- */
   let open = true, handleA = 0, handleTarget = 0, gaugeV = 0, gaugeTarget = 0;
   let introAt = performance.now(), introDone = false;
-  let W = 1, H = 1, base = { x: 0, y: 0, z: 14, s: 1 };
+  let W = 1, H = 1, base = { x: 0, y: 0, s: 1, look: 0.2, camY: 0.5, dive: 10 };
   const ptr = { x: 0, y: 0, tx: 0, ty: 0 };
   let dragRot = 0, dragVel = 0, dragging = false, dx0 = 0, moved = 0;
 
@@ -184,18 +184,44 @@ function init() {
     const r = canvas.getBoundingClientRect();
     W = Math.max(1, r.width); H = Math.max(1, r.height);
     renderer.setSize(W, H, false);
-    camera.aspect = W / H; camera.updateProjectionMatrix();
-    const halfH = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * 14, halfW = halfH * camera.aspect;
-    if (camera.aspect > 1.05) {
-      base = { x: Math.min(halfW * 0.35 + 0.7, 4.3), y: 0.05, z: 14, s: Math.min(0.98, halfH / 4.2) };
+    const aspect = W / H;
+    camera.aspect = aspect;
+    if (aspect > 1.05) {
+      camera.fov = 28;
+      const halfH = Math.tan(THREE.MathUtils.degToRad(14)) * 14, halfW = halfH * aspect;
+      // fit the whole assembly between the end of the headline and the right edge
+      let textRight = W * 0.42;
+      const inEl = hero.querySelector('[data-hero-in]');
+      if (inEl) {
+        const rg = document.createRange(), cr = canvas.getBoundingClientRect();
+        textRight = 0;
+        inEl.querySelectorAll('.hero__t, .hero__p, .hero__b').forEach(el => { rg.selectNodeContents(el); textRight = Math.max(textRight, rg.getBoundingClientRect().right - cr.left); });
+        if (!textRight) textRight = W * 0.42;
+      }
+      const left = Math.min(W * 0.62, textRight + 28), right = W - Math.max(28, W * 0.03);
+      const wpp = 2 * halfW / W, bandW = (right - left) * wpp;
+      const s = Math.max(0.42, Math.min(0.98, halfH / 4.2, bandW * 0.9 / 6.7));
+      const cxWorld = ((left + right) / 2 - W / 2) * wpp;
+      base = { x: cxWorld + 0.62 * s, y: 0.05, s, look: 0.2, camY: 0.5, dive: 10.5 * s };
     } else {
-      const s = Math.min(1, (halfW * 2 * 0.86) / 5.6);
-      base = { x: 0.2 * s, y: 0.6, z: 14, s };
+      // portrait: keep the horizontal field constant so the manifold fills the width
+      camera.fov = Math.min(62, Math.max(28, 2 * THREE.MathUtils.radToDeg(Math.atan(3.1 / 14 / aspect))));
+      const halfH = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * 14;
+      // fit the manifold in the band between the header and the hero text, whatever the phone height
+      const inEl = hero.querySelector('[data-hero-in]'), hd = document.querySelector('[data-hd]');
+      const top = (hd ? hd.offsetHeight : 66) + 6, textTop = inEl ? inEl.offsetTop + (inEl.firstElementChild ? inEl.firstElementChild.offsetTop : 0) : H * 0.5;
+      const band = Math.max(H * 0.22, textTop - top - 8);
+      const worldBand = band / H * 2 * halfH;
+      const s = Math.max(0.5, Math.min(0.9, worldBand / 2.75));
+      const py = top + band * 0.5;
+      base = { x: 0.1, y: (0.5 - py / H) * 2 * halfH - 0.62 * s, s, look: 0, camY: 0, dive: 11 * s };
     }
+    camera.updateProjectionMatrix();
     rig.scale.setScalar(base.s);
   }
   layout();
   addEventListener('resize', layout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
 
   // pointer
   if (FINE) addEventListener('pointermove', e => { ptr.tx = (e.clientX / innerWidth) * 2 - 1; ptr.ty = (e.clientY / innerHeight) * 2 - 1; }, { passive: true });
@@ -228,26 +254,65 @@ function init() {
   }
   if (hint) hint.textContent = verb + ' pour fermer';
 
+  /* ---------- scroll scene: the hero stays pinned while the camera follows the water down the pipes ---------- */
+  const stick = hero.querySelector('.hero__stick');
+  const heroIn = hero.querySelector('[data-hero-in]'), spec = hero.querySelector('[data-hero-spec]'), cue = hero.querySelector('[data-hero-cue]');
+  const calloutWrap = hero.querySelector('[data-callouts]'), meter = hero.querySelector('[data-hero-meter]');
+  const story = hero.querySelector('.hero__story'), qs = [...hero.querySelectorAll('[data-q]')];
+  const clamp01 = x => Math.min(1, Math.max(0, x));
+  const smooth = (a, b, x) => { const t = clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+  function progress() {
+    if (RM) return 0;
+    const r = hero.getBoundingClientRect();
+    return clamp01(-r.top / Math.max(1, r.height - innerHeight));
+  }
+  let lastP = -1;
+  function applyDom(p) {
+    if (Math.abs(p - lastP) < 0.0005) return; lastP = p;
+    const out = smooth(0.0, 0.16, p);
+    heroIn.style.opacity = (1 - out).toFixed(3);
+    heroIn.style.transform = out ? 'translate3d(0,' + (-70 * out).toFixed(1) + 'px,0)' : '';
+    heroIn.style.visibility = out > 0.99 ? 'hidden' : '';
+    if (spec) spec.style.opacity = (1 - smooth(0, 0.08, p)).toFixed(3);
+    if (cue) cue.style.opacity = (1 - smooth(0, 0.06, p)).toFixed(3);
+    if (calloutWrap) calloutWrap.style.opacity = (1 - smooth(0.02, 0.12, p)).toFixed(3);
+    stick.style.setProperty('--veil', (1 - out).toFixed(3));
+    let sb = 0;
+    qs.forEach((q, i) => {
+      const a = i === 0 ? [0.2, 0.32, 0.5, 0.6] : [0.6, 0.72, 0.95, 1.01];
+      const inn = smooth(a[0], a[1], p), o = smooth(a[2], a[3], p), v = inn * (1 - o);
+      q.style.opacity = v.toFixed(3);
+      q.style.transform = 'translate3d(0,' + ((1 - inn) * 44 - o * 44).toFixed(1) + 'px,0)';
+      sb = Math.max(sb, v);
+    });
+    if (story) story.style.setProperty('--sb', sb.toFixed(3));
+    if (meter) meter.style.transform = 'scaleY(' + p.toFixed(4) + ')';
+  }
+
   /* ---------- render loop ---------- */
-  let visible = true, raf = 0, last = performance.now(), T = 0, ready = false;
+  let visible = true, raf = 0, last = performance.now(), T = 0, ready = false, lastSY = scrollY, boost = 0;
   const ease = (a, b, k) => a + (b - a) * k;
   const easeOut = x => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
 
   function frame(now) {
-    const dt = Math.min(0.05, (now - last) / 1000); last = now; T += dt;
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    // scrolling pushes the water: the faster you scroll, the faster it flows
+    const v = Math.abs(scrollY - lastSY) / Math.max(0.001, dt); lastSY = scrollY;
+    boost = ease(boost, Math.min(3, v / 700), 0.08);
+    T += dt * (1 + boost * 2.2);
     const it = (now - introAt) / 1000;
 
     // intro: inlet fills, valve turns, outlets fill, gauge rises
     if (!introDone) {
       handleA = -Math.PI / 2 + Math.PI / 2 * easeOut((it - 1.2) / 0.8);
       inlet.fill = easeOut((it - 0.3) / 1.0);
-      lines.forEach(l => { if (l.ord > 0) l.fill = easeOut((it - 2.0 - l.ord * 0.12) / 1.3); });
+      lines.forEach(l => { if (l.ord > 0) l.fill = easeOut((it - 2.0 - l.ord * 0.12) / 2.2); });
       gaugeV = 3.0 * easeOut((it - 1.9) / 1.6) + Math.sin(Math.max(0, it - 1.9) * 9) * Math.exp(-Math.max(0, it - 1.9) * 2.5) * 0.35 * (it > 1.9 ? 1 : 0);
       if (it > 2.2) Object.values(co).forEach(el => el.classList.add('is-on'));
-      if (it > 4) { introDone = true; lines.forEach(l => l.target = 1); gaugeTarget = 3; }
+      if (it > 5) { introDone = true; lines.forEach(l => l.target = 1); gaugeTarget = 3; }
     } else {
       handleA = ease(handleA, handleTarget, 0.12);
-      lines.forEach(l => { const sp = l.target > l.fill ? 0.9 : 1.6; l.fill += Math.sign(l.target - l.fill) * Math.min(Math.abs(l.target - l.fill), dt * sp / (l.ord ? 1 : 1)); });
+      lines.forEach(l => { const sp = l.target > l.fill ? 0.55 : 1.2; l.fill += Math.sign(l.target - l.fill) * Math.min(Math.abs(l.target - l.fill), dt * sp); });
       gaugeV = ease(gaugeV, gaugeTarget + (open ? Math.sin(T * 7) * 0.03 : 0), 0.06);
     }
     handle.rotation.y = handleA;
@@ -255,28 +320,32 @@ function init() {
     lines.forEach(l => { l.mat.uniforms.fill.value = l.fill; l.mat.uniforms.t.value = RM ? 0 : T * (open || !introDone ? 1 : 0.15); });
     if (barTxt) barTxt.textContent = Math.max(0, gaugeV).toFixed(1).replace('.', ',') + ' bar';
 
-    // motion: intro swing + pointer + drag + scroll
-    const sc = Math.min(1.2, Math.max(0, scrollY / Math.max(1, hero.offsetHeight)));
+    // scene progress (0 = hero, 1 = end of the pinned scroll)
+    const p = progress();
+    applyDom(p);
+    const a = smooth(0, 0.3, p), b = smooth(0.18, 1, p);
     ptr.x = ease(ptr.x, ptr.tx, 0.05); ptr.y = ease(ptr.y, ptr.ty, 0.05);
     if (!dragging) { dragVel *= 0.94; dragRot += dragVel; dragRot *= 0.985; }
     const intro = easeOut(it / 2.2);
     const sway = RM ? 0 : Math.sin(T * 0.45) * 0.07;
-    rig.rotation.y = -0.55 + intro * 0.25 + ptr.x * 0.22 + sway + dragRot + sc * 0.9;
-    rig.rotation.x = 0.12 + ptr.y * 0.08 - sc * 0.15;
-    rig.position.set(base.x, base.y + sc * 2.4 - (1 - intro) * 0.6, 0);
-    camera.position.set(0, 0.5, base.z + sc * 2);
-    camera.lookAt(0, 0.2, 0);
+    rig.rotation.y = -0.55 + intro * 0.25 + ptr.x * 0.22 + sway + dragRot + a * 0.22 - b * 0.12;
+    rig.rotation.x = 0.12 + ptr.y * 0.08 + a * 0.1;
+    rig.position.set(base.x, base.y - (1 - intro) * 0.6, 0);
+    camera.position.set(0, base.camY - b * base.dive, 14 - b * 3);
+    camera.lookAt(0, base.look - b * (base.dive + 2.2), 0);
 
     renderer.render(scene, camera);
     if (!ready) { ready = true; canvas.classList.add('is-ready'); }
 
     // callouts
-    for (const k in co) {
+    if (p < 0.13) for (const k in co) {
       if (!anchors[k]) continue;
       tmp.copy(anchors[k]); assy.localToWorld(tmp); tmp.project(camera);
       const x = (tmp.x * 0.5 + 0.5) * W, y = (-tmp.y * 0.5 + 0.5) * H;
       co[k].style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)' + (co[k].classList.contains('co--l') ? ' translateX(-100%)' : '');
-      co[k].style.visibility = (tmp.z < 1 && x > 8 && x < W - 8 && y > 70 && y < H - 8) ? '' : 'hidden';
+      const cw = co[k].offsetWidth || 0, isL = co[k].classList.contains('co--l');
+      const fits = isL ? x - cw > 8 : x + cw < W - 8;
+      co[k].style.visibility = (fits && tmp.z < 1 && y > 70 && y < H - 8) ? '' : 'hidden';
     }
     if (visible) raf = requestAnimationFrame(frame);
   }
@@ -287,6 +356,7 @@ function init() {
     new IntersectionObserver(en => { visible = en[0].isIntersecting && !document.hidden; visible ? startLoop() : stopLoop(); }).observe(hero);
   }
   document.addEventListener('visibilitychange', () => { visible = !document.hidden; visible ? startLoop() : stopLoop(); });
-  if (RM) introAt = performance.now() - 5000;
+  addEventListener('scroll', () => { if (!raf && visible) startLoop(); }, { passive: true });
+  if (RM) introAt = performance.now() - 6000;
   startLoop();
 }

@@ -42,8 +42,9 @@
     var y = W.scrollY, max = Math.max(1, de.scrollHeight - W.innerHeight), p = Math.min(1, Math.max(0, y / max));
     hd.classList.toggle('is-scrolled', y > 24);
     var menuOpen = de.classList.contains('menu-open') || hd.classList.contains('dd-open');
-    var hide = !menuOpen && y > lastY + 2 && y > 420;
-    var show = y < lastY - 2 || y < 420;
+    // on phones the header (and its menu button) always stays visible
+    var hide = !menuOpen && !isMob() && y > lastY + 2 && y > 420;
+    var show = isMob() || y < lastY - 2 || y < 420;
     if (hide) { hd.classList.add('is-hidden'); de.classList.add('hd-hide'); }
     else if (show) { hd.classList.remove('is-hidden'); de.classList.remove('hd-hide'); }
     lastY = y;
@@ -67,24 +68,35 @@
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && dd.classList.contains('is-open')) { setDD(false); ddBtn.focus(); } });
   }
 
-  var burger = $('[data-burger]'), menu = $('[data-menu]');
+  var burger = $('[data-burger]'), menu = $('[data-menu]'), lockY = 0, bs = d.body.style, kbd = false;
+  // iOS ignores overflow:hidden on body, so the page is pinned with position:fixed while the menu is open
+  function lockPage(on) {
+    if (lenis) { on ? lenis.stop() : lenis.start(); return; }
+    if (on) { lockY = W.scrollY; bs.position = 'fixed'; bs.top = -lockY + 'px'; bs.left = '0'; bs.right = '0'; bs.width = '100%'; }
+    else { bs.position = ''; bs.top = ''; bs.left = ''; bs.right = ''; bs.width = ''; W.scrollTo(0, lockY); }
+  }
   function setMenu(on) {
+    if (on === de.classList.contains('menu-open')) return;
     de.classList.toggle('menu-open', on);
     burger.setAttribute('aria-expanded', on);
     burger.setAttribute('aria-label', on ? 'Fermer le menu' : 'Ouvrir le menu');
     menu.setAttribute('aria-hidden', !on);
-    if (lenis) { on ? lenis.stop() : lenis.start(); }
-    d.body.style.overflow = on ? 'hidden' : '';
-    if (on) { hd.classList.remove('is-hidden'); setTimeout(function () { var f = $('a', menu); if (f) f.focus({ preventScroll: true }); }, 350); }
+    lockPage(on);
+    if (on) { hd.classList.remove('is-hidden'); de.classList.remove('hd-hide'); menu.scrollTop = 0; if (kbd) setTimeout(function () { var f = $('a', menu); if (f) f.focus({ preventScroll: true }); }, 350); }
   }
+  var msvc = $('[data-msvc]');
+  if (msvc) msvc.addEventListener('click', function () {
+    var on = msvc.getAttribute('aria-expanded') !== 'true';
+    msvc.setAttribute('aria-expanded', on); $('#msvc').classList.toggle('is-open', on);
+  });
   if (burger && menu) {
-    burger.addEventListener('click', function () { setMenu(!de.classList.contains('menu-open')); });
+    burger.addEventListener('click', function (e) { kbd = e.detail === 0; setMenu(!de.classList.contains('menu-open')); });
     $$('a', menu).forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
     d.addEventListener('keydown', function (e) {
       if (!de.classList.contains('menu-open')) return;
       if (e.key === 'Escape') { setMenu(false); burger.focus(); }
       if (e.key === 'Tab') {
-        var f = [burger].concat($$('a', menu)), i = f.indexOf(d.activeElement);
+        var f = [burger].concat($$('a, button', menu).filter(function (x) { return x.offsetParent !== null; })), i = f.indexOf(d.activeElement);
         if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
         else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
       }
@@ -274,6 +286,27 @@
       requestAnimationFrame(function () { tilt(W.innerWidth); if (bar) bar.style.transform = 'scaleX(' + (track.scrollLeft / Math.max(1, track.scrollWidth - track.clientWidth)) + ')'; tk = false; });
     }, { passive: true });
     if (isMob() && !RM) tilt(W.innerWidth);
+
+    // mobile: auto-playing carousel with dots; a touch pauses it for a few seconds
+    var dots = d.createElement('div'); dots.className = 'work__dots'; dots.setAttribute('aria-hidden', 'true');
+    cards.forEach(function (c, i) { var b = d.createElement('button'); b.type = 'button'; b.tabIndex = -1; b.addEventListener('click', function () { go(i); hold = performance.now(); }); dots.appendChild(b); });
+    track.parentNode.parentNode.insertBefore(dots, track.parentNode.nextSibling);
+    var hold = 0, inView = false, timer = null;
+    var center = function (c) { var tr = track.getBoundingClientRect(), r = c.getBoundingClientRect(); return track.scrollLeft + (r.left + r.width / 2) - (tr.left + tr.width / 2); };
+    var current = function () { var tr = track.getBoundingClientRect(), mid = tr.left + tr.width / 2, best = 0, bd = 1e9; cards.forEach(function (c, i) { var r = c.getBoundingClientRect(), dd = Math.abs(r.left + r.width / 2 - mid); if (dd < bd) { bd = dd; best = i; } }); return best; };
+    var go = function (i) { track.scrollTo({ left: Math.max(0, center(cards[i])), behavior: RM ? 'auto' : 'smooth' }); };
+    var mark = function () { var k = current(); $$('button', dots).forEach(function (b, i) { b.classList.toggle('is-on', i === k); }); };
+    mark();
+    track.addEventListener('scroll', function () { if (isMob()) requestAnimationFrame(mark); }, { passive: true });
+    ['touchstart', 'pointerdown', 'wheel'].forEach(function (ev) { track.addEventListener(ev, function () { hold = performance.now(); }, { passive: true }); });
+    var tick = function () {
+      if (!isMob() || !inView || d.hidden || RM || performance.now() - hold < 5000) return;
+      var k = current(); go(k + 1 >= cards.length ? 0 : k + 1);
+    };
+    if ('IntersectionObserver' in W) new IntersectionObserver(function (en) {
+      inView = en[0].isIntersecting;
+      if (inView && !timer) timer = setInterval(tick, 3000); else if (!inView && timer) { clearInterval(timer); timer = null; }
+    }, { threshold: 0.35 }).observe(track);
   }
 
   /* ---------------- process gauge ---------------- */

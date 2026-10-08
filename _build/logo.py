@@ -5,8 +5,8 @@ from PIL import Image, ImageFilter
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 im = Image.open(os.path.join(ROOT, "_src", "WhatsApp Image 2026-10-04 at 6.20.42 PM.jpeg")).convert("RGB")
 im = im.crop((220, 420, 810, 640))
-S = 4
-im = im.resize((im.width * S, im.height * S), Image.LANCZOS).filter(ImageFilter.GaussianBlur(1.6))
+S = 6
+im = im.resize((im.width * S, im.height * S), Image.LANCZOS).filter(ImageFilter.GaussianBlur(4.2))
 a = np.asarray(im).astype(int)
 r, g, b = a[..., 0], a[..., 1], a[..., 2]
 blue = (b - r > 38) & (b < 235)
@@ -16,7 +16,7 @@ grey = (~blue) & (r < 205) & (abs(r - b) < 40) & (yy > 128 * S)
 print("blue avg", a[blue].mean(0).round(), "grey avg", a[grey].mean(0).round())
 def trace(mask):
     bm = potrace.Bitmap(~mask)
-    pl = bm.trace(turdsize=20, alphamax=1.0, opticurve=True, opttolerance=0.2)
+    pl = bm.trace(turdsize=60, alphamax=1.15, opticurve=True, opttolerance=0.6)
     d = []
     for c in pl:
         x, y = c.start_point.x, c.start_point.y

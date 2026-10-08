@@ -8,7 +8,7 @@ from svg import LOGO, LOGO_SYMBOL, ARROW, ARROW_UR, PHONE, MAIL, PIN, PLUS, CLOS
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "docs")
 BASE = "https://welcometothenextlevel.github.io/bluetech-sanitaire/"
-V = "1"
+V = "2"
 NOINDEX = True  # keep the site out of Google while the phone number and reviews are placeholders
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -240,7 +240,7 @@ def header(key):
         '<a class="mega__i" href="%s"><span class="mega__ic">%s</span><span class="mega__t"><b>%s</b><em>%s</em></span><span class="mega__n">%s</span></a>'
         % (svc_url(s), SICON[s["icon"]], s["title"], s["short"], s["n"]) for s in SERVICES)
     nav = "".join('<a class="hd__link%s" href="{R}%s">%s</a>' % (" is-cur" if key == k else "", k, t) for k, t in NAV)
-    msvc = "".join('<li><a href="%s"><span>%s</span>%s</a></li>' % (svc_url(s), s["n"], s["title"]) for s in SERVICES)
+    msvc = "".join('<li><a href="%s"><span>%s</span>%s</a></li>' % (svc_url(s), s["n"], s["title"]) for s in SERVICES) + '<li><a href="{R}services/"><span>→</span>Tous les services</a></li>'
     return '''
 <header class="hd" data-hd>
  <div class="hd__in">
@@ -260,7 +260,7 @@ def header(key):
   <div class="hd__act">
    <a class="hd__tel" href="%(tel)s">%(phone)s<span>%(phd)s</span></a>
    <a class="btn btn--blue btn--sm hd__cta" href="{R}contact"><span class="btn__fill"></span><span class="btn__t">Demander un devis</span></a>
-   <button class="hd__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu" data-burger><span></span><span></span></button>
+   <button class="hd__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu" data-burger><span></span><span></span><span></span></button>
   </div>
  </div>
  <div class="hd__pipe" aria-hidden="true"><i data-progress></i></div>
@@ -268,12 +268,14 @@ def header(key):
 <div class="menu" id="menu" data-menu aria-hidden="true">
  <div class="menu__in">
   <nav class="menu__nav" aria-label="Menu mobile">
-   <a class="menu__big" href="{HOME}">Accueil</a>
-   <a class="menu__big" href="{R}services/">Services</a>
-   <ul class="menu__svc">%(msvc)s</ul>
-   <a class="menu__big" href="{R}realisations">Réalisations</a>
-   <a class="menu__big" href="{R}entreprise">L’entreprise</a>
-   <a class="menu__big" href="{R}contact">Contact & devis</a>
+   <a class="menu__big" href="{HOME}"><span class="mono">01</span>Accueil</a>
+   <div class="menu__grp">
+    <button class="menu__big menu__tog" type="button" aria-expanded="false" aria-controls="msvc" data-msvc><span class="mono">02</span>Services<i aria-hidden="true"></i></button>
+    <ul class="menu__svc" id="msvc">%(msvc)s</ul>
+   </div>
+   <a class="menu__big" href="{R}realisations"><span class="mono">03</span>Réalisations</a>
+   <a class="menu__big" href="{R}entreprise"><span class="mono">04</span>L’entreprise</a>
+   <a class="menu__big" href="{R}contact"><span class="mono">05</span>Contact & devis</a>
   </nav>
   <div class="menu__foot">
    <a class="btn btn--blue" href="%(tel)s"><span class="btn__fill"></span><span class="btn__t">Appeler</span>%(phone)s</a>
@@ -612,6 +614,7 @@ def page_home():
     fiche_html = "".join('<div><dt>%s</dt><dd>%s</dd></div>' % (e(a), e(b)) for a, b in fiche)
     body = '''
 <section class="hero" data-hero>
+ <div class="hero__stick">
  <div class="hero__grid" aria-hidden="true"></div>
  <div class="hero__glow" aria-hidden="true"></div>
  <canvas class="hero__gl" data-gl aria-hidden="true"></canvas>
@@ -621,7 +624,7 @@ def page_home():
   <div class="co" data-co="gauge"><i></i><span class="co__l"></span><span class="co__t"><b>Manomètre</b><em data-bar>0,0 bar</em></span></div>
   <div class="co" data-co="mani"><i></i><span class="co__l"></span><span class="co__t"><b>Collecteur laiton</b><em>5 départs · PE-X Ø 16</em></span></div>
  </div>
- <div class="hero__in wrap">
+ <div class="hero__in wrap" data-hero-in>
   <p class="kicker" data-intro><span>[Prilly · VD]</span> Sanitaire & chauffage</p>
   <h1 class="hero__t" data-intro data-split>La précision derrière chaque mur.</h1>
   <p class="hero__p" data-intro>Bluetech Sanitaire installe, rénove et entretient vos installations sanitaires et de chauffage, à Prilly et dans toute la région lausannoise.</p>
@@ -630,13 +633,19 @@ def page_home():
    <a class="btn btn--line" href="{R}realisations"><span class="btn__fill"></span><span class="btn__t">Nos réalisations</span>%(arrow)s</a>
   </div>
  </div>
- <ul class="hero__spec wrap" data-intro>
+ <div class="hero__story" aria-hidden="true">
+  <p class="hero__q" data-q><span class="mono">01 — Distribution</span>Chaque litre suit un chemin tracé.</p>
+  <p class="hero__q" data-q><span class="mono">02 — Jusqu’au robinet</span>De l’arrivée d’eau au dernier raccord, rien n’est laissé au hasard.</p>
+ </div>
+ <div class="hero__specw" data-hero-spec><ul class="hero__spec wrap" data-intro>
   <li><span class="mono">Siège</span>Route de Renens 2, Prilly</li>
   <li><span class="mono">Domaines</span>Sanitaire · Chauffage</li>
   <li><span class="mono">IDE</span>%(ide)s</li>
   <li><span class="mono">Devis</span>Sans engagement</li>
- </ul>
- <div class="hero__scroll" aria-hidden="true"><span class="mono">Défiler</span><i></i></div>
+ </ul></div>
+ <div class="hero__scroll" data-hero-cue aria-hidden="true"><span class="mono">Suivez l’eau</span><i></i></div>
+ <div class="hero__meter" aria-hidden="true"><i data-hero-meter></i></div>
+ </div>
 </section>
 
 <section class="intro sec">

@@ -1,12 +1,14 @@
 """Inline SVG: logo, UI icons, service icons and the animated service illustrations."""
 import os
 
-_HERE = os.path.dirname(os.path.abspath(__file__))
-_vb, _blue, _grey = open(os.path.join(_HERE, "logo-paths.txt")).read().split("\n")[:3]
+import logo_geo as _lg
 
 LOGO_SYMBOL = ('<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="%s">'
-        '<path style="fill:var(--logo-b,#2A5598)" fill-rule="evenodd" d="%s"/><path style="fill:var(--logo-s,#9AA0AC)" fill-rule="evenodd" d="%s"/></symbol></svg>') % (_vb, _blue, _grey)
-LOGO = '<svg class="logo" viewBox="%s" role="img" aria-label="BlueTech Sanitaire"><use href="#logo"/></svg>' % _vb
+               '<g fill="none" stroke-linecap="round" stroke-linejoin="round">'
+               '<path style="stroke:var(--logo-b,#2A5598)" stroke-width="%s" d="%s"/>'
+               '<path style="stroke:var(--logo-s,#9AA0AC)" stroke-width="%s" d="%s"/></g>'
+               '<g style="fill:var(--logo-s,#9AA0AC)">%s</g></symbol></svg>') % (_lg.VB, _lg.W, _lg.DB, _lg.w, _lg.DG, _lg.DOTS)
+LOGO = '<svg class="logo" viewBox="%s" role="img" aria-label="BlueTech Sanitaire"><use href="#logo"/></svg>' % _lg.VB
 
 
 def i(d, cls="ic", vb="0 0 24 24"):
