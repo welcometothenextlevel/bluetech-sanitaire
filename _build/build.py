@@ -11,10 +11,10 @@ BASE = "https://welcometothenextlevel.github.io/bluetech-sanitaire/"
 V = "1"
 NOINDEX = True  # keep the site out of Google while the phone number and reviews are placeholders
 
-# ------------------------------------------------------------------ contact (PLACEHOLDERS — to confirm with the owner)
-PHONE_DISPLAY = "+41 XX XXX XX XX"
-PHONE_TEL = "+41000000000"
-WA_NUMBER = "41000000000"
+# ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
+PHONE_DISPLAY = "079 552 24 70"
+PHONE_TEL = "+41795522470"
+WA_NUMBER = "41795522470"   # same number, assumed to be on WhatsApp
 EMAIL = ""                 # e.g. "info@bluetech-sanitaire.ch" — the forms' e-mail option appears once set
 GOOGLE_REVIEWS_URL = ""    # Google Business "write a review" link, once the profile exists
 

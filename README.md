@@ -8,7 +8,7 @@ Site of Bluetech Sanitaire Sàrl (Prilly VD), served by GitHub Pages from `docs/
 
 ## To confirm with the owner (placeholders)
 In `_build/build.py`:
-- `PHONE_DISPLAY`, `PHONE_TEL`, `WA_NUMBER` — phone and WhatsApp are placeholders (+41 XX…).
+- `WA_NUMBER` — uses the phone number (079 552 24 70); confirm it is on WhatsApp.
 - `EMAIL` — empty; once set, the forms offer "send by e-mail" too.
 - `REVIEWS` / `REVIEWS_ARE_EXAMPLES` — the Google review cards are examples; replace with real reviews and set the flag to `False`.
 - `GOOGLE_REVIEWS_URL` — "Laisser un avis" button appears once set.
