@@ -8,7 +8,7 @@ from svg import LOGO, LOGO_SYMBOL, ARROW, ARROW_UR, PHONE, MAIL, PIN, PLUS, CLOS
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "docs")
 BASE = "https://welcometothenextlevel.github.io/bluetech-sanitaire/"
-V = "2"
+V = "3"
 NOINDEX = True  # keep the site out of Google while the phone number and reviews are placeholders
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -78,41 +78,19 @@ SERVICES = [
               ("Puis-je fournir mes propres appareils ?", "C’est possible. Nous vérifions ensemble leur compatibilité avec l’installation avant la pose."),
               ("Vous occupez-vous du carrelage ?", "Notre métier est le sanitaire. Pour le carrelage et les finitions, nous coordonnons nos interventions avec votre carreleur.")],
          photos=["salle-de-bains-sauge", "salle-de-bains-gros-oeuvre"]),
-    dict(slug="chauffage", icon="radiator", art="radiator", title="Chauffage", short="Radiateurs · Sol · Distribution",
-         spec="Pose · Remplacement · Équilibrage",
-         card="Radiateurs, chauffage au sol, distribution, purge et équilibrage : une chaleur homogène, pièce par pièce.",
-         h1="Un chauffage qui chauffe juste, pièce par pièce.",
-         lead="Pose et remplacement de radiateurs, distribution, chauffage au sol, purge et équilibrage : nous intervenons sur les installations de chauffage à eau chaude, en neuf comme en rénovation.",
-         mt="Chauffage : radiateurs, chauffage au sol, entretien",
-         md="Installation et remplacement de radiateurs, chauffage au sol, purge et équilibrage à Prilly, Lausanne et environs. Bluetech Sanitaire, devis sans engagement.",
-         items=[("Radiateurs", "Pose, remplacement et déplacement de radiateurs, vannes thermostatiques comprises."),
-                ("Chauffage au sol", "Raccordement et équilibrage des collecteurs de chauffage au sol."),
-                ("Distribution", "Conduites d’aller et de retour, isolation, raccordement aux collecteurs."),
-                ("Purge & pression", "Élimination de l’air, contrôle et remise en pression du circuit."),
-                ("Équilibrage", "Réglage hydraulique pour une chaleur homogène dans toutes les pièces."),
-                ("Diagnostic", "Radiateur froid, bruits, pression qui chute : nous cherchons la cause.")],
-         steps=[("Diagnostic", "Relevé de l’installation existante, de la pression et des circuits."),
-                ("Proposition", "Solution chiffrée : réparation, remplacement ou modification."),
-                ("Intervention", "Isolement du circuit, travaux, remplissage et purge."),
-                ("Réglage", "Équilibrage, contrôle de la pression, essai de chaque radiateur.")],
-         faq=[("Mon radiateur est froid en haut, que faire ?", "C’est souvent de l’air dans le circuit. Une purge règle généralement le problème ; si la pression chute ensuite, il faut la rétablir. Si le problème persiste, nous diagnostiquons l’installation."),
-              ("Peut-on remplacer un radiateur sans vider toute l’installation ?", "Selon la configuration et la présence de vannes d’isolement, c’est souvent possible. Nous vous le confirmons lors de la visite."),
-              ("Intervenez-vous sur le chauffage au sol ?", "Oui : raccordement, purge et équilibrage des circuits sur les collecteurs de chauffage au sol."),
-              ("Travaillez-vous pour les immeubles et les PPE ?", "Oui, nous intervenons aussi bien pour des particuliers que pour des copropriétés et des régies.")],
-         photos=["gaine-collecteurs"]),
     dict(slug="depannage", icon="tap", art="tap", title="Dépannage & réparations", short="Fuites · WC · Robinetterie",
          spec="Diagnostic · Réparation · Remplacement",
-         card="Fuite, WC qui coule, écoulement bouché, plus d’eau chaude : diagnostic clair, réparation propre.",
+         card="Fuite, WC qui coule, écoulement bouché, robinet qui goutte : diagnostic clair, réparation propre.",
          h1="Une fuite ? On s’en occupe.",
          lead="Robinet qui goutte, WC qui coule, écoulement bouché, raccord qui fuit : nous diagnostiquons, réparons ou remplaçons — et nous vous expliquons ce qui s’est passé.",
          mt="Dépannage sanitaire : fuites, WC, robinetterie",
-         md="Dépannage sanitaire à Prilly, Lausanne et environs : fuites, WC qui coule, robinetterie, écoulements bouchés, eau chaude. Appelez ou écrivez sur WhatsApp.",
+         md="Dépannage sanitaire à Prilly, Lausanne et environs : fuites, WC qui coule, robinetterie, écoulements bouchés, vannes d’arrêt. Appelez ou écrivez sur WhatsApp.",
          items=[("Fuites", "Recherche et réparation de fuites sur robinetterie, raccords et conduites apparentes."),
                 ("WC & chasses d’eau", "Mécanismes de chasse, robinets flotteurs, réservoirs encastrés : réglage ou remplacement."),
                 ("Robinetterie", "Remplacement de cartouches, mitigeurs, flexibles et robinets d’arrêt."),
                 ("Écoulements bouchés", "Débouchage de lavabos, éviers, douches et siphons."),
-                ("Eau chaude", "Plus d’eau chaude ? Contrôle du boiler et de ses organes de sécurité."),
-                ("Chauffage", "Radiateur froid ou pression en baisse : purge, remise en pression, diagnostic.")],
+                ("Vannes d’arrêt", "Vanne grippée, qui fuit ou ne ferme plus : réparation ou remplacement."),
+                ("Appareils sanitaires", "WC, lavabo ou receveur descellé, fissuré ou qui fuit : réparation ou remplacement.")],
          steps=[("Vous nous contactez", "Par téléphone ou WhatsApp — une photo ou une vidéo nous aide beaucoup."),
                 ("Diagnostic", "Nous identifions la cause, pas seulement le symptôme."),
                 ("Réparation", "Nous vous expliquons la solution, puis nous réparons ou remplaçons."),
@@ -127,48 +105,26 @@ SERVICES = [
               ("Intervenez-vous pour les régies et les PPE ?", "Oui, pour les locataires, les propriétaires, les copropriétés et les régies.")],
          photos=["evacuations-controlees"]),
     dict(slug="entretien", icon="gauge", art="gauge", title="Entretien & maintenance", short="Préventif · Contrôles",
-         spec="Détartrage · Sécurité · Robinetterie",
-         card="Détartrage, organes de sécurité, robinetterie, chauffage : l’entretien qui évite les dépannages.",
+         spec="Robinetterie · Vannes · Écoulements",
+         card="Robinetterie, chasses d’eau, vannes, écoulements : l’entretien qui évite les dépannages.",
          h1="L’entretien qui évite les dépannages.",
-         lead="Une installation entretenue dure plus longtemps et consomme moins. Détartrage, contrôle des organes de sécurité, révision de la robinetterie : nous passons avant que le problème n’arrive.",
-         mt="Entretien et maintenance sanitaire et chauffage",
-         md="Entretien sanitaire et chauffage à Prilly, Lausanne et environs : détartrage de boilers, organes de sécurité, robinetterie, purge. Particuliers, PPE et régies.",
-         items=[("Détartrage des boilers", "Vidange, détartrage, contrôle de l’anode et du corps de chauffe."),
-                ("Organes de sécurité", "Groupes de sécurité, réducteurs de pression et vannes contrôlés."),
-                ("Robinetterie", "Aérateurs nettoyés, joints et cartouches fatigués remplacés."),
-                ("Chasses d’eau", "Réglage des mécanismes, contrôle d’étanchéité des réservoirs."),
-                ("Chauffage", "Purge, contrôle de pression et des vannes thermostatiques."),
+         lead="Une installation entretenue dure plus longtemps et gaspille moins d’eau. Révision de la robinetterie, contrôle des vannes et des chasses d’eau, écoulements : nous passons avant que le problème n’arrive.",
+         mt="Entretien et maintenance des installations sanitaires",
+         md="Entretien des installations sanitaires à Prilly, Lausanne et environs : robinetterie, chasses d’eau, vannes d’arrêt, réducteurs de pression, écoulements. Particuliers, PPE et régies.",
+         items=[("Robinetterie", "Aérateurs détartrés, joints et cartouches fatigués remplacés."),
+                ("Chasses d’eau", "Réglage des mécanismes, contrôle d’étanchéité des réservoirs encastrés."),
+                ("Vannes d’arrêt", "Contrôle et manœuvre des vannes, remplacement de celles qui grippent."),
+                ("Pression du réseau", "Contrôle de la pression et réglage du réducteur de pression."),
+                ("Écoulements", "Contrôle et nettoyage des siphons et des évacuations lentes."),
                 ("Immeubles & PPE", "Entretien régulier pour propriétaires, copropriétés et régies, sur demande.")],
          steps=[("État des lieux", "Inventaire des appareils, de leur âge et de leur état."),
                 ("Plan d’entretien", "Fréquence et contenu des visites définis ensemble."),
-                ("Visites", "Contrôles, détartrage, remplacement des pièces d’usure."),
+                ("Visites", "Contrôles, réglages, remplacement des pièces d’usure."),
                 ("Rapport", "Ce qui a été fait, ce qu’il faudra prévoir — par écrit.")],
-         faq=[("À quelle fréquence détartrer un boiler ?", "Cela dépend de la dureté de l’eau et de la consommation ; dans la région lausannoise, un contrôle tous les quelques années est généralement recommandé. Nous vous conseillons selon votre installation."),
-              ("Pourquoi entretenir une installation qui fonctionne ?", "Parce que le calcaire, l’usure des joints et les organes de sécurité grippés ne préviennent pas. Un contrôle régulier coûte moins cher qu’un dégât d’eau."),
+         faq=[("Pourquoi entretenir une installation qui fonctionne ?", "Parce que le calcaire, l’usure des joints et les vannes grippées ne préviennent pas. Un contrôle régulier coûte moins cher qu’un dégât d’eau."),
+              ("Mon WC coule en continu, est-ce grave ?", "Ce n’est pas dangereux, mais cela peut gaspiller des milliers de litres d’eau par an. Le plus souvent, un joint ou un mécanisme de chasse usé suffit à remplacer."),
               ("Proposez-vous des contrats d’entretien ?", "Oui, sur demande, pour les particuliers comme pour les immeubles. Nous définissons ensemble la fréquence et le contenu des visites.")],
          photos=["wc-bain-ventilation"]),
-    dict(slug="boilers-eau-chaude", icon="boiler", art="boiler", title="Boilers & eau chaude", short="Remplacement · Détartrage",
-         spec="Boiler · Pompe à chaleur · Sécurité",
-         card="Remplacement, dimensionnement, boiler pompe à chaleur, détartrage : de l’eau chaude, tous les jours.",
-         h1="De l’eau chaude, tous les jours, sans y penser.",
-         lead="Remplacement de boilers, boilers pompe à chaleur, détartrage, groupe de sécurité : nous dimensionnons et installons votre production d’eau chaude sanitaire.",
-         mt="Boilers : remplacement, détartrage, pompe à chaleur",
-         md="Remplacement et détartrage de boilers, boilers pompe à chaleur, groupes de sécurité à Prilly, Lausanne et environs. Bluetech Sanitaire, devis sans engagement.",
-         items=[("Remplacement de boiler", "Dépose de l’ancien boiler, pose et raccordement du nouveau, mise en service."),
-                ("Dimensionnement", "Un volume adapté au nombre de personnes et à vos habitudes."),
-                ("Boiler pompe à chaleur", "Conseil et installation de chauffe-eau thermodynamiques, plus économes."),
-                ("Détartrage", "Vidange, détartrage, contrôle du corps de chauffe et de l’anode."),
-                ("Groupe de sécurité", "Contrôle et remplacement des organes de sécurité."),
-                ("Panne d’eau chaude", "Diagnostic de l’alimentation, du thermostat et du corps de chauffe.")],
-         steps=[("Relevé", "Volume actuel, emplacement, raccordements, besoins du ménage."),
-                ("Choix", "Boiler électrique ou pompe à chaleur : avantages et coûts comparés."),
-                ("Remplacement", "Vidange, dépose, pose, raccordement hydraulique et sécurité."),
-                ("Mise en service", "Remplissage, purge, contrôle, raccordement électrique par électricien agréé.")],
-         faq=[("Quelle capacité de boiler choisir ?", "Cela dépend du nombre de personnes, de vos habitudes (bain ou douche) et de la place disponible. Nous dimensionnons le boiler avec vous lors du relevé."),
-              ("Un boiler pompe à chaleur, c’est intéressant ?", "Il consomme nettement moins d’électricité qu’un boiler électrique classique. Il demande un local adapté (volume, température) : nous vérifions la faisabilité avec vous."),
-              ("Le raccordement électrique est-il compris ?", "Le raccordement électrique est réalisé par un électricien agréé, avec qui nous coordonnons l’intervention."),
-              ("Pourquoi détartrer son boiler ?", "Le calcaire isole le corps de chauffe : le boiler consomme plus et s’use plus vite. Un détartrage régulier prolonge sa durée de vie.")],
-         photos=["mur-brique-geberit"]),
 ]
 for k, s in enumerate(SERVICES):
     s["n"] = "%02d" % (k + 1)
@@ -193,9 +149,9 @@ REVIEWS_ARE_EXAMPLES = True
 REVIEWS = [
     ("Prénom N.", "Rénovation de salle de bains", "Travail soigné du début à la fin. Le chantier était propre chaque soir et le planning a été respecté."),
     ("Prénom N.", "Dépannage", "Fuite sous l’évier réparée rapidement. Explications claires, prix annoncé avant l’intervention."),
-    ("Prénom N.", "Boiler", "Remplacement de notre boiler en une matinée. Très professionnel, je recommande."),
+    ("Prénom N.", "Robinetterie", "Tous nos mitigeurs remplacés en une matinée. Très professionnel, je recommande."),
     ("Prénom N.", "Installation sanitaire", "Excellente coordination avec notre architecte. Une équipe précise et à l’écoute."),
-    ("Prénom N.", "Chauffage", "Radiateurs purgés et équilibrés : enfin la même chaleur dans toutes les pièces."),
+    ("Prénom N.", "Installation sanitaire", "Implantation soignée, tout était expliqué. On voit que le travail derrière les murs est fait avec sérieux."),
     ("Prénom N.", "Entretien", "Détartrage et contrôle de l’installation sans mauvaise surprise. Ponctuel et efficace."),
     ("Prénom N.", "Rénovation de salle de bains", "Notre baignoire est devenue une douche de plain-pied magnifique. Merci pour le conseil."),
     ("Prénom N.", "Dépannage", "WC qui coulait depuis des semaines, réglé en une visite. Rapide et sympathique."),
@@ -251,7 +207,7 @@ def header(key):
     <div class="mega" id="mega" data-mega>
      <div class="mega__in">
       <div class="mega__list">%(mega)s</div>
-      <a class="mega__all" href="{R}services/"><span class="mono">06 départs</span><b>Tous les services</b>%(arrow)s</a>
+      <a class="mega__all" href="{R}services/"><span class="mono">%(nsvc)s départs</span><b>Tous les services</b>%(arrow)s</a>
      </div>
     </div>
    </div>
@@ -284,7 +240,7 @@ def header(key):
   </div>
  </div>
 </div>''' % dict(logo=LOGO, chev=CHEV, mega=mega, arrow=ARROW, nav=nav, tel=TEL, phone=PHONE, phd=PHONE_DISPLAY, msvc=msvc,
-                  wa=WA_HELLO, waic=WA, addr=e(ADDR), svccur=" is-cur" if key == "services" else "")
+                  wa=WA_HELLO, waic=WA, addr=e(ADDR), nsvc="%02d" % len(SERVICES), svccur=" is-cur" if key == "services" else "")
 
 
 def footer():
@@ -296,7 +252,7 @@ def footer():
   <div class="ft__top">
    <div class="ft__brand">
     <a class="ft__logo" href="{HOME}" aria-label="Bluetech Sanitaire — accueil">%(logo)s</a>
-    <p>Installations sanitaires et de chauffage à Prilly et dans la région lausannoise.</p>
+    <p>Installations sanitaires à Prilly et dans la région lausannoise.</p>
    </div>
    <nav class="ft__col" aria-label="Services"><p class="mono">Services</p><ul>%(svc)s</ul></nav>
    <nav class="ft__col" aria-label="Entreprise"><p class="mono">Entreprise</p><ul><li><a href="{R}realisations">Réalisations</a></li><li><a href="{R}entreprise">L’entreprise</a></li><li><a href="{R}contact">Contact & devis</a></li><li><a href="{R}mentions-legales">Mentions légales</a></li></ul></nav>
@@ -335,7 +291,7 @@ def jsonld_business():
          "geo": {"@type": "GeoCoordinates", "latitude": CO["lat"], "longitude": CO["lng"]},
          "areaServed": [t[0] for t in TOWNS[:12]], "foundingDate": CO["founded"], "taxID": CO["ide"],
          "founder": {"@type": "Person", "name": CO["manager"]},
-         "knowsAbout": ["Installations sanitaires", "Chauffage", "Rénovation de salles de bains", "Dépannage sanitaire", "Boilers"]}
+         "knowsAbout": ["Installations sanitaires", "Rénovation de salles de bains", "Dépannage sanitaire", "Entretien sanitaire"]}
     if not PHONE_TEL.startswith("+41000"):
         d["telephone"] = PHONE_TEL
     if EMAIL:
@@ -581,12 +537,10 @@ XRAY_SVG = '''<svg class="xr" viewBox="0 0 1500 2000" preserveAspectRatio="xMidY
  <path class="xr__flex xr__p--c" d="M700 1574C700 1440 735 1380 738 1272"/>
  <path class="xr__flex xr__p--h" d="M860 1574C860 1440 768 1380 764 1272"/>
  <path class="xr__p xr__p--d" d="M790 1560V1690H1010V2000"/><path class="xr__f xr__f--d" d="M790 1560V1690H1010V2000"/>
- <path class="xr__p xr__p--r" d="M1060 1940H1290V2000"/><path class="xr__p xr__p--r" d="M1060 1975H1440V2000"/>
  <g class="xr__lab">
   <text x="300" y="1846">EAU FROIDE Ø 16</text>
   <text x="300" y="1940">EAU CHAUDE Ø 16</text>
   <text x="1030" y="1676">ÉVACUATION PE Ø 50</text>
-  <text x="1080" y="1930">CHAUFFAGE ALLER / RETOUR</text>
   <text x="880" y="1610">VANNES D’ARRÊT</text>
  </g>
  <text class="xr__stamp" x="70" y="140">SCHÉMA DE PRINCIPE</text>
@@ -610,7 +564,7 @@ def page_home():
      <figcaption><span class="mono">R—%02d</span><b>%s</b><span>%s</span></figcaption>
     </figure>''' % (n, pic(n, t + " — " + c, "(max-width: 900px) 78vw, 30vw", w=w, h=h), k + 1, t, c) for k, (n, t, c, tag, w, h) in enumerate(WORK[:8]))
     fiche = [("Raison sociale", CO["name"]), ("Siège", ADDR), ("Direction", CO["manager"] + ", associé-gérant"),
-             ("Domaines", "Installations sanitaires · Chauffage"), ("Interventions", "Neuf · Rénovation · Entretien · Dépannage"), ("IDE", CO["ide"])]
+             ("Domaine", "Installations sanitaires"), ("Interventions", "Neuf · Rénovation · Entretien · Dépannage"), ("IDE", CO["ide"])]
     fiche_html = "".join('<div><dt>%s</dt><dd>%s</dd></div>' % (e(a), e(b)) for a, b in fiche)
     body = '''
 <section class="hero" data-hero>
@@ -625,9 +579,9 @@ def page_home():
   <div class="co" data-co="mani"><i></i><span class="co__l"></span><span class="co__t"><b>Collecteur laiton</b><em>5 départs · PE-X Ø 16</em></span></div>
  </div>
  <div class="hero__in wrap" data-hero-in>
-  <p class="kicker" data-intro><span>[Prilly · VD]</span> Sanitaire & chauffage</p>
+  <p class="kicker" data-intro><span>[Prilly · VD]</span> Installations sanitaires</p>
   <h1 class="hero__t" data-intro data-split>La précision derrière chaque mur.</h1>
-  <p class="hero__p" data-intro>Bluetech Sanitaire installe, rénove et entretient vos installations sanitaires et de chauffage, à Prilly et dans toute la région lausannoise.</p>
+  <p class="hero__p" data-intro>Bluetech Sanitaire installe, rénove, entretient et dépanne vos installations sanitaires, à Prilly et dans toute la région lausannoise.</p>
   <div class="hero__b" data-intro>
    %(cta1)s
    <a class="btn btn--line" href="{R}realisations"><span class="btn__fill"></span><span class="btn__t">Nos réalisations</span>%(arrow)s</a>
@@ -639,7 +593,7 @@ def page_home():
  </div>
  <div class="hero__specw" data-hero-spec><ul class="hero__spec wrap" data-intro>
   <li><span class="mono">Siège</span>Route de Renens 2, Prilly</li>
-  <li><span class="mono">Domaines</span>Sanitaire · Chauffage</li>
+  <li><span class="mono">Métier</span>Installations sanitaires</li>
   <li><span class="mono">IDE</span>%(ide)s</li>
   <li><span class="mono">Devis</span>Sans engagement</li>
  </ul></div>
@@ -653,7 +607,7 @@ def page_home():
   <p class="kicker" data-r><span>[01]</span> L’entreprise</p>
   <h2 class="intro__big" data-split>Une installation sanitaire réussie ne se remarque pas. Elle fonctionne — chaque jour, pendant des décennies.</h2>
   <div class="intro__txt" data-r>
-   <p>Bluetech Sanitaire est une entreprise de Prilly spécialisée dans les installations sanitaires et de chauffage. Nous posons, rénovons, entretenons et dépannons — avec la même rigueur sur un chantier neuf que pour une fuite sous un évier.</p>
+   <p>Bluetech Sanitaire est une entreprise de Prilly spécialisée dans les installations sanitaires. Nous posons, rénovons, entretenons et dépannons — avec la même rigueur sur un chantier neuf que pour une fuite sous un évier.</p>
    <p>Nos photos de chantier le montrent : axes tracés au mur, conduites repérées, raccords contrôlés et marqués. C’est ce travail invisible qui fait durer une installation.</p>
    <a class="tlink" href="{R}entreprise">Découvrir l’entreprise %(arrow)s</a>
   </div>
@@ -683,7 +637,7 @@ def page_home():
    <p data-r>Une salle de bains se juge sur ses finitions. Sa durée de vie, elle, se décide avant : dans la gaine technique, derrière le carrelage, dans chaque raccord.</p>
    <p class="xray__how mono" data-r><span class="only-fine">Passez la souris sur la photo</span><span class="only-coarse">Glissez le doigt sur la photo</span> pour voir à travers le mur.</p>
    <ul class="legend" data-r>
-    <li><i class="lg lg--c"></i>Eau froide</li><li><i class="lg lg--h"></i>Eau chaude</li><li><i class="lg lg--d"></i>Évacuation</li><li><i class="lg lg--r"></i>Chauffage</li>
+    <li><i class="lg lg--c"></i>Eau froide</li><li><i class="lg lg--h"></i>Eau chaude</li><li><i class="lg lg--d"></i>Évacuation</li>
    </ul>
    <button class="btn btn--glass btn--sm" type="button" data-xray-toggle aria-pressed="false"><span class="btn__fill"></span><span class="btn__t">Tout révéler</span></button>
   </div>
@@ -720,15 +674,15 @@ def page_home():
 %(zone)s
 %(cta)s
 ''' % dict(cta1=btn("{R}contact", "Demander un devis"), arrow=ARROW, ide=CO["ide"], fiche=fiche_html,
-           svchead=sec_head("02", "Services", "Six départs, une même exigence.", "Comme un collecteur distribue l’eau vers chaque appareil, nos six domaines partent du même point : un travail propre, contrôlé et expliqué."),
+           svchead=sec_head("02", "Services", "Quatre départs, une même exigence.", "Comme un collecteur distribue l’eau vers chaque appareil, nos quatre domaines partent du même point : un travail propre, contrôlé et expliqué."),
            rows=svc_rows, xsvg=XRAY_SVG,
            xpic=pic("salle-de-bains-sauge", "Salle de bains terminée : mosaïque vert sauge, lavabo suspendu et miroir rond lumineux", "(max-width: 900px) 92vw, 46vw", cls="xray__base"),
            xpic2=pic("salle-de-bains-sauge", "", "(max-width: 900px) 92vw, 46vw"),
            workhead=sec_head("04", "Réalisations", "Avant que les murs ne se referment.", "Nous photographions nos installations avant la fermeture des parois. C’est là que se voit la qualité d’un travail."),
            work=work, nwork=len(WORK), process=process_section(), reviews=reviews_section(), zone=zone_section(), cta=cta_band())
     body = FALLBACK_SYMBOL + body
-    return render("index.html", "Bluetech Sanitaire — Installations sanitaires & chauffage à Prilly",
-                  "Bluetech Sanitaire Sàrl, Prilly (VD) : installations sanitaires, rénovation de salles de bains, chauffage, dépannage, entretien et boilers à Lausanne et environs. Devis sans engagement.",
+    return render("index.html", "Bluetech Sanitaire — Installations sanitaires à Prilly",
+                  "Bluetech Sanitaire Sàrl, Prilly (VD) : installations sanitaires, rénovation de salles de bains, dépannage et entretien à Prilly, Lausanne et environs. Devis sans engagement.",
                   body, key="home", body_cls="p-home",
                   scripts='<script type="module" src="{R}assets/js/hero3d.js?v={V}"></script>')
 
@@ -766,7 +720,7 @@ def page_service(s):
  <div class="wrap sv-hero__g">
   <div class="sv-hero__t">
    <nav class="crumbs mono" aria-label="Fil d’Ariane" data-intro><a href="{HOME}">Accueil</a><span>/</span><a href="{R}services/">Services</a><span>/</span><span aria-current="page">%(title)s</span></nav>
-   <p class="kicker" data-intro><span>[Service %(n)s / 06]</span> %(short)s</p>
+   <p class="kicker" data-intro><span>[Service %(n)s / %(tot)s]</span> %(short)s</p>
    <h1 class="sv-hero__h" data-intro data-split>%(h1)s</h1>
    <p class="sv-hero__p" data-intro>%(lead)s</p>
    <div class="hero__b" data-intro>%(cta)s<a class="btn btn--line" href="%(tel)s"><span class="btn__fill"></span><span class="btn__t">Appeler</span>%(phone)s</a></div>
@@ -816,7 +770,7 @@ def page_service(s):
  </div>
 </section>
 %(ctab)s
-''' % dict(title=s["title"], n=s["n"], short=s["short"], h1=s["h1"], lead=s["lead"], cta=btn("{R}contact?service=" + s["slug"], "Demander un devis"),
+''' % dict(title=s["title"], n=s["n"], tot="%02d" % len(SERVICES), short=s["short"], h1=s["h1"], lead=s["lead"], cta=btn("{R}contact?service=" + s["slug"], "Demander un devis"),
            tel=TEL, phone=PHONE, art=ART[s["art"]], spec=s["spec"], band=band, nph=len(photos),
            ihead=sec_head("01", "Prestations", "Ce que nous faisons."), items=items, tips=tips,
            process=process_section("02", "Comment ça se passe.", steps, "Déroulement"),
@@ -852,9 +806,9 @@ def page_services():
  <div class="pg-hero__art" data-art data-intro aria-hidden="true">{RUN}</div>
  <div class="wrap">
   <nav class="crumbs mono" aria-label="Fil d’Ariane" data-intro><a href="{HOME}">Accueil</a><span>/</span><span aria-current="page">Services</span></nav>
-  <p class="kicker" data-intro><span>[06 départs]</span> Sanitaire & chauffage</p>
-  <h1 class="pg-hero__h" data-intro data-split>Six services, une même exigence.</h1>
-  <p class="pg-hero__p" data-intro>Installation, rénovation, chauffage, dépannage, entretien, eau chaude : tout ce qui transporte l’eau dans votre bâtiment, posé et contrôlé avec le même soin.</p>
+  <p class="kicker" data-intro><span>[04 départs]</span> Installations sanitaires</p>
+  <h1 class="pg-hero__h" data-intro data-split>Quatre services, une même exigence.</h1>
+  <p class="pg-hero__p" data-intro>Installation, rénovation, dépannage, entretien : tout ce qui transporte l’eau dans votre bâtiment, posé et contrôlé avec le même soin.</p>
  </div>
 </section>
 <section class="sec scards">
@@ -862,8 +816,8 @@ def page_services():
 </section>
 %s
 %s''' % (cards, process_section("—"), cta_band())
-    return render("services/index.html", "Services : sanitaire, chauffage, dépannage | Bluetech Sanitaire",
-                  "Installations sanitaires, rénovation de salles de bains, chauffage, dépannage, entretien et boilers à Prilly, Lausanne et environs.",
+    return render("services/index.html", "Services : installations, salles de bains, dépannage, entretien | Bluetech Sanitaire",
+                  "Installations sanitaires, rénovation de salles de bains, dépannage et entretien à Prilly, Lausanne et environs.",
                   body, key="services", body_cls="p-services")
 
 
@@ -914,8 +868,8 @@ def page_company():
     vals = "".join('<li class="val" data-r><span class="mono">%02d</span><h3>%s</h3><p>%s</p></li>' % (k + 1, t, p) for k, (t, p) in enumerate(values))
     fiche = [("Raison sociale", CO["name"]), ("Forme juridique", "Société à responsabilité limitée"), ("Siège", ADDR),
              ("Associé-gérant", CO["manager"]), ("Inscription au RC", "Canton de Vaud, juillet 2026"), ("N° IDE", CO["ide"]),
-             ("Domaines", "Installations sanitaires et de chauffage"),
-             ("Activités", "Pose, entretien, maintenance, dépannage, rénovation et réparation d’équipements sanitaires et de systèmes de chauffage")]
+             ("Domaine", "Installations sanitaires"),
+             ("Activités", "Pose, rénovation, entretien, dépannage et réparation d’installations sanitaires")]
     fiche_html = "".join('<div><dt>%s</dt><dd>%s</dd></div>' % (e(a), e(b)) for a, b in fiche)
     body = '''
 <section class="pg-hero">
@@ -934,7 +888,7 @@ def page_company():
   <figure class="story__ph" data-r>%(ph)s<span class="crop" aria-hidden="true"></span></figure>
   <div class="story__t">
    %(shead)s
-   <p data-r>Nous intervenons sur l’ensemble des installations sanitaires et de chauffage : construction neuve, transformation, rénovation de salles de bains, entretien et dépannage, pour les particuliers, les copropriétés et les régies.</p>
+   <p data-r>Nous intervenons sur l’ensemble des installations sanitaires : construction neuve, transformation, rénovation de salles de bains, entretien et dépannage, pour les particuliers, les copropriétés et les régies.</p>
    <p data-r>Notre conviction : la qualité d’une installation se joue là où personne ne regarde. C’est pourquoi nous traçons les axes avant de poser, repérons chaque conduite, contrôlons chaque raccord et photographions nos réseaux avant fermeture.</p>
    <p class="sign" data-r><b>%(mgr)s</b><span>Associé-gérant, Bluetech Sanitaire Sàrl</span></p>
   </div>
@@ -951,7 +905,7 @@ def page_company():
 <section class="sec">
  <div class="wrap fiche-pg">
   %(fhead)s
-  <div class="fiche fiche--lg" data-r><p class="mono fiche__h">Registre du commerce <span>VD</span></p><dl>%(fiche)s</dl></div>
+  <div class="fiche fiche--lg" data-r><p class="mono fiche__h">Fiche d’identité <span>VD</span></p><dl>%(fiche)s</dl></div>
  </div>
 </section>
 %(process)s
@@ -961,8 +915,8 @@ def page_company():
                   vhead=sec_head("02", "Engagements", "Quatre principes, sur chaque chantier."), vals=vals,
                   fhead=sec_head("03", "Fiche d’identité", "Les faits, simplement."), fiche=fiche_html,
                   process=process_section("04"), zone=zone_section("05"), cta=cta_band())
-    return render("entreprise.html", "L’entreprise : Bluetech Sanitaire Sàrl, Prilly | Sanitaire & chauffage",
-                  "Bluetech Sanitaire Sàrl, entreprise de sanitaire et chauffage fondée en 2026 à Prilly (VD). Associé-gérant : Ahmet Hoti. Notre approche, nos engagements.",
+    return render("entreprise.html", "L’entreprise : Bluetech Sanitaire Sàrl, Prilly | Installations sanitaires",
+                  "Bluetech Sanitaire Sàrl, entreprise de sanitaire fondée en 2026 à Prilly (VD). Associé-gérant : Ahmet Hoti. Notre approche, nos engagements.",
                   body, key="entreprise", body_cls="p-company")
 
 
@@ -1044,7 +998,7 @@ def page_contact():
                      mailcard=('<a class="ccard__l" href="mailto:%s">%s<span><b>%s</b>E-mail</span></a>' % (EMAIL, MAIL, EMAIL)) if EMAIL else "",
                      street=e(CO["street"]), zip=CO["zip"], city=CO["city"], addr=e(ADDR), embed=MAP_EMBED)
     return render("contact.html", "Contact & devis | Bluetech Sanitaire, Prilly",
-                  "Demandez un devis à Bluetech Sanitaire : installations sanitaires, salles de bains, chauffage, dépannage, entretien et boilers à Prilly, Lausanne et environs.",
+                  "Demandez un devis à Bluetech Sanitaire : installations sanitaires, salles de bains, dépannage et entretien à Prilly, Lausanne et environs.",
                   body, key="contact", body_cls="p-contact")
 
 

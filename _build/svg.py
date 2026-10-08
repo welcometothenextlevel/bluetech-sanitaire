@@ -35,10 +35,8 @@ STARS = '<span class="stars" aria-label="5 étoiles sur 5">' + STAR * 5 + '</spa
 SICON = {
     "install": i('<path d="M3 8.5h6.5a3 3 0 0 1 3 3V21"/><path d="M3 4.5h6.5a7 7 0 0 1 7 7V21"/><path d="M2.5 3.5v6M11.5 16.5h6M16.5 3l4 4M18.5 5l-2.8 2.8"/>'),
     "shower": i('<path d="M5 21V8a4 4 0 0 1 4-4h1a4 4 0 0 1 4 4"/><path d="M10 8h8"/><path d="M11 12v.5M14 12v.5M17 12v.5M12 15.5v.5M15.5 15.5v.5M13.5 19v.5M17 19v.5"/>'),
-    "radiator": i('<rect x="3.5" y="6" width="17" height="12" rx="1.5"/><path d="M7.5 6v12M11.5 6v12M15.5 6v12M3.5 20.5h2M18.5 20.5h2M5 3c.8.8.8 1.7 0 2.5M12 3c.8.8.8 1.7 0 2.5M19 3c.8.8.8 1.7 0 2.5"/>'),
     "tap": i('<path d="M4 9h9a5 5 0 0 1 5 5v1"/><path d="M4 5v8M8 9V6M6 6h4"/><path d="M18 18.5c0 1.1-.7 2-1.6 2s-1.6-.9-1.6-2c0-1 1.6-2.8 1.6-2.8s1.6 1.8 1.6 2.8Z"/>'),
     "gauge": i('<circle cx="12" cy="13" r="8"/><path d="M12 13l4-4M7.5 13h1M12 7.5v1M15.5 16.5h1"/><path d="M10 3h4M12 3v2"/>'),
-    "boiler": i('<rect x="6" y="2.5" width="12" height="19" rx="6"/><path d="M9.5 15.5c.8-.8 1.7-.8 2.5 0s1.7.8 2.5 0M12 7v5"/><circle cx="12" cy="12.5" r="1"/>'),
 }
 
 # ---------------------------------------------------------------- service illustrations
@@ -93,20 +91,6 @@ ART["shower"] = '''
  <text class="an an--ax" x="256" y="36">AXE DOUCHE</text>
 </svg>'''
 
-ART["radiator"] = '''
-<svg class="art" viewBox="0 0 480 480" aria-hidden="true">
- <g class="grid-ax"><path d="M30 400H450"/></g>
- <g class="heat"><path d="M120 150c-12-16 12-28 0-44s12-28 0-44"/><path d="M180 150c-12-16 12-28 0-44s12-28 0-44"/><path d="M240 150c-12-16 12-28 0-44s12-28 0-44"/><path d="M300 150c-12-16 12-28 0-44s12-28 0-44"/></g>
- <g class="d"><rect x="80" y="170" width="260" height="170" rx="10"/><path d="M112 170v170M144 170v170M176 170v170M208 170v170M240 170v170M272 170v170M304 170v170"/></g>
- <g class="d"><path d="M340 200h22"/><rect x="362" y="184" width="26" height="40" rx="8"/><path d="M368 196h14M368 204h14M368 212h14"/></g>
- <path class="d pipe pipe--h" d="M100 340v60H20"/><path class="fl fl--h" d="M100 342v58H20"/>
- <path class="d pipe pipe--r" d="M320 340v40h130"/><path class="fl fl--r" d="M320 342v38h130"/>
- <text class="an" x="24" y="420">ALLER 55 °C</text>
- <text class="an" x="368" y="372">RETOUR</text>
- <text class="an" x="364" y="246">VANNE THERMO.</text>
- <g class="thermo"><rect class="d" x="410" y="60" width="18" height="110" rx="9"/><circle class="d" cx="419" cy="182" r="14"/><rect class="thermo__fill" x="414" y="70" width="8" height="112" rx="4"/><text class="an" x="398" y="50" text-anchor="middle"><tspan class="thermo__val">21</tspan> °C</text></g>
-</svg>'''
-
 ART["tap"] = '''
 <svg class="art" viewBox="0 0 480 480" aria-hidden="true">
  <g class="grid-ax"><path d="M30 440H450"/><path d="M290 30V440"/></g>
@@ -141,7 +125,7 @@ ART["gauge"] = '''
  <g class="checks">
   <g><path class="ck" d="M350 132l8 8 16-16"/><text class="an" x="384" y="138">PRESSION</text></g>
   <g><path class="ck" d="M350 192l8 8 16-16"/><text class="an" x="384" y="198">ROBINETS</text></g>
-  <g><path class="ck" d="M350 252l8 8 16-16"/><text class="an" x="384" y="258">BOILER</text></g>
+  <g><path class="ck" d="M350 252l8 8 16-16"/><text class="an" x="384" y="258">WC</text></g>
   <g><path class="ck" d="M350 312l8 8 16-16"/><text class="an" x="384" y="318">ÉCOULEMENTS</text></g>
  </g>
 </svg>'''
@@ -153,21 +137,7 @@ def _arc(cx, cy, r, a0, a1):
     return "%.1f %.1fA%s %s 0 0 1 %.1f %.1f" % (x0, y0, r, r, x1, y1)
 ART["gauge"] = ART["gauge"].replace('d="M%s"', 'd="M%s"' % _arc(190, 210, 100, 135 + 4 * 27, 135 + 7 * 27))
 
-ART["boiler"] = '''
-<svg class="art" viewBox="0 0 480 480" aria-hidden="true">
- <defs><linearGradient id="bgrad" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#3D8BFF"/><stop offset=".55" stop-color="#8C7CF0"/><stop offset="1" stop-color="#F0603F"/></linearGradient>
- <clipPath id="tank"><rect x="152" y="62" width="176" height="356" rx="86"/></clipPath></defs>
- <g clip-path="url(#tank)"><rect class="boil" x="150" y="60" width="180" height="360" fill="url(#bgrad)"/></g>
- <g class="d"><rect x="150" y="60" width="180" height="360" rx="88"/><rect x="138" y="48" width="204" height="384" rx="100" class="ghost"/></g>
- <g class="d element"><path d="M180 390h20l10-16 10 32 10-32 10 32 10-32 10 32 10-16h20"/></g>
- <path class="d pipe pipe--c" d="M20 400h130"/><path class="fl fl--c" d="M20 400h130"/>
- <path class="d pipe pipe--h" d="M330 100h130"/><path class="fl fl--h" d="M330 100h130"/>
- <g class="d"><rect x="66" y="384" width="36" height="32" rx="4"/><path d="M84 384v-16M76 368h16"/></g>
- <text class="an" x="24" y="440">EAU FROIDE</text><text class="an" x="56" y="356">GROUPE DE SÉCURITÉ</text>
- <text class="an" x="350" y="88">EAU CHAUDE</text>
- <g class="dial"><circle class="d" cx="400" cy="250" r="34"/><text class="an an--big" x="400" y="258" text-anchor="middle"><tspan class="boil__val">60</tspan>°</text></g>
- <path class="lead" d="M330 250h36"/>
-</svg>'''
+
 
 # decorative pipe run for inner page heroes
 ART["run"] = '''
