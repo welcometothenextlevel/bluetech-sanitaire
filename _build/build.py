@@ -8,7 +8,7 @@ from svg import LOGO, LOGO_SYMBOL, ARROW, ARROW_UR, PHONE, MAIL, PIN, PLUS, CLOS
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "docs")
 BASE = "https://welcometothenextlevel.github.io/bluetech-sanitaire/"
-V = "3"
+V = "4"
 NOINDEX = True  # keep the site out of Google while the phone number and reviews are placeholders
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -103,7 +103,7 @@ SERVICES = [
               ("Où se trouve ma vanne d’arrêt principale ?", "Le plus souvent près du compteur d’eau, à la cave ou dans une gaine technique. En appartement, il existe souvent des vannes sur le collecteur de l’étage et sous chaque appareil."),
               ("Connaîtrai-je le prix avant la réparation ?", "Nous vous expliquons le problème et la solution avant d’intervenir. Pour des travaux plus importants, vous recevez un devis."),
               ("Intervenez-vous pour les régies et les PPE ?", "Oui, pour les locataires, les propriétaires, les copropriétés et les régies.")],
-         photos=["evacuations-controlees"]),
+         photos=["colonne-chute"]),
     dict(slug="entretien", icon="gauge", art="gauge", title="Entretien & maintenance", short="Préventif · Contrôles",
          spec="Robinetterie · Vannes · Écoulements",
          card="Robinetterie, chasses d’eau, vannes, écoulements : l’entretien qui évite les dépannages.",
@@ -132,7 +132,6 @@ for k, s in enumerate(SERVICES):
 # ------------------------------------------------------------------ work (the client's own photos, captions describe what is visible)
 WORK = [
     ("wc-douche-collecteur", "Implantation tracée", "WC et douche implantés au trait sur le mur brut, collecteur de distribution en attente.", "encastre", 1200, 1600),
-    ("evacuations-controlees", "Raccords contrôlés", "Évacuations posées et contrôlées raccord par raccord — chaque assemblage marqué « OK ».", "evac", 1440, 2048),
     ("salle-de-bains-sauge", "Salle de bains terminée", "Mosaïque vert sauge, lavabo suspendu, miroir lumineux et étagères en verre.", "sdb", 1500, 2000),
     ("double-bati-ventilation", "Gaine technique double", "Deux bâtis-supports, colonne de chute et ventilation réunis dans une même gaine.", "encastre", 1500, 2000),
     ("gaine-collecteurs", "Distribution par collecteurs", "Collecteurs eau froide / eau chaude et alimentations gainées vers chaque appareil.", "encastre", 1500, 2000),
@@ -257,14 +256,6 @@ def footer():
    <nav class="ft__col" aria-label="Services"><p class="mono">Services</p><ul>%(svc)s</ul></nav>
    <nav class="ft__col" aria-label="Entreprise"><p class="mono">Entreprise</p><ul><li><a href="{R}realisations">Réalisations</a></li><li><a href="{R}entreprise">L’entreprise</a></li><li><a href="{R}contact">Contact & devis</a></li><li><a href="{R}mentions-legales">Mentions légales</a></li></ul></nav>
    <div class="ft__col"><p class="mono">Contact</p><ul><li><a href="%(tel)s">%(phd)s</a></li><li><a href="%(wa)s" target="_blank" rel="noopener">WhatsApp</a></li>%(mail)s<li><a href="%(maps)s" target="_blank" rel="noopener">%(street)s<br>%(zip)s %(city)s</a></li></ul></div>
-  </div>
-  <div class="cartouche" aria-label="Informations légales">
-   <div class="c c--logo"><span class="mono">Entreprise</span><b>%(name)s</b></div>
-   <div class="c"><span class="mono">Siège</span><b>%(street)s, %(zip)s %(city)s</b></div>
-   <div class="c"><span class="mono">IDE</span><b>%(ide)s</b></div>
-   <div class="c"><span class="mono">Projet</span><b>Votre installation</b></div>
-   <div class="c"><span class="mono">Échelle</span><b>1 : 1</b></div>
-   <div class="c"><span class="mono">Date</span><b data-today>2026</b></div>
   </div>
   <div class="ft__bot"><span>© <span data-year>2026</span> %(name)s</span><a href="{R}mentions-legales">Mentions légales & confidentialité</a></div>
  </div>
@@ -527,9 +518,6 @@ def quick_form(service_title="", ident="qf"):
 XRAY_SVG = '''<svg class="xr" viewBox="0 0 1500 2000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
  <defs><pattern id="xg" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none"/></pattern></defs>
  <rect class="xr__grid" width="1500" height="2000" fill="url(#xg)"/>
- <g class="xr__ax"><path d="M800 1080V1990"/><path d="M770 1110l60 60M830 1110l-60 60"/><text x="820" y="1100">AXE LAVABO</text></g>
- <g class="xr__frame"><rect x="520" y="1090" width="560" height="700" rx="6"/><path d="M520 1560h560M560 1790v60M1040 1790v60"/></g>
- <text class="xr__t" x="1090" y="1600">BÂTI-SUPPORT</text>
  <g class="xr__box"><rect x="70" y="1820" width="190" height="120" rx="8"/><path d="M95 1860h140M95 1900h140"/><text x="70" y="1800">COLLECTEUR EF / EC</text></g>
  <path class="xr__p xr__p--c" d="M260 1862H700V1600"/><path class="xr__f xr__f--c" d="M260 1862H700V1600"/>
  <path class="xr__p xr__p--h" d="M260 1902H860V1600"/><path class="xr__f xr__f--h" d="M260 1902H860V1600"/>
@@ -610,10 +598,6 @@ def page_home():
    <p>Bluetech Sanitaire est une entreprise de Prilly spécialisée dans les installations sanitaires. Nous posons, rénovons, entretenons et dépannons — avec la même rigueur sur un chantier neuf que pour une fuite sous un évier.</p>
    <p>Nos photos de chantier le montrent : axes tracés au mur, conduites repérées, raccords contrôlés et marqués. C’est ce travail invisible qui fait durer une installation.</p>
    <a class="tlink" href="{R}entreprise">Découvrir l’entreprise %(arrow)s</a>
-  </div>
-  <div class="fiche" data-r>
-   <p class="mono fiche__h">Fiche technique <span>BTS — 2026</span></p>
-   <dl>%(fiche)s</dl>
   </div>
  </div>
 </section>
@@ -837,7 +821,7 @@ def page_work():
   <nav class="crumbs mono" aria-label="Fil d’Ariane" data-intro><a href="{HOME}">Accueil</a><span>/</span><span aria-current="page">Réalisations</span></nav>
   <p class="kicker" data-intro><span>[%d photos]</span> Chantiers Bluetech</p>
   <h1 class="pg-hero__h" data-intro data-split>Le travail, avant qu’il ne disparaisse.</h1>
-  <p class="pg-hero__p" data-intro>Une fois les plaques posées et le carrelage terminé, plus personne ne voit les réseaux. Nous les photographions avant : axes tracés, conduites repérées, raccords marqués « OK ».</p>
+  <p class="pg-hero__p" data-intro>Une fois les plaques posées et le carrelage terminé, plus personne ne voit les réseaux. Nous les photographions avant : axes tracés, conduites repérées, raccords contrôlés.</p>
  </div>
 </section>
 <section class="sec gal">
@@ -902,19 +886,12 @@ def page_company():
  </div>
 </section>
 
-<section class="sec">
- <div class="wrap fiche-pg">
-  %(fhead)s
-  <div class="fiche fiche--lg" data-r><p class="mono fiche__h">Fiche d’identité <span>VD</span></p><dl>%(fiche)s</dl></div>
- </div>
-</section>
 %(process)s
 %(zone)s
-%(cta)s''' % dict(ph=pic("evacuations-controlees", "Évacuations marquées « OK » après contrôle, derrière un bâti-support", "(max-width: 900px) 92vw, 40vw", w=1440, h=2048),
+%(cta)s''' % dict(ph=pic("double-bati-ventilation", "Gaine technique avec deux bâtis-supports, colonne de chute et ventilation", "(max-width: 900px) 92vw, 40vw"),
                   shead=sec_head("01", "Notre approche", "Le soin se voit surtout là où on ne regarde pas."), mgr=e(CO["manager"]),
                   vhead=sec_head("02", "Engagements", "Quatre principes, sur chaque chantier."), vals=vals,
-                  fhead=sec_head("03", "Fiche d’identité", "Les faits, simplement."), fiche=fiche_html,
-                  process=process_section("04"), zone=zone_section("05"), cta=cta_band())
+                  process=process_section("03"), zone=zone_section("04"), cta=cta_band())
     return render("entreprise.html", "L’entreprise : Bluetech Sanitaire Sàrl, Prilly | Installations sanitaires",
                   "Bluetech Sanitaire Sàrl, entreprise de sanitaire fondée en 2026 à Prilly (VD). Associé-gérant : Ahmet Hoti. Notre approche, nos engagements.",
                   body, key="entreprise", body_cls="p-company")

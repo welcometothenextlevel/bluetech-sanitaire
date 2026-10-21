@@ -110,15 +110,36 @@ grey.append("M%s V%s M%s A%s 0 0 1 %s" % (P(rx_, rt_), f(rb_), P(rx_, rt_ + rrad
 # e
 grey.append(e_glyph(441.2, 157.8, 488.0, 206.0, w))
 
-VB = "8 10 568 202"
+# small "Sàrl" next to BlueTech (same rounded strokes, grey)
+w3 = 5.4
+sarl = []
+h3 = w3 / 2
+def S_glyph(x0, y0, x1, y1, sw):
+    sx0, sx1, st, sb = x0 + sw / 2, x1 - sw / 2, y0 + sw / 2, y1 - sw / 2
+    cxm, mid = (sx0 + sx1) / 2, (st + sb) / 2
+    ryu, ryl = (mid - st) / 2, (sb - mid) / 2
+    rxu, rxl = (sx1 - sx0) / 2 * 0.92, (sx1 - sx0) / 2
+    q0 = ell(cxm, st + ryu, rxu, ryu, -28); q2 = ell(cxm, mid + ryl, rxl, ryl, 152)
+    return "M%s A%s 0 1 0 %s A%s 0 1 1 %s" % (P(*q0), P(rxu, ryu), P(cxm, mid), P(rxl, ryl), P(*q2))
+base_y, xt = 120.5, 93.5
+sarl.append(S_glyph(584, 84, 605, base_y, w3))
+sarl.append(bowl(609, xt, 632, base_y, w3))
+sarl.append("M%s L%s" % (P(615.5, 82.5), P(621.5, 88.5)))  # grave accent
+rx0, rr0 = 637 + h3, 650 - h3
+sarl.append("M%s V%s M%s A%s 0 0 1 %s" % (P(rx0, xt + h3), f(base_y - h3), P(rx0, xt + h3 + (rr0 - rx0)), P(rr0 - rx0, rr0 - rx0), P(rr0, xt + h3)))
+lx3, lr3 = 654 + h3, 663 - h3
+sarl.append("M%s V%s A%s 0 0 0 %s" % (P(lx3, 82 + h3), f(base_y - h3 - (lr3 - lx3)), P(lr3 - lx3, lr3 - lx3), P(lr3, base_y - h3)))
+DS = " ".join(sarl)
+
+VB = "8 10 662 202"
 DB, DG = " ".join(blue), " ".join(grey)
 DOTS = "".join('<circle cx="%s" cy="%s" r="%s"/>' % (f(x), f(y), f(r)) for x, y, r in dots)
 
 
 def svg(b="#2A5598", s="#9AA0AC", attrs=""):
     return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="%s"%s><g fill="none" stroke-linecap="round" stroke-linejoin="round">'
-            '<path stroke="%s" stroke-width="%s" d="%s"/><path stroke="%s" stroke-width="%s" d="%s"/></g><g fill="%s">%s</g></svg>') % (
-        VB, attrs, b, W, DB, s, w, DG, s, DOTS)
+            '<path stroke="%s" stroke-width="%s" d="%s"/><path stroke="%s" stroke-width="%s" d="%s"/><path stroke="%s" stroke-width="%s" d="%s"/></g><g fill="%s">%s</g></svg>') % (
+        VB, attrs, b, W, DB, s, w, DG, s, w3, DS, s, DOTS)
 
 
 if __name__ == "__main__":
