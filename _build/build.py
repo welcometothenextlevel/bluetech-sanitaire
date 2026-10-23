@@ -8,7 +8,7 @@ from svg import LOGO, LOGO_SYMBOL, ARROW, ARROW_UR, PHONE, MAIL, PIN, PLUS, CLOS
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "docs")
 BASE = "https://welcometothenextlevel.github.io/bluetech-sanitaire/"
-V = "5"
+V = "6"
 NOINDEX = True  # keep the site out of Google while the phone number and reviews are placeholders
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -214,7 +214,7 @@ def header(key):
   </nav>
   <div class="hd__act">
    <a class="hd__tel" href="%(tel)s">%(phone)s<span>%(phd)s</span></a>
-   <a class="btn btn--blue btn--sm hd__cta" href="{R}contact"><span class="btn__fill"></span><span class="btn__t">Demander un devis</span></a>
+   <a class="btn btn--blue btn--sm hd__cta" href="{R}contact"><span class="btn__fill"></span><span class="btn__t">Devis gratuit</span></a>
    <button class="hd__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu" data-burger><span></span><span></span><span></span></button>
   </div>
  </div>
@@ -268,7 +268,7 @@ def footer():
 <nav class="dock" aria-label="Contact rapide" data-dock>
  <a href="%(tel)s">%(phone)s<span>Appeler</span></a>
  <a class="dock__wa" href="%(wa)s" target="_blank" rel="noopener">%(waic)s<span>WhatsApp</span></a>
- <a class="dock__cta" href="{R}contact">%(arrowur)s<span>Devis</span></a>
+ <a class="dock__cta" href="{R}contact">%(arrowur)s<span>Devis gratuit</span></a>
 </nav>
 <div class="sidepipe" aria-hidden="true"><i data-sidepipe></i><b></b></div>''' % dict(
         logo=LOGO, svc=svc, tel=TEL, phd=PHONE_DISPLAY, wa=WA_HELLO, waic=WA, phone=PHONE, mail=("<li>%s</li>" % mail) if mail else "",
@@ -364,7 +364,7 @@ def cta_band():
   </div>
   <p class="cta__hint mono" aria-hidden="true"><i></i>Touchez l’eau</p>
  </div>
-</section>''' % (btn("{R}contact", "Demander un devis", "btn--white"), TEL, PHONE, WA_HELLO, WA)
+</section>''' % (btn("{R}contact", "Devis gratuit", "btn--white"), TEL, PHONE, WA_HELLO, WA)
 
 
 def reviews_section(num="06"):
@@ -564,7 +564,7 @@ def page_home():
   <div class="co" data-co="mani"><i></i><span class="co__l"></span><span class="co__t"><b>Collecteur laiton</b><em>5 départs · PE-X Ø 16</em></span></div>
  </div>
  <div class="hero__in wrap" data-hero-in>
-  <p class="kicker" data-intro><span>[Prilly · VD]</span> Installations sanitaires</p>
+  <p class="kicker" data-intro><span>[Prilly · VD]</span> Installations sanitaires · Devis gratuit</p>
   <h1 class="hero__t" data-intro data-split>La précision derrière chaque mur.</h1>
   <p class="hero__p" data-intro>Bluetech Sanitaire installe, rénove, entretient et dépanne vos installations sanitaires, à Prilly et dans toute la région lausannoise.</p>
   <div class="hero__b" data-intro>
@@ -654,7 +654,7 @@ def page_home():
 %(reviews)s
 %(zone)s
 %(cta)s
-''' % dict(cta1=btn("{R}contact", "Demander un devis"), arrow=ARROW, ide=CO["ide"],
+''' % dict(cta1=btn("{R}contact", "Devis gratuit"), arrow=ARROW, ide=CO["ide"],
            svchead=sec_head("02", "Services", "Quatre départs, une même exigence.", "Comme un collecteur distribue l’eau vers chaque appareil, nos quatre domaines partent du même point : un travail propre, contrôlé et expliqué."),
            rows=svc_rows, xsvg=XRAY_SVG,
            xpic=pic("salle-de-bains-sauge", "Salle de bains terminée : mosaïque vert sauge, lavabo suspendu et miroir rond lumineux", "(max-width: 900px) 92vw, 46vw", cls="xray__base"),
@@ -751,7 +751,7 @@ def page_service(s):
  </div>
 </section>
 %(ctab)s
-''' % dict(title=s["title"], n=s["n"], tot="%02d" % len(SERVICES), short=s["short"], h1=s["h1"], lead=s["lead"], cta=btn("{R}contact?service=" + s["slug"], "Demander un devis"),
+''' % dict(title=s["title"], n=s["n"], tot="%02d" % len(SERVICES), short=s["short"], h1=s["h1"], lead=s["lead"], cta=btn("{R}contact?service=" + s["slug"], "Devis gratuit"),
            tel=TEL, phone=PHONE, art=ART[s["art"]], spec=s["spec"], band=band, nph=len(photos),
            ihead=sec_head("01", "Prestations", "Ce que nous faisons."), items=items, tips=tips,
            process=process_section("02", "Comment ça se passe.", steps, "Déroulement"),

@@ -122,25 +122,29 @@ def S_glyph(x0, y0, x1, y1, sw):
     q0 = ell(cxm, st + ryu, rxu, ryu, -28); q2 = ell(cxm, mid + ryl, rxl, ryl, 152)
     return "M%s A%s 0 1 0 %s A%s 0 1 1 %s" % (P(*q0), P(rxu, ryu), P(cxm, mid), P(rxl, ryl), P(*q2))
 # "Sàrl" follows "Sanitaire" at the same size; the whole second line is then centred under BlueTech
-grey.append(S_glyph(512, 142, 559.5, 206, w))
-grey.append(bowl(566, 157.8, 613.8, 206.2, w))
-grey.append("M%s L%s" % (P(581, 141), P(590.5, 150.5)))  # grave accent
+sarl = []
+sarl.append(S_glyph(512, 142, 559.5, 206, w))
+sarl.append(bowl(566, 157.8, 613.8, 206.2, w))
+sarl.append("M%s L%s" % (P(581, 141), P(590.5, 150.5)))  # grave accent
 rx0, rr0 = 623 + hs, 651.4 - hs
-grey.append("M%s V%s M%s A%s 0 0 1 %s" % (P(rx0, 157.8 + hs), f(205.5 - hs), P(rx0, 157.8 + hs + (rr0 - rx0)), P(rr0 - rx0, rr0 - rx0), P(rr0, 157.8 + hs)))
+sarl.append("M%s V%s M%s A%s 0 0 1 %s" % (P(rx0, 157.8 + hs), f(205.5 - hs), P(rx0, 157.8 + hs + (rr0 - rx0)), P(rr0 - rx0, rr0 - rx0), P(rr0, 157.8 + hs)))
 lx3, lr3 = 659 + hs, 677 - hs
-grey.append("M%s V%s A%s 0 0 0 %s" % (P(lx3, 139 + hs), f(206 - hs - (lr3 - lx3)), P(lr3 - lx3, lr3 - lx3), P(lr3, 206 - hs)))
-LINE2_DX = (14.5 + 569.5) / 2 - (113.5 + 677) / 2
-DS = ""
+sarl.append("M%s V%s A%s 0 0 0 %s" % (P(lx3, 139 + hs), f(206 - hs - (lr3 - lx3)), P(lr3 - lx3, lr3 - lx3), P(lr3, 206 - hs)))
+SARL_K = 0.6                      # "Sàrl" is a small suffix: 60 % of "Sanitaire", same baseline
+SARL_X = 504                       # where it starts, just after "Sanitaire"
+SARL_T = "translate(%s 206) scale(%s) translate(-512 -206)" % (SARL_X, SARL_K)
+LINE2_DX = (14.5 + 569.5) / 2 - (113.5 + SARL_X + (677 - 512) * SARL_K) / 2
+DS = " ".join(sarl)
 
-VB = "6 10 572 202"
+VB = "8 10 568 202"
 DB, DG = " ".join(blue), " ".join(grey)
 DOTS = "".join('<circle cx="%s" cy="%s" r="%s"/>' % (f(x), f(y), f(r)) for x, y, r in dots)
 
 
 def svg(b="#2A5598", s="#9AA0AC", attrs=""):
     return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="%s"%s><g fill="none" stroke-linecap="round" stroke-linejoin="round">'
-            '<path stroke="%s" stroke-width="%s" d="%s"/><g transform="translate(%s 0)"><path stroke="%s" stroke-width="%s" d="%s"/></g></g><g fill="%s" transform="translate(%s 0)">%s</g></svg>') % (
-        VB, attrs, b, W, DB, f(LINE2_DX), s, w, DG, s, f(LINE2_DX), DOTS)
+            '<path stroke="%s" stroke-width="%s" d="%s"/><g transform="translate(%s 0)"><path stroke="%s" stroke-width="%s" d="%s"/><path stroke="%s" stroke-width="%s" transform="%s" d="%s"/></g></g><g fill="%s" transform="translate(%s 0)">%s</g></svg>') % (
+        VB, attrs, b, W, DB, f(LINE2_DX), s, w, DG, s, w, SARL_T, DS, s, f(LINE2_DX), DOTS)
 
 
 if __name__ == "__main__":
