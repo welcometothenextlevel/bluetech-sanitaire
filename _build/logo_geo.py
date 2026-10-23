@@ -121,25 +121,26 @@ def S_glyph(x0, y0, x1, y1, sw):
     rxu, rxl = (sx1 - sx0) / 2 * 0.92, (sx1 - sx0) / 2
     q0 = ell(cxm, st + ryu, rxu, ryu, -28); q2 = ell(cxm, mid + ryl, rxl, ryl, 152)
     return "M%s A%s 0 1 0 %s A%s 0 1 1 %s" % (P(*q0), P(rxu, ryu), P(cxm, mid), P(rxl, ryl), P(*q2))
-base_y, xt = 120.5, 93.5
-sarl.append(S_glyph(584, 84, 605, base_y, w3))
-sarl.append(bowl(609, xt, 632, base_y, w3))
-sarl.append("M%s L%s" % (P(615.5, 82.5), P(621.5, 88.5)))  # grave accent
-rx0, rr0 = 637 + h3, 650 - h3
-sarl.append("M%s V%s M%s A%s 0 0 1 %s" % (P(rx0, xt + h3), f(base_y - h3), P(rx0, xt + h3 + (rr0 - rx0)), P(rr0 - rx0, rr0 - rx0), P(rr0, xt + h3)))
-lx3, lr3 = 654 + h3, 663 - h3
-sarl.append("M%s V%s A%s 0 0 0 %s" % (P(lx3, 82 + h3), f(base_y - h3 - (lr3 - lx3)), P(lr3 - lx3, lr3 - lx3), P(lr3, base_y - h3)))
-DS = " ".join(sarl)
+# "Sàrl" follows "Sanitaire" at the same size; the whole second line is then centred under BlueTech
+grey.append(S_glyph(512, 142, 559.5, 206, w))
+grey.append(bowl(566, 157.8, 613.8, 206.2, w))
+grey.append("M%s L%s" % (P(581, 141), P(590.5, 150.5)))  # grave accent
+rx0, rr0 = 623 + hs, 651.4 - hs
+grey.append("M%s V%s M%s A%s 0 0 1 %s" % (P(rx0, 157.8 + hs), f(205.5 - hs), P(rx0, 157.8 + hs + (rr0 - rx0)), P(rr0 - rx0, rr0 - rx0), P(rr0, 157.8 + hs)))
+lx3, lr3 = 659 + hs, 677 - hs
+grey.append("M%s V%s A%s 0 0 0 %s" % (P(lx3, 139 + hs), f(206 - hs - (lr3 - lx3)), P(lr3 - lx3, lr3 - lx3), P(lr3, 206 - hs)))
+LINE2_DX = (14.5 + 569.5) / 2 - (113.5 + 677) / 2
+DS = ""
 
-VB = "8 10 662 202"
+VB = "6 10 572 202"
 DB, DG = " ".join(blue), " ".join(grey)
 DOTS = "".join('<circle cx="%s" cy="%s" r="%s"/>' % (f(x), f(y), f(r)) for x, y, r in dots)
 
 
 def svg(b="#2A5598", s="#9AA0AC", attrs=""):
     return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="%s"%s><g fill="none" stroke-linecap="round" stroke-linejoin="round">'
-            '<path stroke="%s" stroke-width="%s" d="%s"/><path stroke="%s" stroke-width="%s" d="%s"/><path stroke="%s" stroke-width="%s" d="%s"/></g><g fill="%s">%s</g></svg>') % (
-        VB, attrs, b, W, DB, s, w, DG, s, w3, DS, s, DOTS)
+            '<path stroke="%s" stroke-width="%s" d="%s"/><g transform="translate(%s 0)"><path stroke="%s" stroke-width="%s" d="%s"/></g></g><g fill="%s" transform="translate(%s 0)">%s</g></svg>') % (
+        VB, attrs, b, W, DB, f(LINE2_DX), s, w, DG, s, f(LINE2_DX), DOTS)
 
 
 if __name__ == "__main__":

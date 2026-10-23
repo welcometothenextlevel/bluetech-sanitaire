@@ -467,6 +467,9 @@
   }
 
   /* ---------------- forms → WhatsApp / e-mail ---------------- */
+  // phones: hide the bottom contact bar while typing, so it never covers the form's buttons
+  d.addEventListener('focusin', function (e) { if (isMob() && e.target.matches('input, textarea, select')) de.classList.add('typing'); });
+  d.addEventListener('focusout', function () { setTimeout(function () { var a = d.activeElement; if (!a || !a.matches || !a.matches('input, textarea, select')) de.classList.remove('typing'); }, 60); });
   function send(via, subject, lines) {
     var text = lines.filter(function (l) { return l !== null; }).join('\n');
     if (via === 'mail' && MAIL) { W.location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text); return 'Votre messagerie s’ouvre avec le message prêt à être envoyé.'; }

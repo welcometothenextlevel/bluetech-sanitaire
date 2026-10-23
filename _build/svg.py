@@ -6,10 +6,10 @@ import logo_geo as _lg
 LOGO_SYMBOL = ('<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="%s">'
                '<g fill="none" stroke-linecap="round" stroke-linejoin="round">'
                '<path style="stroke:var(--logo-b,#2A5598)" stroke-width="%s" d="%s"/>'
-               '<path style="stroke:var(--logo-s,#9AA0AC)" stroke-width="%s" d="%s"/>'
-               '<path style="stroke:var(--logo-s,#9AA0AC)" stroke-width="%s" d="%s"/></g>'
-               '<g style="fill:var(--logo-s,#9AA0AC)">%s</g></symbol></svg>') % (_lg.VB, _lg.W, _lg.DB, _lg.w, _lg.DG, _lg.w3, _lg.DS, _lg.DOTS)
-LOGO = '<svg class="logo" viewBox="%s" role="img" aria-label="BlueTech Sanitaire"><use href="#logo"/></svg>' % _lg.VB
+               '<path style="stroke:var(--logo-s,#9AA0AC)" stroke-width="%s" transform="translate(%s 0)" d="%s"/></g>'
+               '<g style="fill:var(--logo-s,#9AA0AC)" transform="translate(%s 0)">%s</g></symbol></svg>') % (
+    _lg.VB, _lg.W, _lg.DB, _lg.w, _lg.f(_lg.LINE2_DX), _lg.DG, _lg.f(_lg.LINE2_DX), _lg.DOTS)
+LOGO = '<svg class="logo" viewBox="%s" role="img" aria-label="BlueTech Sanitaire Sàrl"><use href="#logo"/></svg>' % _lg.VB
 
 
 def i(d, cls="ic", vb="0 0 24 24"):

@@ -8,14 +8,14 @@ from svg import LOGO, LOGO_SYMBOL, ARROW, ARROW_UR, PHONE, MAIL, PIN, PLUS, CLOS
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "docs")
 BASE = "https://welcometothenextlevel.github.io/bluetech-sanitaire/"
-V = "4"
+V = "5"
 NOINDEX = True  # keep the site out of Google while the phone number and reviews are placeholders
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
 PHONE_DISPLAY = "079 552 24 70"
 PHONE_TEL = "+41795522470"
 WA_NUMBER = "41795522470"   # same number, assumed to be on WhatsApp
-EMAIL = ""                 # e.g. "info@bluetech-sanitaire.ch" — the forms' e-mail option appears once set
+EMAIL = "bluetechsanitaire@gmail.com"                 # e.g. "info@bluetech-sanitaire.ch" — the forms' e-mail option appears once set
 GOOGLE_REVIEWS_URL = ""    # Google Business "write a review" link, once the profile exists
 
 TEL = "tel:" + PHONE_TEL
@@ -26,7 +26,7 @@ WA_HELLO = wa("Bonjour Bluetech Sanitaire, ")
 
 # ------------------------------------------------------------------ company (Registre du commerce VD / Moneyhouse, 2026-10-08)
 CO = dict(name="Bluetech Sanitaire Sàrl", brand="Bluetech Sanitaire", street="Route de Renens 2", zip="1008", city="Prilly",
-          canton="VD", ide="CHE-227.168.225", rc="CH-550.1.258.051-8", manager="Ahmet Hoti", founded="2026-07-08",
+          canton="VD", ide="CHE-227.168.225", rc="CH-550.1.258.051-8", founded="2026-07-08",
           lat=46.52856, lng=6.60343)
 ADDR = "%s, %s %s" % (CO["street"], CO["zip"], CO["city"])
 MAPS = "https://www.google.com/maps/search/?api=1&query=" + quote(CO["name"] + " " + ADDR)
@@ -40,7 +40,7 @@ SERVICES = [
          h1="Installations sanitaires, du réseau à la robinetterie.",
          lead="Construction neuve ou transformation : nous posons l’installation complète — distribution d’eau froide et d’eau chaude, évacuations, bâtis-supports et appareils — avec des axes tracés au mur et des raccords contrôlés un à un.",
          mt="Installations sanitaires à Prilly et Lausanne",
-         md="Installations sanitaires neuves et transformations à Prilly, Lausanne et environs : distribution EF/EC, évacuations, bâtis-supports, appareils. Devis sans engagement.",
+         md="Installations sanitaires neuves et transformations à Prilly, Lausanne et environs : distribution EF/EC, évacuations, bâtis-supports, appareils. Devis gratuit.",
          items=[("Distribution EF / EC", "Réseaux d’eau froide et d’eau chaude par collecteurs, conduites gainées et repérées."),
                 ("Évacuations & colonnes", "Colonnes de chute, conduites d’évacuation et ventilations, posées avec les pentes adéquates."),
                 ("Bâtis-supports", "Systèmes encastrés pour WC suspendus, lavabos, douches et baignoires, implantés au trait."),
@@ -54,7 +54,7 @@ SERVICES = [
          faq=[("Intervenez-vous en construction neuve comme en rénovation ?", "Oui. Nous réalisons des installations complètes sur des chantiers neufs et adaptons les réseaux existants lors de transformations, en appartement comme en maison."),
               ("Travaillez-vous avec les architectes et les autres entreprises ?", "Oui. Nous coordonnons nos interventions avec l’architecte ou le maître d’ouvrage, ainsi qu’avec le carreleur, l’électricien et le plâtrier, pour que chaque étape arrive au bon moment."),
               ("Quand l’installation est-elle contrôlée ?", "Avant la fermeture des parois : les réseaux sont mis en pression et chaque raccord est vérifié. C’est le moment où un défaut se corrige facilement — plus tard, il coûte un mur."),
-              ("Comment obtenir un devis ?", "Décrivez votre projet via le formulaire, sur WhatsApp ou par téléphone. Nous convenons d’une visite si nécessaire, puis vous recevez un devis détaillé, sans engagement.")],
+              ("Comment obtenir un devis ?", "Décrivez votre projet via le formulaire, sur WhatsApp ou par téléphone. Nous convenons d’une visite si nécessaire, puis vous recevez un devis détaillé, gratuit et sans engagement.")],
          photos=["wc-douche-collecteur", "double-bati-ventilation"]),
     dict(slug="renovation-salle-de-bains", icon="shower", art="shower", title="Rénovation de salles de bains", short="Douche · Bain · WC · Vasques",
          spec="Dépose · Adaptation · Pose",
@@ -62,7 +62,7 @@ SERVICES = [
          h1="Votre salle de bains, repensée jusque dans les murs.",
          lead="Remplacer une baignoire par une douche de plain-pied, passer à un WC suspendu, installer une double vasque : nous adaptons les conduites existantes et posons vos nouveaux équipements, en coordination avec les autres artisans.",
          mt="Rénovation de salle de bains à Prilly et Lausanne",
-         md="Rénovation de salles de bains à Prilly, Lausanne et environs : douche à l’italienne, WC suspendu, vasques, adaptation des conduites. Devis sans engagement.",
+         md="Rénovation de salles de bains à Prilly, Lausanne et environs : douche à l’italienne, WC suspendu, vasques, adaptation des conduites. Devis gratuit.",
          items=[("Dépose & adaptation", "Démontage des anciens appareils, adaptation des alimentations et des évacuations."),
                 ("Douche de plain-pied", "Douche à l’italienne avec caniveau ou siphon de sol, mitigeur thermostatique."),
                 ("Baignoire", "Remplacement ou pose de baignoire, robinetterie apparente ou encastrée."),
@@ -235,11 +235,12 @@ def header(key):
   <div class="menu__foot">
    <a class="btn btn--blue" href="%(tel)s"><span class="btn__fill"></span><span class="btn__t">Appeler</span>%(phone)s</a>
    <a class="btn btn--wa" href="%(wa)s" target="_blank" rel="noopener"><span class="btn__fill"></span><span class="btn__t">WhatsApp</span>%(waic)s</a>
+   %(mailbtn)s
    <p class="mono">%(addr)s</p>
   </div>
  </div>
 </div>''' % dict(logo=LOGO, chev=CHEV, mega=mega, arrow=ARROW, nav=nav, tel=TEL, phone=PHONE, phd=PHONE_DISPLAY, msvc=msvc,
-                  wa=WA_HELLO, waic=WA, addr=e(ADDR), nsvc="%02d" % len(SERVICES), svccur=" is-cur" if key == "services" else "")
+                  wa=WA_HELLO, waic=WA, addr=e(ADDR), mailbtn=('<a class="btn btn--glass menu__mail" href="mailto:%s"><span class="btn__fill"></span><span class="btn__t">E-mail</span>%s</a>' % (EMAIL, MAIL)) if EMAIL else "", nsvc="%02d" % len(SERVICES), svccur=" is-cur" if key == "services" else "")
 
 
 def footer():
@@ -281,7 +282,6 @@ def jsonld_business():
                      "addressRegion": "VD", "addressCountry": "CH"},
          "geo": {"@type": "GeoCoordinates", "latitude": CO["lat"], "longitude": CO["lng"]},
          "areaServed": [t[0] for t in TOWNS[:12]], "foundingDate": CO["founded"], "taxID": CO["ide"],
-         "founder": {"@type": "Person", "name": CO["manager"]},
          "knowsAbout": ["Installations sanitaires", "Rénovation de salles de bains", "Dépannage sanitaire", "Entretien sanitaire"]}
     if not PHONE_TEL.startswith("+41000"):
         d["telephone"] = PHONE_TEL
@@ -356,7 +356,7 @@ def cta_band():
  <div class="cta__in wrap">
   <p class="kicker kicker--light" data-r><span>[—]</span> Une fuite, un projet, une question ?</p>
   <h2 class="cta__t" data-split>Parlons de votre installation.</h2>
-  <p class="cta__p" data-r>Décrivez votre besoin en quelques mots — une photo suffit souvent pour un premier avis.</p>
+  <p class="cta__p" data-r>Décrivez votre besoin en quelques mots — une photo suffit souvent pour un premier avis. Le devis est gratuit.</p>
   <div class="cta__b" data-r>
    %s
    <a class="btn btn--glass" href="%s"><span class="btn__fill"></span><span class="btn__t">Appeler</span>%s</a>
@@ -445,7 +445,7 @@ def zone_section(num="07"):
 def process_section(num="05", title="Quatre étapes, aucune approximation.", steps=None, label="Méthode"):
     steps = steps or [
         ("Visite & relevé", "Nous venons voir, mesurons et écoutons. Pas de devis à l’aveugle.", "Sur place"),
-        ("Devis détaillé", "Poste par poste, avec un planning réaliste. Vous savez ce que vous payez.", "Sans engagement"),
+        ("Devis détaillé", "Poste par poste, avec un planning réaliste. Vous savez ce que vous payez.", "Gratuit"),
         ("Implantation & pose", "Axes tracés au mur, réseaux fixés et repérés, raccords marqués un à un.", "Comme sur nos photos"),
         ("Essai & mise en service", "Mise en pression et contrôle d’étanchéité avant fermeture, puis lieux rendus propres.", "Étanche"),
     ]
@@ -511,7 +511,7 @@ def quick_form(service_title="", ident="qf"):
  </div>
  <p class="form__note">Votre message s’ouvre dans WhatsApp%s, prêt à être envoyé. Rien n’est enregistré sur ce site.</p>
  <p class="form__ok" role="status" aria-live="polite"></p>
-</form>''' % (opts, WA, ('<button class="btn btn--line" type="submit" data-via="mail"><span class="btn__fill"></span><span class="btn__t">Par e-mail</span>%s</button>' % MAIL) if EMAIL else "", " ou votre messagerie" if EMAIL else "")
+</form>''' % (opts, WA, ('<button class="btn btn--line" type="submit" data-via="mail"><span class="btn__fill"></span><span class="btn__t">Envoyer par e-mail</span>%s</button>' % MAIL) if EMAIL else "", " ou votre messagerie" if EMAIL else "")
 
 
 # ------------------------------------------------------------------ x-ray schematic (aligned on salle-de-bains-sauge, 1500×2000)
@@ -551,9 +551,6 @@ def page_home():
      <a class="wc__ph" href="{R}realisations#%s">%s<span class="crop" aria-hidden="true"></span></a>
      <figcaption><span class="mono">R—%02d</span><b>%s</b><span>%s</span></figcaption>
     </figure>''' % (n, pic(n, t + " — " + c, "(max-width: 900px) 78vw, 30vw", w=w, h=h), k + 1, t, c) for k, (n, t, c, tag, w, h) in enumerate(WORK[:8]))
-    fiche = [("Raison sociale", CO["name"]), ("Siège", ADDR), ("Direction", CO["manager"] + ", associé-gérant"),
-             ("Domaine", "Installations sanitaires"), ("Interventions", "Neuf · Rénovation · Entretien · Dépannage"), ("IDE", CO["ide"])]
-    fiche_html = "".join('<div><dt>%s</dt><dd>%s</dd></div>' % (e(a), e(b)) for a, b in fiche)
     body = '''
 <section class="hero" data-hero>
  <div class="hero__stick">
@@ -583,7 +580,7 @@ def page_home():
   <li><span class="mono">Siège</span>Route de Renens 2, Prilly</li>
   <li><span class="mono">Métier</span>Installations sanitaires</li>
   <li><span class="mono">IDE</span>%(ide)s</li>
-  <li><span class="mono">Devis</span>Sans engagement</li>
+  <li><span class="mono">Devis</span>Gratuit et sans engagement</li>
  </ul></div>
  <div class="hero__scroll" data-hero-cue aria-hidden="true"><span class="mono">Suivez l’eau</span><i></i></div>
  <div class="hero__meter" aria-hidden="true"><i data-hero-meter></i></div>
@@ -657,7 +654,7 @@ def page_home():
 %(reviews)s
 %(zone)s
 %(cta)s
-''' % dict(cta1=btn("{R}contact", "Demander un devis"), arrow=ARROW, ide=CO["ide"], fiche=fiche_html,
+''' % dict(cta1=btn("{R}contact", "Demander un devis"), arrow=ARROW, ide=CO["ide"],
            svchead=sec_head("02", "Services", "Quatre départs, une même exigence.", "Comme un collecteur distribue l’eau vers chaque appareil, nos quatre domaines partent du même point : un travail propre, contrôlé et expliqué."),
            rows=svc_rows, xsvg=XRAY_SVG,
            xpic=pic("salle-de-bains-sauge", "Salle de bains terminée : mosaïque vert sauge, lavabo suspendu et miroir rond lumineux", "(max-width: 900px) 92vw, 46vw", cls="xray__base"),
@@ -666,7 +663,7 @@ def page_home():
            work=work, nwork=len(WORK), process=process_section(), reviews=reviews_section(), zone=zone_section(), cta=cta_band())
     body = FALLBACK_SYMBOL + body
     return render("index.html", "Bluetech Sanitaire — Installations sanitaires à Prilly",
-                  "Bluetech Sanitaire Sàrl, Prilly (VD) : installations sanitaires, rénovation de salles de bains, dépannage et entretien à Prilly, Lausanne et environs. Devis sans engagement.",
+                  "Bluetech Sanitaire Sàrl, Prilly (VD) : installations sanitaires, rénovation de salles de bains, dépannage et entretien à Prilly, Lausanne et environs. Devis gratuit.",
                   body, key="home", body_cls="p-home",
                   scripts='<script type="module" src="{R}assets/js/hero3d.js?v={V}"></script>')
 
@@ -850,11 +847,6 @@ def page_company():
               ("Transparence", "Devis détaillé, explications claires, aucune surprise. Vous savez ce que nous faisons et pourquoi."),
               ("Durabilité", "Matériaux éprouvés et installations pensées pour durer, faciles à entretenir.")]
     vals = "".join('<li class="val" data-r><span class="mono">%02d</span><h3>%s</h3><p>%s</p></li>' % (k + 1, t, p) for k, (t, p) in enumerate(values))
-    fiche = [("Raison sociale", CO["name"]), ("Forme juridique", "Société à responsabilité limitée"), ("Siège", ADDR),
-             ("Associé-gérant", CO["manager"]), ("Inscription au RC", "Canton de Vaud, juillet 2026"), ("N° IDE", CO["ide"]),
-             ("Domaine", "Installations sanitaires"),
-             ("Activités", "Pose, rénovation, entretien, dépannage et réparation d’installations sanitaires")]
-    fiche_html = "".join('<div><dt>%s</dt><dd>%s</dd></div>' % (e(a), e(b)) for a, b in fiche)
     body = '''
 <section class="pg-hero">
  <div class="hero__grid" aria-hidden="true"></div>
@@ -874,7 +866,6 @@ def page_company():
    %(shead)s
    <p data-r>Nous intervenons sur l’ensemble des installations sanitaires : construction neuve, transformation, rénovation de salles de bains, entretien et dépannage, pour les particuliers, les copropriétés et les régies.</p>
    <p data-r>Notre conviction : la qualité d’une installation se joue là où personne ne regarde. C’est pourquoi nous traçons les axes avant de poser, repérons chaque conduite, contrôlons chaque raccord et photographions nos réseaux avant fermeture.</p>
-   <p class="sign" data-r><b>%(mgr)s</b><span>Associé-gérant, Bluetech Sanitaire Sàrl</span></p>
   </div>
  </div>
 </section>
@@ -889,11 +880,11 @@ def page_company():
 %(process)s
 %(zone)s
 %(cta)s''' % dict(ph=pic("double-bati-ventilation", "Gaine technique avec deux bâtis-supports, colonne de chute et ventilation", "(max-width: 900px) 92vw, 40vw"),
-                  shead=sec_head("01", "Notre approche", "Le soin se voit surtout là où on ne regarde pas."), mgr=e(CO["manager"]),
+                  shead=sec_head("01", "Notre approche", "Le soin se voit surtout là où on ne regarde pas."),
                   vhead=sec_head("02", "Engagements", "Quatre principes, sur chaque chantier."), vals=vals,
                   process=process_section("03"), zone=zone_section("04"), cta=cta_band())
     return render("entreprise.html", "L’entreprise : Bluetech Sanitaire Sàrl, Prilly | Installations sanitaires",
-                  "Bluetech Sanitaire Sàrl, entreprise de sanitaire fondée en 2026 à Prilly (VD). Associé-gérant : Ahmet Hoti. Notre approche, nos engagements.",
+                  "Bluetech Sanitaire Sàrl, entreprise de sanitaire fondée en 2026 à Prilly (VD). Notre approche, nos engagements.",
                   body, key="entreprise", body_cls="p-company")
 
 
@@ -909,7 +900,7 @@ def page_contact():
  <div class="hero__grid" aria-hidden="true"></div>
  <div class="wrap">
   <nav class="crumbs mono" aria-label="Fil d’Ariane" data-intro><a href="{HOME}">Accueil</a><span>/</span><span aria-current="page">Contact & devis</span></nav>
-  <p class="kicker" data-intro><span>[Devis sans engagement]</span> Réponse personnalisée</p>
+  <p class="kicker" data-intro><span>[Devis gratuit]</span> Sans engagement</p>
   <h1 class="pg-hero__h" data-intro data-split>Parlons de votre projet.</h1>
   <p class="pg-hero__p" data-intro>Trois étapes, deux minutes. Votre demande nous parvient sur WhatsApp%(ormail)s, prête à être envoyée.</p>
  </div>
@@ -970,7 +961,7 @@ def page_contact():
                      bien=chips("bien", ["Appartement", "Maison", "Immeuble / PPE", "Commerce"]),
                      delai=chips("delai", ["Urgent", "Dans le mois", "Dans les 3 mois", "Pas pressé"]),
                      left=LEFT, arrow=ARROW, waic=WA,
-                     mailbtn=('<button class="btn btn--line" type="submit" data-via="mail" hidden><span class="btn__fill"></span><span class="btn__t">Par e-mail</span>%s</button>' % MAIL) if EMAIL else "",
+                     mailbtn=('<button class="btn btn--line" type="submit" data-via="mail" hidden><span class="btn__fill"></span><span class="btn__t">Envoyer par e-mail</span>%s</button>' % MAIL) if EMAIL else "",
                      ormail=" ou par e-mail" if EMAIL else "", tel=TEL, phone=PHONE, phd=PHONE_DISPLAY, wa=WA_HELLO, maps=MAPS, pin=PIN,
                      mailcard=('<a class="ccard__l" href="mailto:%s">%s<span><b>%s</b>E-mail</span></a>' % (EMAIL, MAIL, EMAIL)) if EMAIL else "",
                      street=e(CO["street"]), zip=CO["zip"], city=CO["city"], addr=e(ADDR), embed=MAP_EMBED)
@@ -993,7 +984,7 @@ def page_legal():
   <div class="legal__b">
    <h2>Éditeur du site</h2>
    <p>%(name)s<br>%(street)s<br>%(zip)s %(city)s, Suisse</p>
-   <p>Numéro IDE : %(ide)s<br>Registre du commerce du canton de Vaud : %(rc)s<br>Associé-gérant : %(mgr)s</p>
+   <p>Numéro IDE : %(ide)s<br>Registre du commerce du canton de Vaud : %(rc)s</p>
    <h2>Responsabilité</h2>
    <p>Les informations publiées sur ce site sont fournies à titre indicatif et peuvent être modifiées sans préavis. Elles ne constituent pas une offre ; seul un devis écrit engage %(name)s.</p>
    <h2>Propriété intellectuelle</h2>
@@ -1005,7 +996,7 @@ def page_legal():
    <p>Ce site est hébergé par GitHub Pages (GitHub, Inc., San Francisco, États-Unis).</p>
   </div>
  </div>
-</section>''' % dict(name=e(CO["name"]), street=e(CO["street"]), zip=CO["zip"], city=CO["city"], ide=CO["ide"], rc=CO["rc"], mgr=e(CO["manager"]),
+</section>''' % dict(name=e(CO["name"]), street=e(CO["street"]), zip=CO["zip"], city=CO["city"], ide=CO["ide"], rc=CO["rc"],
                      ormail=" ou par e-mail" if EMAIL else "")
     return render("mentions-legales.html", "Mentions légales | Bluetech Sanitaire", "Mentions légales et protection des données du site de Bluetech Sanitaire Sàrl, Prilly.",
                   body, key="legal", body_cls="p-legal")
