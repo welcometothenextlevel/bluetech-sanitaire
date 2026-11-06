@@ -156,6 +156,7 @@ REVIEWS_ARE_EXAMPLES = False
 REVIEWS = [
     ("Ilir K.", "Avis Google", "J’ai fait appel à cette entreprise pour une intervention sanitaire. Ils ont été très réactifs, rapides et professionnels. Un service efficace et de qualité. Je recommande vivement !"),
     ("Shirine", "Avis Google", "Hello, je recommande énormément, j’ai eu un problème de fuite, ils ont su trouver la fuite d’eau en très peu de temps. Merci à Bluetech Sanitaire Sàrl pour son intervention."),
+    ("Neti B.", "Avis Google", "Entreprise très professionnel et à l’écoute. Je recommande fortement. Merci encore pour les travaux."),
     ("Mohamed H.", "Avis Google", "Entreprise super professionnelle et à l’écoute. Ils m’ont bien aidé avec une fuite malgré le week-end. Équipe aimable, respectueuse, efficace et des prix super raisonnable ! Très rare de nos jours ! Merci"),
     ("Aljan H.", "Avis Google", "Franchement super professionnel, travail propre et soigné. Il est sérieux, sympa et surtout il connaît très bien son métier. Tout s’est parfaitement bien passé, je recommande sans hésiter !"),
     ("Hana H.", "Avis Google", None),
