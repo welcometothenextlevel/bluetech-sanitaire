@@ -727,6 +727,9 @@ a:hover>.crop,button:hover>.crop,.story__ph .crop{opacity:1;inset:18px}
 .hero__in>*:nth-child(2){animation-delay:.07s}.hero__in>*:nth-child(3){animation-delay:.14s}.hero__in>*:nth-child(4){animation-delay:.21s}.hero__spec{animation-delay:.28s}
 @keyframes heroIn{from{opacity:.01;transform:translateY(24px)}to{opacity:1;transform:none}}
 
+.rv__none{color:var(--ink-3)!important;font-size:15px!important}
+.gsum span a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+
 /* opening hours */
 .ccard__h{margin:4px 0 0;padding:4px 16px;font-size:15px}
 .ccard__h b{display:block;color:var(--ink);font-weight:600}
@@ -896,7 +899,7 @@ a:hover>.crop,button:hover>.crop,.story__ph .crop{opacity:1;inset:18px}
   .wiz__nav .btn{flex:1 1 auto}
   .wiz__nav [data-wiz-next],.wiz__nav [data-via]{margin-left:0}
   .opts{grid-template-columns:1fr}
-  .gsum{width:100%}
+  .gsum{width:100%;flex-wrap:wrap}.gsum .btn{width:100%}
   .btn{height:54px;padding:0 22px}
   .menu__foot{grid-template-columns:1fr}
 }

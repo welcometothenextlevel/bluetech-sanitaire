@@ -12,7 +12,7 @@ BASE = "https://bluetech-sarl.com/"
 DOMAIN = "bluetech-sarl.com"
 LASTMOD = "2026-11-06"
 GSC_TOKEN = ""             # Google Search Console "HTML tag" verification code, if used
-V = "11"
+V = "12"
 NOINDEX = False
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -149,17 +149,14 @@ WORK = [
 ]
 WORK_TAGS = [("all", "Tout"), ("encastre", "Installations encastrées"), ("evac", "Évacuations"), ("sdb", "Salles de bains")]
 
-# ------------------------------------------------------------------ reviews — PLACEHOLDERS, swap for real Google reviews
-REVIEWS_ARE_EXAMPLES = True
+# ------------------------------------------------------------------ reviews — real Google reviews, copied word for word
+# Shown as first name + initial: the owner doesn't want his surname on the site. text=None means stars only.
+REVIEWS_ARE_EXAMPLES = False
+GOOGLE_RATING, GOOGLE_COUNT = "5,0", 3
 REVIEWS = [
-    ("Prénom N.", "Rénovation de salle de bains", "Travail soigné du début à la fin. Le chantier était propre chaque soir et le planning a été respecté."),
-    ("Prénom N.", "Dépannage", "Fuite sous l’évier réparée rapidement. Explications claires, prix annoncé avant l’intervention."),
-    ("Prénom N.", "Robinetterie", "Tous nos mitigeurs remplacés en une matinée. Très professionnel, je recommande."),
-    ("Prénom N.", "Installation sanitaire", "Excellente coordination avec notre architecte. Une équipe précise et à l’écoute."),
-    ("Prénom N.", "Installation sanitaire", "Implantation soignée, tout était expliqué. On voit que le travail derrière les murs est fait avec sérieux."),
-    ("Prénom N.", "Entretien", "Détartrage et contrôle de l’installation sans mauvaise surprise. Ponctuel et efficace."),
-    ("Prénom N.", "Rénovation de salle de bains", "Notre baignoire est devenue une douche de plain-pied magnifique. Merci pour le conseil."),
-    ("Prénom N.", "Dépannage", "WC qui coulait depuis des semaines, réglé en une visite. Rapide et sympathique."),
+    ("Ilir K.", "Avis Google", "J’ai fait appel à cette entreprise pour une intervention sanitaire. Ils ont été très réactifs, rapides et professionnels. Un service efficace et de qualité. Je recommande vivement !"),
+    ("Aljan H.", "Avis Google", "Franchement super professionnel, travail propre et soigné. Il est sérieux, sympa et surtout il connaît très bien son métier. Tout s’est parfaitement bien passé, je recommande sans hésiter !"),
+    ("Hana H.", "Avis Google", None),
 ]
 
 # ------------------------------------------------------------------ area (inferred from the Prilly address — confirm with the owner)
@@ -395,9 +392,9 @@ def reviews_section(num="06"):
         cards.append('''<article class="rv">
  <header class="rv__h"><span class="rv__av" aria-hidden="true">%s</span><span class="rv__n"><b>%s</b><em>%s</em></span>%s</header>
  %s
- <p>%s</p>
  %s
-</article>''' % (name[0], e(name), e(svc), GOOGLE, STARS, e(txt), '<span class="rv__ex">Exemple</span>' if REVIEWS_ARE_EXAMPLES else ""))
+ %s
+</article>''' % (name[0], e(name), e(svc), GOOGLE, STARS, ("<p>%s</p>" % e(txt)) if txt else '<p class="rv__none">5 étoiles sur Google, sans commentaire.</p>', '<span class="rv__ex">Exemple</span>' if REVIEWS_ARE_EXAMPLES else ""))
     track = "".join(cards)
     write = ('<a class="btn btn--line btn--sm" href="%s" target="_blank" rel="noopener"><span class="btn__fill"></span><span class="btn__t">Laisser un avis</span>%s</a>' % (GOOGLE_REVIEWS_URL, ARROW_UR)) if GOOGLE_REVIEWS_URL else ""
     return '''
@@ -406,7 +403,7 @@ def reviews_section(num="06"):
   %s
   <div class="gsum" data-r>
    %s
-   <div><b>Avis Google</b>%s<span>Les premiers avis de nos clients arrivent bientôt.</span></div>
+   <div><b>%s sur Google</b>%s<span><a href="%s" target="_blank" rel="noopener">%d avis à lire sur Google</a></span></div>
    %s
   </div>
  </div>
@@ -414,7 +411,7 @@ def reviews_section(num="06"):
   <div class="rev__track" data-track>%s</div>
  </div>
  <div class="wrap rev__ctl"><button class="rbtn" type="button" data-rail-prev aria-label="Avis précédents">%s</button><button class="rbtn" type="button" data-rail-next aria-label="Avis suivants">%s</button></div>
-</section>''' % (sec_head(num, "Avis clients", "La parole est à nos clients."), GOOGLE, STARS, write, track, LEFT, RIGHT)
+</section>''' % (sec_head(num, "Avis clients", "La parole est à nos clients."), GOOGLE, GOOGLE_RATING, STARS, "https://search.google.com/local/reviews?placeid=" + PLACE_ID, GOOGLE_COUNT, write, track, LEFT, RIGHT)
 
 
 def zone_section(num="07"):

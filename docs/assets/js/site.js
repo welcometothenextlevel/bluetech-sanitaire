@@ -333,10 +333,13 @@
   var rail = $('[data-rail]');
   if (rail) (function () {
     var tr = $('[data-track]', rail);
-    var orig = tr.innerHTML; tr.innerHTML = orig + orig;
-    $$('.rv', tr).slice(tr.children.length / 2).forEach(function (c) { c.setAttribute('aria-hidden', 'true'); });
+    var orig = tr.innerHTML, count = tr.children.length;
+    // few reviews: repeat the set so the loop always fills the screen
+    var reps = Math.max(1, Math.ceil(W.innerWidth * 1.15 / Math.max(1, tr.scrollWidth)));
+    orig = new Array(reps + 1).join(orig); tr.innerHTML = orig + orig;
+    $$('.rv', tr).slice(count).forEach(function (c) { c.setAttribute('aria-hidden', 'true'); });
     var x = 0, v = 0, target = RM ? 0 : -0.5, drag = false, sx = 0, sp = 0, lastX = 0, lastT = 0, vel = 0, half = 1, run = false, raf = 0, prevT = 0, tween = null;
-    var measure = function () { half = tr.scrollWidth / 2; };
+    var measure = function () { var c = tr.children; half = c[c.length / 2].offsetLeft - c[0].offsetLeft; };
     measure(); W.addEventListener('resize', measure); W.addEventListener('load', measure);
     var wrap = function () { while (x <= -half) x += half; while (x > 0) x -= half; };
     var frame = function (now) {
