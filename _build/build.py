@@ -4,7 +4,7 @@ CSS and JS are hand-written in docs/assets; bump V after editing them (cache-bus
 import os, json, html, math
 from urllib.parse import quote
 from seo_content import LOCAL, GUIDES
-from svg import LOGO, LOGO_SYMBOL, ARROW, ARROW_UR, PHONE, MAIL, PIN, PLUS, CLOSE, CHECK, CHEV, LEFT, RIGHT, WA, GOOGLE, STARS, SICON, ART
+from svg import LOGO, LOGO_SYMBOL, ARROW, ARROW_UR, PHONE, MAIL, PIN, PLUS, CLOSE, CHECK, CHEV, LEFT, RIGHT, WA, GOOGLE, STAR, STARS, SICON, ART
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "docs")
@@ -12,7 +12,7 @@ BASE = "https://bluetech-sarl.com/"
 DOMAIN = "bluetech-sarl.com"
 LASTMOD = "2026-11-06"
 GSC_TOKEN = ""             # Google Search Console "HTML tag" verification code, if used
-V = "12"
+V = "14"
 NOINDEX = False
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -23,6 +23,7 @@ EMAIL = "bluetechsanitaire@gmail.com"                 # e.g. "info@bluetech-sani
 PLACE_ID = "ChIJ6XWmlSBuw64RJ1hQD23PMJU"   # Google Business Profile (service-area business, no public address)
 GBP_URL = "https://www.google.com/maps?cid=10750320377848682535"
 GOOGLE_REVIEWS_URL = "https://search.google.com/local/writereview?placeid=" + PLACE_ID
+REVIEWS_URL = "https://search.google.com/local/reviews?placeid=" + PLACE_ID
 
 TEL = "tel:" + PHONE_TEL
 WA_URL = "https://wa.me/" + WA_NUMBER
@@ -152,11 +153,11 @@ WORK_TAGS = [("all", "Tout"), ("encastre", "Installations encastrées"), ("evac"
 # ------------------------------------------------------------------ reviews — real Google reviews, copied word for word
 # Shown as first name + initial: the owner doesn't want his surname on the site. text=None means stars only.
 REVIEWS_ARE_EXAMPLES = False
-GOOGLE_RATING, GOOGLE_COUNT = "5,0", 3
 REVIEWS = [
     ("Ilir K.", "Avis Google", "J’ai fait appel à cette entreprise pour une intervention sanitaire. Ils ont été très réactifs, rapides et professionnels. Un service efficace et de qualité. Je recommande vivement !"),
     ("Aljan H.", "Avis Google", "Franchement super professionnel, travail propre et soigné. Il est sérieux, sympa et surtout il connaît très bien son métier. Tout s’est parfaitement bien passé, je recommande sans hésiter !"),
     ("Hana H.", "Avis Google", None),
+    ("Valmir A.", "Avis Google", None),
 ]
 
 # ------------------------------------------------------------------ area (inferred from the Prilly address — confirm with the owner)
@@ -217,6 +218,7 @@ def header(key):
    %(nav)s
   </nav>
   <div class="hd__act">
+   <a class="hd__rate" href="%(rv)s" target="_blank" rel="noopener" aria-label="5 étoiles sur Google : lire les avis">%(g)s<span><span class="stars" aria-hidden="true">%(s5)s</span><em>5 étoiles sur Google</em></span></a>
    <a class="hd__tel" href="%(tel)s">%(phone)s<span>%(phd)s</span></a>
    <a class="btn btn--blue btn--sm hd__cta" href="{R}contact"><span class="btn__fill"></span><span class="btn__t">Devis gratuit</span></a>
    <button class="hd__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu" data-burger><span></span><span></span><span></span></button>
@@ -244,7 +246,7 @@ def header(key):
   </div>
  </div>
 </div>''' % dict(logo=LOGO, chev=CHEV, mega=mega, arrow=ARROW, nav=nav, tel=TEL, phone=PHONE, phd=PHONE_DISPLAY, msvc=msvc,
-                  wa=WA_HELLO, waic=WA, addr=e(ADDR), mailbtn=('<a class="btn btn--glass menu__mail" href="mailto:%s"><span class="btn__fill"></span><span class="btn__t">E-mail</span>%s</a>' % (EMAIL, MAIL)) if EMAIL else "", nsvc="%02d" % len(SERVICES), svccur=" is-cur" if key == "services" else "")
+                  rv=REVIEWS_URL, g=GOOGLE, s5=STAR * 5, wa=WA_HELLO, waic=WA, addr=e(ADDR), mailbtn=('<a class="btn btn--glass menu__mail" href="mailto:%s"><span class="btn__fill"></span><span class="btn__t">E-mail</span>%s</a>' % (EMAIL, MAIL)) if EMAIL else "", nsvc="%02d" % len(SERVICES), svccur=" is-cur" if key == "services" else "")
 
 
 def footer():
@@ -403,7 +405,7 @@ def reviews_section(num="06"):
   %s
   <div class="gsum" data-r>
    %s
-   <div><b>%s sur Google</b>%s<span><a href="%s" target="_blank" rel="noopener">%d avis à lire sur Google</a></span></div>
+   <div><b>5 étoiles sur Google</b>%s<span><a href="%s" target="_blank" rel="noopener">Lire les avis sur Google</a></span></div>
    %s
   </div>
  </div>
@@ -411,7 +413,7 @@ def reviews_section(num="06"):
   <div class="rev__track" data-track>%s</div>
  </div>
  <div class="wrap rev__ctl"><button class="rbtn" type="button" data-rail-prev aria-label="Avis précédents">%s</button><button class="rbtn" type="button" data-rail-next aria-label="Avis suivants">%s</button></div>
-</section>''' % (sec_head(num, "Avis clients", "La parole est à nos clients."), GOOGLE, GOOGLE_RATING, STARS, "https://search.google.com/local/reviews?placeid=" + PLACE_ID, GOOGLE_COUNT, write, track, LEFT, RIGHT)
+</section>''' % (sec_head(num, "Avis clients", "La parole est à nos clients."), GOOGLE, STARS, REVIEWS_URL, write, track, LEFT, RIGHT)
 
 
 def zone_section(num="07"):

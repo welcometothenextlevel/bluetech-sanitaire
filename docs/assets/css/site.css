@@ -730,6 +730,23 @@ a:hover>.crop,button:hover>.crop,.story__ph .crop{opacity:1;inset:18px}
 .rv__none{color:var(--ink-3)!important;font-size:15px!important}
 .gsum span a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 
+/* Google rating badge in the header */
+.hd__rate{display:inline-flex;align-items:center;gap:8px;color:var(--ink);white-space:nowrap;flex:none}
+.hd__rate .g-logo{width:24px;height:24px;flex:none}
+.hd__rate>span{display:flex;flex-direction:column;gap:2px;line-height:1.1}
+.hd__rate .stars{gap:1px}
+.hd__rate .star{width:12px;height:12px}
+.hd__rate em{font:500 11.5px/1.1 var(--f-b);font-style:normal;color:var(--ink-2)}
+.menu-open .hd__rate em{color:#fff}
+.hd__rate:hover em{color:var(--blue)}
+@media (min-width:1181px) and (max-width:1340px){.hd__tel span{display:none}.hd__tel{padding:0}}
+@media (max-width:374px){.hd__rate .g-logo{width:20px;height:20px}.hd__rate em{font-size:10.5px}}
+
+/* long e-mail address must wrap on small phones */
+.ccard__l,.ask__c a{min-width:0}
+.ccard__l span,.ask__c span,.ft__col a{min-width:0;overflow-wrap:anywhere}
+@media (max-width:900px){.contact__g{grid-template-columns:minmax(0,1fr)}}
+
 /* opening hours */
 .ccard__h{margin:4px 0 0;padding:4px 16px;font-size:15px}
 .ccard__h b{display:block;color:var(--ink);font-weight:600}
