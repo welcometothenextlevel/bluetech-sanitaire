@@ -155,6 +155,7 @@ WORK_TAGS = [("all", "Tout"), ("encastre", "Installations encastrées"), ("evac"
 REVIEWS_ARE_EXAMPLES = False
 REVIEWS = [
     ("Ilir K.", "Avis Google", "J’ai fait appel à cette entreprise pour une intervention sanitaire. Ils ont été très réactifs, rapides et professionnels. Un service efficace et de qualité. Je recommande vivement !"),
+    ("Mohamed H.", "Avis Google", "Entreprise super professionnelle et à l’écoute. Ils m’ont bien aidé avec une fuite malgré le week-end. Équipe aimable, respectueuse, efficace et des prix super raisonnable ! Très rare de nos jours ! Merci"),
     ("Aljan H.", "Avis Google", "Franchement super professionnel, travail propre et soigné. Il est sérieux, sympa et surtout il connaît très bien son métier. Tout s’est parfaitement bien passé, je recommande sans hésiter !"),
     ("Hana H.", "Avis Google", None),
     ("Valmir A.", "Avis Google", None),
