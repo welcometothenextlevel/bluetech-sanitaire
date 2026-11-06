@@ -12,7 +12,7 @@ BASE = "https://bluetech-sarl.com/"
 DOMAIN = "bluetech-sarl.com"
 LASTMOD = "2026-11-06"
 GSC_TOKEN = ""             # Google Search Console "HTML tag" verification code, if used
-V = "14"
+V = "15"
 NOINDEX = False
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -291,7 +291,7 @@ def footer():
 def jsonld_business():
     d = {"@context": "https://schema.org", "@type": "Plumber", "@id": BASE + "#entreprise", "name": CO["name"], "legalName": CO["name"],
          "alternateName": ["Bluetech Sanitaire", "Bluetech Sàrl", "BlueTech Sanitaire Sàrl Prilly"],
-         "description": "Plombier et installateur sanitaire à Prilly (VD) : installations sanitaires, rénovation de salles de bains, dépannage et entretien à Lausanne et environs. Devis gratuit.",
+         "description": "Plombier et installateur sanitaire à Prilly (VD) : installations sanitaires, rénovation de salles de bains, dépannage et entretien dans tout le canton de Vaud. Devis gratuit.",
          "url": BASE, "logo": BASE + "assets/img/logo.png", "image": BASE + "assets/img/og.jpg",
          "telephone": PHONE_TEL, "email": EMAIL, "hasMap": GBP_URL, "sameAs": [GBP_URL],
          "address": {"@type": "PostalAddress", "streetAddress": CO["street"], "postalCode": CO["zip"], "addressLocality": CO["city"],
@@ -822,7 +822,7 @@ def page_services():
 %s
 %s''' % (cards, process_section("—"), cta_band())
     return render("services/index.html", "Services de plomberie à Prilly et Lausanne | Bluetech Sàrl",
-                  "Plombier à Prilly : installations sanitaires, rénovation de salles de bains, dépannage et entretien à Lausanne et environs. Devis gratuit.",
+                  "Plombier à Prilly : installations sanitaires, rénovation de salles de bains, dépannage et entretien dans tout le canton de Vaud. Devis gratuit.",
                   body, key="services", body_cls="p-services", jsonld=[crumbs_ld(("Accueil", ""), ("Services", "services/"))])
 
 
@@ -991,7 +991,7 @@ def page_contact():
                      mailcard=('<a class="ccard__l" href="mailto:%s">%s<span><b>%s</b>E-mail</span></a>' % (EMAIL, MAIL, EMAIL)) if EMAIL else "",
                      street=e(CO["street"]), zip=CO["zip"], city=CO["city"], addr=e(ADDR), embed=MAP_EMBED)
     return render("contact.html", "Contact et devis gratuit | Bluetech Sanitaire Sàrl, Prilly",
-                  "Demandez un devis à Bluetech Sanitaire : installations sanitaires, salles de bains, dépannage et entretien à Prilly, Lausanne et environs.",
+                  "Demandez un devis à Bluetech Sanitaire : installations sanitaires, salles de bains, dépannage et entretien dans tout le canton de Vaud.",
                   body, key="contact", body_cls="p-contact", jsonld=[crumbs_ld(("Accueil", ""), ("Contact et devis", "contact"))])
 
 
