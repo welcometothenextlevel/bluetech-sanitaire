@@ -12,7 +12,7 @@ In `_build/build.py`:
 - `EMAIL` — empty; once set, the forms offer "send by e-mail" too.
 - `REVIEWS` / `REVIEWS_ARE_EXAMPLES` — the Google review cards are examples; replace with real reviews and set the flag to `False`.
 - `GOOGLE_REVIEWS_URL` — "Laisser un avis" button appears once set.
-- `NOINDEX` — `True` keeps the site out of Google while placeholders remain.
-- `TOWNS` — area served is inferred from the Prilly address.
+- `NOINDEX` — `False`: the site is indexed on bluetech-sarl.com. `GSC_TOKEN` takes a Search Console HTML-tag code if needed.
+- `TOWNS` and `_build/seo_content.py` — area served is inferred from the Prilly address; local pages and guides live in seo_content.py. Each local page needs its own text: no mass-produced town pages.
 
 Facts used (Registre du commerce VD, 2026-10-08): Bluetech Sanitaire Sàrl, Route de Renens 2, 1008 Prilly, IDE CHE-227.168.225, associé-gérant Ahmet Hoti, inscrite en juillet 2026. All photos are the company's own.

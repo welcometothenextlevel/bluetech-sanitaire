@@ -3,20 +3,26 @@
 CSS and JS are hand-written in docs/assets; bump V after editing them (cache-buster)."""
 import os, json, html, math
 from urllib.parse import quote
+from seo_content import LOCAL, GUIDES
 from svg import LOGO, LOGO_SYMBOL, ARROW, ARROW_UR, PHONE, MAIL, PIN, PLUS, CLOSE, CHECK, CHEV, LEFT, RIGHT, WA, GOOGLE, STARS, SICON, ART
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "docs")
-BASE = "https://welcometothenextlevel.github.io/bluetech-sanitaire/"
-V = "6"
-NOINDEX = True  # keep the site out of Google while the phone number and reviews are placeholders
+BASE = "https://bluetech-sarl.com/"
+DOMAIN = "bluetech-sarl.com"
+LASTMOD = "2026-11-06"
+GSC_TOKEN = ""             # Google Search Console "HTML tag" verification code, if used
+V = "9"
+NOINDEX = False
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
 PHONE_DISPLAY = "079 552 24 70"
 PHONE_TEL = "+41795522470"
 WA_NUMBER = "41795522470"   # same number, assumed to be on WhatsApp
 EMAIL = "bluetechsanitaire@gmail.com"                 # e.g. "info@bluetech-sanitaire.ch" — the forms' e-mail option appears once set
-GOOGLE_REVIEWS_URL = ""    # Google Business "write a review" link, once the profile exists
+PLACE_ID = "ChIJ6XWmlSBuw64RJ1hQD23PMJU"   # Google Business Profile (service-area business, no public address)
+GBP_URL = "https://www.google.com/maps?cid=10750320377848682535"
+GOOGLE_REVIEWS_URL = "https://search.google.com/local/writereview?placeid=" + PLACE_ID
 
 TEL = "tel:" + PHONE_TEL
 WA_URL = "https://wa.me/" + WA_NUMBER
@@ -29,7 +35,7 @@ CO = dict(name="Bluetech Sanitaire Sàrl", brand="Bluetech Sanitaire", street="R
           canton="VD", ide="CHE-227.168.225", rc="CH-550.1.258.051-8", founded="2026-07-08",
           lat=46.52856, lng=6.60343)
 ADDR = "%s, %s %s" % (CO["street"], CO["zip"], CO["city"])
-MAPS = "https://www.google.com/maps/search/?api=1&query=" + quote(CO["name"] + " " + ADDR)
+MAPS = GBP_URL
 MAP_EMBED = "https://maps.google.com/maps?q=" + quote(ADDR) + "&z=16&output=embed"
 
 # ------------------------------------------------------------------ services
@@ -39,7 +45,7 @@ SERVICES = [
          card="Distribution, évacuations, bâtis-supports et appareils : des réseaux complets, posés proprement et contrôlés avant fermeture.",
          h1="Installations sanitaires, du réseau à la robinetterie.",
          lead="Construction neuve ou transformation : nous posons l’installation complète — distribution d’eau froide et d’eau chaude, évacuations, bâtis-supports et appareils — avec des axes tracés au mur et des raccords contrôlés un à un.",
-         mt="Installations sanitaires à Prilly et Lausanne",
+         mt="Installateur sanitaire à Prilly et Lausanne",
          md="Installations sanitaires neuves et transformations à Prilly, Lausanne et environs : distribution EF/EC, évacuations, bâtis-supports, appareils. Devis gratuit.",
          items=[("Distribution EF / EC", "Réseaux d’eau froide et d’eau chaude par collecteurs, conduites gainées et repérées."),
                 ("Évacuations & colonnes", "Colonnes de chute, conduites d’évacuation et ventilations, posées avec les pentes adéquates."),
@@ -59,9 +65,9 @@ SERVICES = [
     dict(slug="renovation-salle-de-bains", icon="shower", art="shower", title="Rénovation de salles de bains", short="Douche · Bain · WC · Vasques",
          spec="Dépose · Adaptation · Pose",
          card="Baignoire remplacée par une douche, WC suspendu, double vasque : nous adaptons les réseaux et posons les nouveaux équipements.",
-         h1="Votre salle de bains, repensée jusque dans les murs.",
+         h1="Rénovation de salle de bains, repensée jusque dans les murs.",
          lead="Remplacer une baignoire par une douche de plain-pied, passer à un WC suspendu, installer une double vasque : nous adaptons les conduites existantes et posons vos nouveaux équipements, en coordination avec les autres artisans.",
-         mt="Rénovation de salle de bains à Prilly et Lausanne",
+         mt="Rénovation de salle de bains à Lausanne",
          md="Rénovation de salles de bains à Prilly, Lausanne et environs : douche à l’italienne, WC suspendu, vasques, adaptation des conduites. Devis gratuit.",
          items=[("Dépose & adaptation", "Démontage des anciens appareils, adaptation des alimentations et des évacuations."),
                 ("Douche de plain-pied", "Douche à l’italienne avec caniveau ou siphon de sol, mitigeur thermostatique."),
@@ -81,9 +87,9 @@ SERVICES = [
     dict(slug="depannage", icon="tap", art="tap", title="Dépannage & réparations", short="Fuites · WC · Robinetterie",
          spec="Diagnostic · Réparation · Remplacement",
          card="Fuite, WC qui coule, écoulement bouché, robinet qui goutte : diagnostic clair, réparation propre.",
-         h1="Une fuite ? On s’en occupe.",
+         h1="Plombier dépannage : une fuite ? On s’en occupe.",
          lead="Robinet qui goutte, WC qui coule, écoulement bouché, raccord qui fuit : nous diagnostiquons, réparons ou remplaçons — et nous vous expliquons ce qui s’est passé.",
-         mt="Dépannage sanitaire : fuites, WC, robinetterie",
+         mt="Plombier dépannage à Lausanne et Prilly",
          md="Dépannage sanitaire à Prilly, Lausanne et environs : fuites, WC qui coule, robinetterie, écoulements bouchés, vannes d’arrêt. Appelez ou écrivez sur WhatsApp.",
          items=[("Fuites", "Recherche et réparation de fuites sur robinetterie, raccords et conduites apparentes."),
                 ("WC & chasses d’eau", "Mécanismes de chasse, robinets flotteurs, réservoirs encastrés : réglage ou remplacement."),
@@ -107,10 +113,10 @@ SERVICES = [
     dict(slug="entretien", icon="gauge", art="gauge", title="Entretien & maintenance", short="Préventif · Contrôles",
          spec="Robinetterie · Vannes · Écoulements",
          card="Robinetterie, chasses d’eau, vannes, écoulements : l’entretien qui évite les dépannages.",
-         h1="L’entretien qui évite les dépannages.",
+         h1="Entretien sanitaire : celui qui évite les dépannages.",
          lead="Une installation entretenue dure plus longtemps et gaspille moins d’eau. Révision de la robinetterie, contrôle des vannes et des chasses d’eau, écoulements : nous passons avant que le problème n’arrive.",
-         mt="Entretien et maintenance des installations sanitaires",
-         md="Entretien des installations sanitaires à Prilly, Lausanne et environs : robinetterie, chasses d’eau, vannes d’arrêt, réducteurs de pression, écoulements. Particuliers, PPE et régies.",
+         mt="Entretien sanitaire à Lausanne et Prilly",
+         md="Entretien sanitaire à Prilly, Lausanne et environs : robinetterie, chasses d’eau, vannes d’arrêt, écoulements. Particuliers, PPE et régies. Devis gratuit.",
          items=[("Robinetterie", "Aérateurs détartrés, joints et cartouches fatigués remplacés."),
                 ("Chasses d’eau", "Réglage des mécanismes, contrôle d’étanchéité des réservoirs encastrés."),
                 ("Vannes d’arrêt", "Contrôle et manœuvre des vannes, remplacement de celles qui grippent."),
@@ -258,6 +264,10 @@ def footer():
    <nav class="ft__col" aria-label="Entreprise"><p class="mono">Entreprise</p><ul><li><a href="{R}realisations">Réalisations</a></li><li><a href="{R}entreprise">L’entreprise</a></li><li><a href="{R}contact">Contact & devis</a></li><li><a href="{R}mentions-legales">Mentions légales</a></li></ul></nav>
    <div class="ft__col"><p class="mono">Contact</p><ul><li><a href="%(tel)s">%(phd)s</a></li><li><a href="%(wa)s" target="_blank" rel="noopener">WhatsApp</a></li>%(mail)s<li><a href="%(maps)s" target="_blank" rel="noopener">%(street)s<br>%(zip)s %(city)s</a></li></ul></div>
   </div>
+  <nav class="ft__zones" aria-label="Zones et conseils">
+   <p><a class="mono" href="{R}zone-intervention">Zone d’intervention</a>%(zones)s</p>
+   <p><a class="mono" href="{R}conseils/">Conseils</a>%(guides)s</p>
+  </nav>
   <div class="ft__bot"><span>© <span data-year>2026</span> %(name)s</span><a href="{R}mentions-legales">Mentions légales & confidentialité</a></div>
  </div>
 </footer>
@@ -271,23 +281,31 @@ def footer():
  <a class="dock__cta" href="{R}contact">%(arrowur)s<span>Devis gratuit</span></a>
 </nav>
 <div class="sidepipe" aria-hidden="true"><i data-sidepipe></i><b></b></div>''' % dict(
+        zones="".join('<a href="{R}%s">%s</a>' % (t["slug"], t["head"]) for t in LOCAL),
+        guides="".join('<a href="{R}conseils/%s">%s</a>' % (g["slug"], g["mt"].split(" :")[0]) for g in GUIDES),
         logo=LOGO, svc=svc, tel=TEL, phd=PHONE_DISPLAY, wa=WA_HELLO, waic=WA, phone=PHONE, mail=("<li>%s</li>" % mail) if mail else "",
         maps=MAPS, street=e(CO["street"]), zip=CO["zip"], city=CO["city"], name=e(CO["name"]), ide=CO["ide"], arrowur=ARROW_UR)
 
 
 def jsonld_business():
-    d = {"@context": "https://schema.org", "@type": "Plumber", "@id": BASE + "#entreprise", "name": CO["name"], "url": BASE,
-         "logo": BASE + "assets/img/logo.svg", "image": BASE + "assets/img/og.jpg",
+    d = {"@context": "https://schema.org", "@type": "Plumber", "@id": BASE + "#entreprise", "name": CO["name"], "legalName": CO["name"],
+         "alternateName": ["Bluetech Sanitaire", "Bluetech Sàrl", "BlueTech Sanitaire Sàrl Prilly"],
+         "description": "Plombier et installateur sanitaire à Prilly (VD) : installations sanitaires, rénovation de salles de bains, dépannage et entretien à Lausanne et environs. Devis gratuit.",
+         "url": BASE, "logo": BASE + "assets/img/logo.png", "image": BASE + "assets/img/og.jpg",
+         "telephone": PHONE_TEL, "email": EMAIL, "hasMap": GBP_URL, "sameAs": [GBP_URL],
          "address": {"@type": "PostalAddress", "streetAddress": CO["street"], "postalCode": CO["zip"], "addressLocality": CO["city"],
                      "addressRegion": "VD", "addressCountry": "CH"},
          "geo": {"@type": "GeoCoordinates", "latitude": CO["lat"], "longitude": CO["lng"]},
-         "areaServed": [t[0] for t in TOWNS[:12]], "foundingDate": CO["founded"], "taxID": CO["ide"],
-         "knowsAbout": ["Installations sanitaires", "Rénovation de salles de bains", "Dépannage sanitaire", "Entretien sanitaire"]}
-    if not PHONE_TEL.startswith("+41000"):
-        d["telephone"] = PHONE_TEL
-    if EMAIL:
-        d["email"] = EMAIL
+         "areaServed": [{"@type": "City", "name": t["name"]} for t in LOCAL] + [{"@type": "AdministrativeArea", "name": "Ouest lausannois"}],
+         "foundingDate": CO["founded"], "taxID": CO["ide"],
+         "knowsAbout": ["Plomberie", "Installations sanitaires", "Rénovation de salles de bains", "Dépannage sanitaire", "Entretien sanitaire"],
+         "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": x["title"], "url": BASE + "services/" + x["slug"]}} for x in SERVICES]}
     return d
+
+
+def crumbs_ld(*items):
+    return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": k + 1, "name": n, "item": BASE + u} for k, (n, u) in enumerate(items)]}
 
 
 def render(path, title, desc, body, key="", jsonld=None, scripts="", body_cls="", og=None):
@@ -306,13 +324,14 @@ def render(path, title, desc, body, key="", jsonld=None, scripts="", body_cls=""
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>%(title)s</title>
 <meta name="description" content="%(desc)s">
-%(robots)s<link rel="canonical" href="%(canon)s">
+%(robots)s%(gsc)s<link rel="canonical" href="%(canon)s">
 <meta name="theme-color" content="#F4F6F9">
 <meta property="og:type" content="website"><meta property="og:locale" content="fr_CH"><meta property="og:site_name" content="Bluetech Sanitaire">
 <meta property="og:title" content="%(title)s"><meta property="og:description" content="%(desc)s"><meta property="og:url" content="%(canon)s">
 <meta property="og:image" content="%(base)sassets/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="%(R)sassets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="%(R)sassets/img/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="%(R)sassets/img/apple-touch-icon.png">
 <link rel="preload" href="%(R)sassets/fonts/cabinet-grotesk-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="%(R)sassets/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -324,7 +343,8 @@ def render(path, title, desc, body, key="", jsonld=None, scripts="", body_cls=""
 <a class="skip" href="#main">Aller au contenu</a>
 %(logosym)s
 ''' % dict(logosym=LOGO_SYMBOL, wa=WA_NUMBER, mail=EMAIL, title=e(title), desc=e(desc), canon=canon, base=BASE, R=R, V=V, bc=body_cls,
-           robots='<meta name="robots" content="noindex, follow">\n' if NOINDEX else "",
+           robots='<meta name="robots" content="noindex, follow">\n' if NOINDEX else '<meta name="robots" content="index, follow, max-image-preview:large">\n',
+           gsc=('<meta name="google-site-verification" content="%s">\n' % GSC_TOKEN) if GSC_TOKEN else "",
            ld="\n".join('<script type="application/ld+json">%s</script>' % json.dumps(x, ensure_ascii=False) for x in lds))
     tail = '''
 <script src="%(R)sassets/js/vendor/gsap.min.js?v=%(V)s" defer></script>
@@ -414,7 +434,8 @@ def zone_section(num="07"):
         dx = 9 if anchor == "start" else -9
         towns.append('<g class="tw%s"><circle cx="%.1f" cy="%.1f" r="%s"/><text x="%.1f" y="%.1f" text-anchor="%s">%s</text></g>' % (
             " tw--big" if big else "", x, y, 3.2 if big else 2.4, x + dx, y + 4, anchor, name))
-    chips = "".join("<li>%s</li>" % t[0] for t in TOWNS)
+    lk = {t["name"]: t["slug"] for t in LOCAL}
+    chips = "".join(('<li><a href="{R}%s">%s</a></li>' % (lk[t[0]], t[0])) if t[0] in lk else "<li>%s</li>" % t[0] for t in TOWNS)
     return '''
 <section class="zone sec">
  <div class="wrap zone__g">
@@ -438,7 +459,7 @@ def zone_section(num="07"):
   </figure>
  </div>
 </section>''' % (sec_head(num, "Zone d’intervention", "Depuis Prilly, au cœur de l’Ouest lausannois.",
-                      "Notre atelier est à deux pas de Malley. Nous intervenons à Prilly, à Lausanne et dans les communes voisines — n’hésitez pas à nous demander pour une adresse plus éloignée."),
+                      "Nous sommes basés à deux pas de Malley. Nous intervenons à Prilly, à Lausanne et dans les communes voisines — n’hésitez pas à nous demander pour une adresse plus éloignée."),
                  chips, MAPS, PIN, e(CO["name"]), e(ADDR), ARROW_UR, lake, hq[0], hq[1], "".join(towns), hq[0], hq[1])
 
 
@@ -564,10 +585,10 @@ def page_home():
   <div class="co" data-co="mani"><i></i><span class="co__l"></span><span class="co__t"><b>Collecteur laiton</b><em>5 départs · PE-X Ø 16</em></span></div>
  </div>
  <div class="hero__in wrap" data-hero-in>
-  <p class="kicker" data-intro><span>[Prilly · VD]</span> Installations sanitaires · Devis gratuit</p>
-  <h1 class="hero__t" data-intro data-split>La précision derrière chaque mur.</h1>
-  <p class="hero__p" data-intro>Bluetech Sanitaire installe, rénove, entretient et dépanne vos installations sanitaires, à Prilly et dans toute la région lausannoise.</p>
-  <div class="hero__b" data-intro>
+  <h1 class="kicker"><span>[Devis gratuit]</span> Bluetech Sanitaire Sàrl, plombier à Prilly et Lausanne</h1>
+  <p class="hero__t">La précision derrière chaque mur.</p>
+  <p class="hero__p">Votre plombier à Prilly : Bluetech Sanitaire installe, rénove, entretient et dépanne vos installations sanitaires, à Lausanne et dans toute la région.</p>
+  <div class="hero__b">
    %(cta1)s
    <a class="btn btn--line" href="{R}realisations"><span class="btn__fill"></span><span class="btn__t">Nos réalisations</span>%(arrow)s</a>
   </div>
@@ -576,7 +597,7 @@ def page_home():
   <p class="hero__q" data-q><span class="mono">01 — Distribution</span>Chaque litre suit un chemin tracé.</p>
   <p class="hero__q" data-q><span class="mono">02 — Jusqu’au robinet</span>De l’arrivée d’eau au dernier raccord, rien n’est laissé au hasard.</p>
  </div>
- <div class="hero__specw" data-hero-spec><ul class="hero__spec wrap" data-intro>
+ <div class="hero__specw" data-hero-spec><ul class="hero__spec wrap">
   <li><span class="mono">Siège</span>Route de Renens 2, Prilly</li>
   <li><span class="mono">Métier</span>Installations sanitaires</li>
   <li><span class="mono">IDE</span>%(ide)s</li>
@@ -592,7 +613,7 @@ def page_home():
   <p class="kicker" data-r><span>[01]</span> L’entreprise</p>
   <h2 class="intro__big" data-split>Une installation sanitaire réussie ne se remarque pas. Elle fonctionne — chaque jour, pendant des décennies.</h2>
   <div class="intro__txt" data-r>
-   <p>Bluetech Sanitaire est une entreprise de Prilly spécialisée dans les installations sanitaires. Nous posons, rénovons, entretenons et dépannons — avec la même rigueur sur un chantier neuf que pour une fuite sous un évier.</p>
+   <p>Bluetech Sanitaire Sàrl est une entreprise de plomberie de Prilly, spécialisée dans les installations sanitaires. Nous posons, rénovons, entretenons et dépannons — avec la même rigueur sur un chantier neuf que pour une fuite sous un évier.</p>
    <p>Nos photos de chantier le montrent : axes tracés au mur, conduites repérées, raccords contrôlés et marqués. C’est ce travail invisible qui fait durer une installation.</p>
    <a class="tlink" href="{R}entreprise">Découvrir l’entreprise %(arrow)s</a>
   </div>
@@ -662,10 +683,10 @@ def page_home():
            workhead=sec_head("04", "Réalisations", "Avant que les murs ne se referment.", "Nous photographions nos installations avant la fermeture des parois. C’est là que se voit la qualité d’un travail."),
            work=work, nwork=len(WORK), process=process_section(), reviews=reviews_section(), zone=zone_section(), cta=cta_band())
     body = FALLBACK_SYMBOL + body
-    return render("index.html", "Bluetech Sanitaire — Installations sanitaires à Prilly",
-                  "Bluetech Sanitaire Sàrl, Prilly (VD) : installations sanitaires, rénovation de salles de bains, dépannage et entretien à Prilly, Lausanne et environs. Devis gratuit.",
+    return render("index.html", "Bluetech Sanitaire Sàrl | Plombier à Prilly et Lausanne",
+                  "Bluetech Sanitaire Sàrl, plombier à Prilly (VD) : installations sanitaires, salles de bains, dépannage et entretien à Lausanne et environs. Devis gratuit, 079 552 24 70.",
                   body, key="home", body_cls="p-home",
-                  scripts='<script type="module" src="{R}assets/js/hero3d.js?v={V}"></script>')
+                  scripts='''<script>addEventListener("load",function(){var f=function(){var s=document.createElement("script");s.type="module";s.src="{R}assets/js/hero3d.js?v={V}";document.head.appendChild(s)};"requestIdleCallback"in window?requestIdleCallback(f,{timeout:1200}):setTimeout(f,300)})</script>''')
 
 
 FALLBACK_SYMBOL = '''<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="fallback" viewBox="0 0 480 480">
@@ -767,7 +788,7 @@ def page_service(s):
         {"@type": "ListItem", "position": 1, "name": "Accueil", "item": BASE},
         {"@type": "ListItem", "position": 2, "name": "Services", "item": BASE + "services/"},
         {"@type": "ListItem", "position": 3, "name": s["title"], "item": BASE + "services/" + s["slug"]}]}
-    return render("services/%s.html" % s["slug"], s["mt"] + " | Bluetech Sanitaire", s["md"], body, key="services",
+    return render("services/%s.html" % s["slug"], s["mt"] + " | Bluetech Sàrl", s["md"], body, key="services",
                   jsonld=[svld, faqld, bc], body_cls="p-service")
 
 
@@ -797,9 +818,9 @@ def page_services():
 </section>
 %s
 %s''' % (cards, process_section("—"), cta_band())
-    return render("services/index.html", "Services : installations, salles de bains, dépannage, entretien | Bluetech Sanitaire",
-                  "Installations sanitaires, rénovation de salles de bains, dépannage et entretien à Prilly, Lausanne et environs.",
-                  body, key="services", body_cls="p-services")
+    return render("services/index.html", "Services de plomberie à Prilly et Lausanne | Bluetech Sàrl",
+                  "Plombier à Prilly : installations sanitaires, rénovation de salles de bains, dépannage et entretien à Lausanne et environs. Devis gratuit.",
+                  body, key="services", body_cls="p-services", jsonld=[crumbs_ld(("Accueil", ""), ("Services", "services/"))])
 
 
 def page_work():
@@ -836,9 +857,9 @@ def page_work():
 <script type="application/json" id="work-data">%s</script>
 %s
 %s''' % (len(WORK), filt, grid, CLOSE, LEFT, RIGHT, data, reviews_section("—"), cta_band())
-    return render("realisations.html", "Réalisations : nos chantiers sanitaires | Bluetech Sanitaire",
+    return render("realisations.html", "Réalisations : nos chantiers sanitaires | Bluetech Sàrl",
                   "Photos de chantiers Bluetech Sanitaire : installations encastrées, collecteurs, évacuations, bâtis-supports et salles de bains, à Prilly et environs.",
-                  body, key="realisations", body_cls="p-work")
+                  body, key="realisations", body_cls="p-work", jsonld=[crumbs_ld(("Accueil", ""), ("Réalisations", "realisations"))])
 
 
 def page_company():
@@ -864,7 +885,7 @@ def page_company():
   <figure class="story__ph" data-r>%(ph)s<span class="crop" aria-hidden="true"></span></figure>
   <div class="story__t">
    %(shead)s
-   <p data-r>Nous intervenons sur l’ensemble des installations sanitaires : construction neuve, transformation, rénovation de salles de bains, entretien et dépannage, pour les particuliers, les copropriétés et les régies.</p>
+   <p data-r>Bluetech Sanitaire Sàrl est une entreprise indépendante dont le siège est à Prilly, Route de Renens 2. Elle est inscrite au Registre du commerce du canton de Vaud sous le numéro %(ide)s et n’a aucun lien avec d’autres sociétés au nom proche. Nous intervenons sur l’ensemble des installations sanitaires : construction neuve, transformation, rénovation de salles de bains, entretien et dépannage, pour les particuliers, les copropriétés et les régies.</p>
    <p data-r>Notre conviction : la qualité d’une installation se joue là où personne ne regarde. C’est pourquoi nous traçons les axes avant de poser, repérons chaque conduite, contrôlons chaque raccord et photographions nos réseaux avant fermeture.</p>
   </div>
  </div>
@@ -880,12 +901,12 @@ def page_company():
 %(process)s
 %(zone)s
 %(cta)s''' % dict(ph=pic("double-bati-ventilation", "Gaine technique avec deux bâtis-supports, colonne de chute et ventilation", "(max-width: 900px) 92vw, 40vw"),
-                  shead=sec_head("01", "Notre approche", "Le soin se voit surtout là où on ne regarde pas."),
+                  ide=CO["ide"], shead=sec_head("01", "Notre approche", "Le soin se voit surtout là où on ne regarde pas."),
                   vhead=sec_head("02", "Engagements", "Quatre principes, sur chaque chantier."), vals=vals,
                   process=process_section("03"), zone=zone_section("04"), cta=cta_band())
-    return render("entreprise.html", "L’entreprise : Bluetech Sanitaire Sàrl, Prilly | Installations sanitaires",
+    return render("entreprise.html", "L’entreprise : Bluetech Sanitaire Sàrl, plombier à Prilly",
                   "Bluetech Sanitaire Sàrl, entreprise de sanitaire fondée en 2026 à Prilly (VD). Notre approche, nos engagements.",
-                  body, key="entreprise", body_cls="p-company")
+                  body, key="entreprise", body_cls="p-company", jsonld=[crumbs_ld(("Accueil", ""), ("L’entreprise", "entreprise"))])
 
 
 def page_contact():
@@ -965,9 +986,9 @@ def page_contact():
                      ormail=" ou par e-mail" if EMAIL else "", tel=TEL, phone=PHONE, phd=PHONE_DISPLAY, wa=WA_HELLO, maps=MAPS, pin=PIN,
                      mailcard=('<a class="ccard__l" href="mailto:%s">%s<span><b>%s</b>E-mail</span></a>' % (EMAIL, MAIL, EMAIL)) if EMAIL else "",
                      street=e(CO["street"]), zip=CO["zip"], city=CO["city"], addr=e(ADDR), embed=MAP_EMBED)
-    return render("contact.html", "Contact & devis | Bluetech Sanitaire, Prilly",
+    return render("contact.html", "Contact et devis gratuit | Bluetech Sanitaire Sàrl, Prilly",
                   "Demandez un devis à Bluetech Sanitaire : installations sanitaires, salles de bains, dépannage et entretien à Prilly, Lausanne et environs.",
-                  body, key="contact", body_cls="p-contact")
+                  body, key="contact", body_cls="p-contact", jsonld=[crumbs_ld(("Accueil", ""), ("Contact et devis", "contact"))])
 
 
 def page_legal():
@@ -998,8 +1019,166 @@ def page_legal():
  </div>
 </section>''' % dict(name=e(CO["name"]), street=e(CO["street"]), zip=CO["zip"], city=CO["city"], ide=CO["ide"], rc=CO["rc"],
                      ormail=" ou par e-mail" if EMAIL else "")
-    return render("mentions-legales.html", "Mentions légales | Bluetech Sanitaire", "Mentions légales et protection des données du site de Bluetech Sanitaire Sàrl, Prilly.",
+    return render("mentions-legales.html", "Mentions légales | Bluetech Sanitaire Sàrl", "Mentions légales et protection des données du site de Bluetech Sanitaire Sàrl, entreprise de plomberie à Prilly (VD), inscrite au Registre du commerce vaudois.",
                   body, key="legal", body_cls="p-legal")
+
+
+def km(t):
+    a, b = math.radians(CO["lat"]), math.radians(t["lat"])
+    d = 6371 * math.acos(min(1, math.sin(a) * math.sin(b) + math.cos(a) * math.cos(b) * math.cos(math.radians(t["lng"] - CO["lng"]))))
+    return max(1, round(d))
+
+
+def page_town(t):
+    by = {s["slug"]: s for s in SERVICES}
+    wmap = {w[0]: w for w in WORK}
+    lk = {x["slug"]: x for x in LOCAL}
+    w = wmap[t["photo"]]
+    cards = "".join('<li class="it" data-r><span class="it__c mono">%02d</span><h3><a href="%s">%s</a></h3><p>%s</p></li>' % (n + 1, svc_url(by[k]), by[k]["title"], v) for n, (k, v) in enumerate(t["svc"].items()))
+    near = "".join('<a class="rel" href="{R}%s"><span class="rel__n mono">%d km</span><b>%s</b><em>%s</em>%s</a>' % (x, km(lk[x]), lk[x]["head"], lk[x]["name"] + " (VD)", ARROW) for x in t["near"])
+    dist = "" if t["name"] == "Prilly" else '<p data-r>%s se trouve à environ %d km de notre base de Prilly, à vol d’oiseau.</p>' % (t["name"], km(t))
+    body = '''
+<section class="pg-hero">
+ <div class="hero__grid" aria-hidden="true"></div>
+ <div class="pg-hero__art" data-art data-intro aria-hidden="true">{RUN}</div>
+ <div class="wrap">
+  <nav class="crumbs mono" aria-label="Fil d’Ariane" data-intro><a href="{HOME}">Accueil</a><span>/</span><a href="{R}zone-intervention">Zone d’intervention</a><span>/</span><span aria-current="page">%(name)s</span></nav>
+  <p class="kicker" data-intro><span>[Devis gratuit]</span> %(name)s · Vaud</p>
+  <h1 class="pg-hero__h" data-intro data-split>%(h1)s</h1>
+  <p class="pg-hero__p" data-intro>%(lead)s</p>
+  <div class="hero__b town__b" data-intro>%(cta)s<a class="btn btn--line" href="%(tel)s"><span class="btn__fill"></span><span class="btn__t">%(phd)s</span>%(phone)s</a></div>
+ </div>
+</section>
+<section class="sec story">
+ <div class="wrap story__g">
+  <figure class="story__ph" data-r>%(ph)s<span class="crop" aria-hidden="true"></span></figure>
+  <div class="story__t">
+   %(shead)s
+   <p data-r>%(p1)s</p>
+   <p data-r>%(p2)s</p>
+   %(dist)s
+  </div>
+ </div>
+</section>
+<section class="items sec">
+ <div class="wrap">
+  %(ihead)s
+  <ul class="items__l items__l--2">%(cards)s</ul>
+ </div>
+</section>
+<section class="faqs sec">
+ <div class="wrap faqs__g">
+  %(fhead)s
+  %(faq)s
+ </div>
+</section>
+<section class="rels sec sec--paper">
+ <div class="wrap">
+  %(rhead)s
+  <div class="rels__l">%(near)s</div>
+  <p class="town__all" data-r><a class="tlink" href="{R}zone-intervention">Toute notre zone d’intervention %(arrow)s</a></p>
+ </div>
+</section>
+%(ctab)s''' % dict(name=t["name"], h1=t["h1"], lead=t["lead"], cta=btn("{R}contact", "Devis gratuit"), tel=TEL, phd=PHONE_DISPLAY, phone=PHONE,
+                     ph=pic(t["photo"], w[1] + " — " + w[2], "(max-width: 900px) 92vw, 40vw", w=w[4], h=w[5], eager=True),
+                     shead=sec_head("01", t["name"], "Votre plombier, à %s et autour." % t["name"]), p1=t["paras"][0], p2=t["paras"][1], dist=dist,
+                     ihead=sec_head("02", "Services", "Nos services à %s." % t["name"]), cards=cards,
+                     fhead=sec_head("03", "Questions", "Questions fréquentes à %s." % t["name"]), faq=faq_block(t["faq"]),
+                     rhead=sec_head("04", "À proximité", "Communes voisines."), near=near, arrow=ARROW, ctab=cta_band())
+    faqld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in t["faq"]]}
+    svld = {"@context": "https://schema.org", "@type": "Service", "name": t["head"], "serviceType": "Plomberie et installations sanitaires", "description": t["desc"],
+            "provider": {"@id": BASE + "#entreprise"}, "areaServed": {"@type": "City", "name": t["name"]}}
+    return render(t["slug"] + ".html", t["title"], t["desc"], body, key="zone", body_cls="p-town",
+                  jsonld=[svld, faqld, crumbs_ld(("Accueil", ""), ("Zone d’intervention", "zone-intervention"), (t["name"], t["slug"]))])
+
+
+def page_zone():
+    cards = "".join('<a class="rel" href="{R}%s"><span class="rel__n mono">%s</span><b>%s</b><em>%s</em>%s</a>' % (
+        t["slug"], "Notre siège" if t["name"] == "Prilly" else "%d km" % km(t), t["head"], t["name"] + " (VD)", ARROW) for t in LOCAL)
+    body = '''
+<section class="pg-hero">
+ <div class="hero__grid" aria-hidden="true"></div>
+ <div class="pg-hero__art" data-art data-intro aria-hidden="true">{RUN}</div>
+ <div class="wrap">
+  <nav class="crumbs mono" aria-label="Fil d’Ariane" data-intro><a href="{HOME}">Accueil</a><span>/</span><span aria-current="page">Zone d’intervention</span></nav>
+  <p class="kicker" data-intro><span>[Devis gratuit]</span> Ouest lausannois · Lausanne</p>
+  <h1 class="pg-hero__h" data-intro data-split>Plombier dans la région lausannoise.</h1>
+  <p class="pg-hero__p" data-intro>Basée à Prilly, Bluetech Sanitaire Sàrl intervient à Lausanne et dans l’Ouest lausannois pour les installations sanitaires, les rénovations de salles de bains, les dépannages et l’entretien.</p>
+ </div>
+</section>
+<section class="rels sec">
+ <div class="wrap">
+  %s
+  <div class="rels__l">%s</div>
+ </div>
+</section>
+%s
+%s''' % (sec_head("01", "Communes", "Choisissez votre commune."), cards, zone_section("02"), cta_band())
+    return render("zone-intervention.html", "Plombier région lausannoise : nos communes | Bluetech Sàrl",
+                  "Plombier à Prilly, Lausanne, Renens, Crissier, Ecublens, Morges et environs. Bluetech Sanitaire Sàrl : installations, salles de bains, dépannage. Devis gratuit.",
+                  body, key="zone", body_cls="p-zone", jsonld=[crumbs_ld(("Accueil", ""), ("Zone d’intervention", "zone-intervention"))])
+
+
+def page_guide(g):
+    by = {s["slug"]: s for s in SERVICES}
+    wmap = {w[0]: w for w in WORK}
+    w = wmap[g["photo"]]
+    sv = by[g["service"]]
+    sections = "".join('<h2>%s</h2>%s' % (h, "".join("<p>%s</p>" % x for x in ps)) for h, ps in g["body"])
+    others = "".join('<li><a href="{R}conseils/%s">%s</a></li>' % (o["slug"], o["title"]) for o in GUIDES if o is not g)
+    body = '''
+<section class="pg-hero pg-hero--tight">
+ <div class="hero__grid" aria-hidden="true"></div>
+ <div class="wrap">
+  <nav class="crumbs mono" aria-label="Fil d’Ariane" data-intro><a href="{HOME}">Accueil</a><span>/</span><a href="{R}conseils/">Conseils</a><span>/</span><span aria-current="page">%(short)s</span></nav>
+  <h1 class="pg-hero__h guide__h" data-intro>%(title)s</h1>
+  <p class="pg-hero__p" data-intro>%(lead)s</p>
+ </div>
+</section>
+<section class="sec guide">
+ <div class="wrap guide__g">
+  <article class="legal__b">
+   %(sections)s
+  </article>
+  <aside class="guide__side">
+   <figure class="story__ph">%(ph)s</figure>
+   <div class="ccard">
+    <p class="mono">Besoin d’un plombier ?</p>
+    <a class="ccard__l" href="%(tel)s">%(phone)s<span><b>%(phd)s</b>Appel</span></a>
+    <a class="ccard__l" href="%(wa)s" target="_blank" rel="noopener">%(waic)s<span><b>WhatsApp</b>Envoyez une photo</span></a>
+    <a class="tlink" href="%(svurl)s">%(svt)s %(arrow)s</a>
+   </div>
+   <div class="guide__more"><p class="mono">À lire aussi</p><ul>%(others)s</ul></div>
+  </aside>
+ </div>
+</section>
+%(ctab)s''' % dict(short=g["mt"].split(" :")[0], title=g["title"].replace(" :", "\u00a0:").replace(" ?", "\u00a0?"), lead=g["lead"], sections=sections, ph=pic(g["photo"], w[1] + " — " + w[2], "(max-width: 900px) 92vw, 30vw", w=w[4], h=w[5]),
+                     tel=TEL, phone=PHONE, phd=PHONE_DISPLAY, wa=WA_HELLO, waic=WA, svurl=svc_url(sv), svt=sv["title"], arrow=ARROW, others=others, ctab=cta_band())
+    art = {"@context": "https://schema.org", "@type": "Article", "headline": g["title"], "description": g["md"], "image": BASE + "assets/img/work/%s.jpg" % g["photo"],
+           "datePublished": LASTMOD, "dateModified": LASTMOD, "inLanguage": "fr-CH", "mainEntityOfPage": BASE + "conseils/" + g["slug"],
+           "author": {"@id": BASE + "#entreprise"}, "publisher": {"@id": BASE + "#entreprise"}}
+    return render("conseils/%s.html" % g["slug"], g["mt"] + " | Bluetech Sàrl", g["md"], body, key="conseils", body_cls="p-guide",
+                  jsonld=[art, crumbs_ld(("Accueil", ""), ("Conseils", "conseils/"), (g["mt"].split(" :")[0], "conseils/" + g["slug"]))])
+
+
+def page_guides():
+    cards = "".join('<a class="rel rel--g" href="{R}conseils/%s"><b>%s</b><em>%s</em>%s</a>' % (g["slug"], g["title"], g["lead"], ARROW) for g in GUIDES)
+    body = '''
+<section class="pg-hero pg-hero--tight">
+ <div class="hero__grid" aria-hidden="true"></div>
+ <div class="wrap">
+  <nav class="crumbs mono" aria-label="Fil d’Ariane" data-intro><a href="{HOME}">Accueil</a><span>/</span><span aria-current="page">Conseils</span></nav>
+  <h1 class="pg-hero__h" data-intro data-split>Conseils de plombier.</h1>
+  <p class="pg-hero__p" data-intro>Les bons réflexes et les questions à se poser, avant d’appeler ou avant de lancer des travaux.</p>
+ </div>
+</section>
+<section class="rels sec">
+ <div class="wrap"><div class="rels__l">%s</div></div>
+</section>
+%s''' % (cards, cta_band())
+    return render("conseils/index.html", "Conseils de plombier | Bluetech Sanitaire Sàrl", "Fuite d’eau, WC qui coule, baignoire à remplacer par une douche : les conseils de Bluetech Sanitaire, plombier à Prilly.",
+                  body, key="conseils", body_cls="p-guides", jsonld=[crumbs_ld(("Accueil", ""), ("Conseils", "conseils/"))])
 
 
 def page_404():
@@ -1019,7 +1198,7 @@ def page_404():
     f = os.path.join(OUT, "404.html")
     s = open(f).read()
     s = s.replace('href="./', 'href="' + BASE).replace('src="assets/', 'src="' + BASE + 'assets/').replace('href="assets/', 'href="' + BASE + 'assets/')
-    for k in ["realisations", "entreprise", "contact", "services/", "mentions-legales"]:
+    for k in ["realisations", "entreprise", "contact", "services/", "mentions-legales", "plombier-", "installateur-", "zone-intervention", "conseils/"]:
         s = s.replace('href="%s' % k, 'href="%s%s' % (BASE, k))
     s = s.replace('srcset="assets/', 'srcset="' + BASE + 'assets/')
     open(f, "w").write(s)
@@ -1028,16 +1207,18 @@ def page_404():
 
 def write_misc(urls):
     open(os.path.join(OUT, "robots.txt"), "w").write(
-        ("User-agent: *\nDisallow:\n" if not NOINDEX else "User-agent: *\nAllow: /\n") + "\nSitemap: %ssitemap.xml\n" % BASE)
+        ("User-agent: *\nDisallow: /\n" if NOINDEX else "User-agent: *\nAllow: /\n") + "\nSitemap: %ssitemap.xml\n" % BASE)
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for u in urls:
-        sm += "  <url><loc>%s%s</loc></url>\n" % (BASE, u)
+        sm += "  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>\n" % (BASE, u, LASTMOD)
     open(os.path.join(OUT, "sitemap.xml"), "w").write(sm + "</urlset>\n")
     open(os.path.join(OUT, ".nojekyll"), "w").write("")
+    open(os.path.join(OUT, "CNAME"), "w").write(DOMAIN)
 
 
 if __name__ == "__main__":
-    urls = [page_home(), page_services()] + [page_service(s) for s in SERVICES] + [page_work(), page_company(), page_contact(), page_legal()]
+    urls = ([page_home(), page_services()] + [page_service(s) for s in SERVICES] + [page_zone()] + [page_town(t) for t in LOCAL]
+            + [page_guides()] + [page_guide(g) for g in GUIDES] + [page_work(), page_company(), page_contact(), page_legal()])
     page_404()
     write_misc(urls)
     print("built", len(urls) + 1, "pages:", ", ".join(u or "/" for u in urls))
