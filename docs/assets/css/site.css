@@ -727,6 +727,11 @@ a:hover>.crop,button:hover>.crop,.story__ph .crop{opacity:1;inset:18px}
 .hero__in>*:nth-child(2){animation-delay:.07s}.hero__in>*:nth-child(3){animation-delay:.14s}.hero__in>*:nth-child(4){animation-delay:.21s}.hero__spec{animation-delay:.28s}
 @keyframes heroIn{from{opacity:.01;transform:translateY(24px)}to{opacity:1;transform:none}}
 
+/* opening hours */
+.ccard__h{margin:4px 0 0;padding:4px 16px;font-size:15px}
+.ccard__h b{display:block;color:var(--ink);font-weight:600}
+.ft__h{font-size:15.5px;color:var(--ink-2)}
+
 /* local pages + guides */
 .chips a{color:inherit;text-decoration:underline;text-decoration-color:var(--blue-m);text-underline-offset:3px}
 .chips a:hover{color:var(--blue)}

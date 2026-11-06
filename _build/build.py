@@ -12,7 +12,7 @@ BASE = "https://bluetech-sarl.com/"
 DOMAIN = "bluetech-sarl.com"
 LASTMOD = "2026-11-06"
 GSC_TOKEN = ""             # Google Search Console "HTML tag" verification code, if used
-V = "10"
+V = "11"
 NOINDEX = False
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -263,7 +263,7 @@ def footer():
    </div>
    <nav class="ft__col" aria-label="Services"><p class="mono">Services</p><ul>%(svc)s</ul></nav>
    <nav class="ft__col" aria-label="Entreprise"><p class="mono">Entreprise</p><ul><li><a href="{R}realisations">Réalisations</a></li><li><a href="{R}entreprise">L’entreprise</a></li><li><a href="{R}contact">Contact & devis</a></li><li><a href="{R}mentions-legales">Mentions légales</a></li></ul></nav>
-   <div class="ft__col"><p class="mono">Contact</p><ul><li><a href="%(tel)s">%(phd)s</a></li><li><a href="%(wa)s" target="_blank" rel="noopener">WhatsApp</a></li>%(mail)s<li><a href="%(maps)s" target="_blank" rel="noopener">%(street)s<br>%(zip)s %(city)s</a></li></ul></div>
+   <div class="ft__col"><p class="mono">Contact</p><ul><li><a href="%(tel)s">%(phd)s</a></li><li><a href="%(wa)s" target="_blank" rel="noopener">WhatsApp</a></li>%(mail)s<li><a href="%(maps)s" target="_blank" rel="noopener">%(street)s<br>%(zip)s %(city)s</a></li><li class="ft__h">Lun – sam : 7h – 18h</li></ul></div>
   </div>
   <nav class="ft__zones" aria-label="Zones et conseils">
    <p><a class="mono" href="{R}zone-intervention">Zone d’intervention</a>%(zones)s</p>
@@ -298,6 +298,7 @@ def jsonld_business():
                      "addressRegion": "VD", "addressCountry": "CH"},
          "geo": {"@type": "GeoCoordinates", "latitude": CO["lat"], "longitude": CO["lng"]},
          "areaServed": [{"@type": "City", "name": t["name"]} for t in LOCAL] + [{"@type": "AdministrativeArea", "name": "Canton de Vaud"}],
+         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "07:00", "closes": "18:00"}],
          "foundingDate": CO["founded"], "taxID": CO["ide"],
          "knowsAbout": ["Plomberie", "Installations sanitaires", "Rénovation de salles de bains", "Dépannage sanitaire", "Entretien sanitaire"],
          "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": x["title"], "url": BASE + "services/" + x["slug"]}} for x in SERVICES]}
@@ -974,6 +975,7 @@ def page_contact():
     <a class="ccard__l" href="%(wa)s" target="_blank" rel="noopener">%(waic)s<span><b>WhatsApp</b>Photos et vidéos bienvenues</span></a>
     %(mailcard)s
     <a class="ccard__l" href="%(maps)s" target="_blank" rel="noopener">%(pin)s<span><b>%(street)s</b>%(zip)s %(city)s</span></a>
+    <p class="ccard__h"><b>Horaires</b>Lundi – samedi : 7h – 18h<br>Dimanche : fermé</p>
    </div>
    <div class="mapf" data-r>
     <iframe title="Plan d’accès : %(addr)s" src="%(embed)s" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
