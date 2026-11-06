@@ -12,7 +12,7 @@ BASE = "https://bluetech-sarl.com/"
 DOMAIN = "bluetech-sarl.com"
 LASTMOD = "2026-11-06"
 GSC_TOKEN = ""             # Google Search Console "HTML tag" verification code, if used
-V = "15"
+V = "16"
 NOINDEX = False
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -270,7 +270,7 @@ def footer():
    <p><a class="mono" href="{R}zone-intervention">Zone d’intervention</a>%(zones)s</p>
    <p><a class="mono" href="{R}conseils/">Conseils</a>%(guides)s</p>
   </nav>
-  <div class="ft__bot"><span>© <span data-year>2026</span> %(name)s</span><a href="{R}mentions-legales">Mentions légales & confidentialité</a></div>
+  <div class="ft__bot"><span>© <span data-year>2026</span> %(name)s</span><span class="ft__credit">Création de site internet en Suisse romande : <a href="https://nextdigitalevel.com/">Next Digital Level</a></span><a href="{R}mentions-legales">Mentions légales & confidentialité</a></div>
  </div>
 </footer>
 <div class="fab" data-fab>

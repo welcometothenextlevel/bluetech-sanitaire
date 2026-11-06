@@ -747,6 +747,8 @@ a:hover>.crop,button:hover>.crop,.story__ph .crop{opacity:1;inset:18px}
 .ccard__l span,.ask__c span,.ft__col a{min-width:0;overflow-wrap:anywhere}
 @media (max-width:900px){.contact__g{grid-template-columns:minmax(0,1fr)}}
 
+.ft__credit a{color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
+
 /* opening hours */
 .ccard__h{margin:4px 0 0;padding:4px 16px;font-size:15px}
 .ccard__h b{display:block;color:var(--ink);font-weight:600}
