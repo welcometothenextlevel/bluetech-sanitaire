@@ -12,7 +12,7 @@ BASE = "https://bluetech-sarl.com/"
 DOMAIN = "bluetech-sarl.com"
 LASTMOD = "2026-11-06"
 GSC_TOKEN = ""             # Google Search Console "HTML tag" verification code, if used
-V = "9"
+V = "10"
 NOINDEX = False
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -46,7 +46,7 @@ SERVICES = [
          h1="Installations sanitaires, du réseau à la robinetterie.",
          lead="Construction neuve ou transformation : nous posons l’installation complète — distribution d’eau froide et d’eau chaude, évacuations, bâtis-supports et appareils — avec des axes tracés au mur et des raccords contrôlés un à un.",
          mt="Installateur sanitaire à Prilly et Lausanne",
-         md="Installations sanitaires neuves et transformations à Prilly, Lausanne et environs : distribution EF/EC, évacuations, bâtis-supports, appareils. Devis gratuit.",
+         md="Installations sanitaires neuves et transformations dans tout le canton de Vaud : distribution d’eau, évacuations, bâtis-supports, appareils. Devis gratuit.",
          items=[("Distribution EF / EC", "Réseaux d’eau froide et d’eau chaude par collecteurs, conduites gainées et repérées."),
                 ("Évacuations & colonnes", "Colonnes de chute, conduites d’évacuation et ventilations, posées avec les pentes adéquates."),
                 ("Bâtis-supports", "Systèmes encastrés pour WC suspendus, lavabos, douches et baignoires, implantés au trait."),
@@ -68,7 +68,7 @@ SERVICES = [
          h1="Rénovation de salle de bains, repensée jusque dans les murs.",
          lead="Remplacer une baignoire par une douche de plain-pied, passer à un WC suspendu, installer une double vasque : nous adaptons les conduites existantes et posons vos nouveaux équipements, en coordination avec les autres artisans.",
          mt="Rénovation de salle de bains à Lausanne",
-         md="Rénovation de salles de bains à Prilly, Lausanne et environs : douche à l’italienne, WC suspendu, vasques, adaptation des conduites. Devis gratuit.",
+         md="Rénovation de salles de bains à Lausanne, Prilly et dans tout le canton de Vaud : douche à l’italienne, WC suspendu, vasques, adaptation des conduites. Devis gratuit.",
          items=[("Dépose & adaptation", "Démontage des anciens appareils, adaptation des alimentations et des évacuations."),
                 ("Douche de plain-pied", "Douche à l’italienne avec caniveau ou siphon de sol, mitigeur thermostatique."),
                 ("Baignoire", "Remplacement ou pose de baignoire, robinetterie apparente ou encastrée."),
@@ -90,7 +90,7 @@ SERVICES = [
          h1="Plombier dépannage : une fuite ? On s’en occupe.",
          lead="Robinet qui goutte, WC qui coule, écoulement bouché, raccord qui fuit : nous diagnostiquons, réparons ou remplaçons — et nous vous expliquons ce qui s’est passé.",
          mt="Plombier dépannage à Lausanne et Prilly",
-         md="Dépannage sanitaire à Prilly, Lausanne et environs : fuites, WC qui coule, robinetterie, écoulements bouchés, vannes d’arrêt. Appelez ou écrivez sur WhatsApp.",
+         md="Dépannage sanitaire à Lausanne, Prilly et dans le canton de Vaud : fuites, WC qui coule, robinetterie, écoulements bouchés, vannes d’arrêt. Appelez ou écrivez sur WhatsApp.",
          items=[("Fuites", "Recherche et réparation de fuites sur robinetterie, raccords et conduites apparentes."),
                 ("WC & chasses d’eau", "Mécanismes de chasse, robinets flotteurs, réservoirs encastrés : réglage ou remplacement."),
                 ("Robinetterie", "Remplacement de cartouches, mitigeurs, flexibles et robinets d’arrêt."),
@@ -116,7 +116,7 @@ SERVICES = [
          h1="Entretien sanitaire : celui qui évite les dépannages.",
          lead="Une installation entretenue dure plus longtemps et gaspille moins d’eau. Révision de la robinetterie, contrôle des vannes et des chasses d’eau, écoulements : nous passons avant que le problème n’arrive.",
          mt="Entretien sanitaire à Lausanne et Prilly",
-         md="Entretien sanitaire à Prilly, Lausanne et environs : robinetterie, chasses d’eau, vannes d’arrêt, écoulements. Particuliers, PPE et régies. Devis gratuit.",
+         md="Entretien sanitaire dans le canton de Vaud : robinetterie, chasses d’eau, vannes d’arrêt, écoulements. Particuliers, PPE et régies. Devis gratuit.",
          items=[("Robinetterie", "Aérateurs détartrés, joints et cartouches fatigués remplacés."),
                 ("Chasses d’eau", "Réglage des mécanismes, contrôle d’étanchéité des réservoirs encastrés."),
                 ("Vannes d’arrêt", "Contrôle et manœuvre des vannes, remplacement de celles qui grippent."),
@@ -166,7 +166,8 @@ REVIEWS = [
 TOWNS = [("Prilly", 46.5346, 6.6056, 1), ("Lausanne", 46.5197, 6.6323, 1), ("Renens", 46.5393, 6.5881, 0), ("Crissier", 46.5513, 6.5754, 0),
          ("Ecublens", 46.5279, 6.5615, 0), ("Chavannes", 46.5309, 6.5702, 0), ("Bussigny", 46.5507, 6.5528, 0),
          ("Le Mont", 46.5583, 6.6313, 0), ("Romanel", 46.5642, 6.6075, 0), ("Jouxtens", 46.5523, 6.5979, 0),
-         ("Pully", 46.5101, 6.6618, 0), ("Epalinges", 46.5491, 6.6687, 0), ("Morges", 46.5113, 6.4985, 0), ("St-Sulpice", 46.5106, 6.5590, 0)]
+         ("Pully", 46.5101, 6.6618, 0), ("Epalinges", 46.5491, 6.6687, 0), ("Morges", 46.5113, 6.4985, 0), ("St-Sulpice", 46.5106, 6.5590, 0),
+         ("Nyon", 46.3833, 6.2398, 0), ("Vevey", 46.4628, 6.8419, 0), ("Montreux", 46.4312, 6.9107, 0), ("Yverdon-les-Bains", 46.7785, 6.6408, 0), ("Aigle", 46.3180, 6.9709, 0), ("Payerne", 46.8220, 6.9381, 0)]
 SHORE = [(46.4995, 6.47), (46.5055, 6.497), (46.5085, 6.53), (46.5075, 6.556), (46.5113, 6.585), (46.5155, 6.598), (46.5135, 6.615), (46.5062, 6.626),
          (46.5065, 6.645), (46.5055, 6.663), (46.4985, 6.69), (46.49, 6.71)]
 
@@ -258,7 +259,7 @@ def footer():
   <div class="ft__top">
    <div class="ft__brand">
     <a class="ft__logo" href="{HOME}" aria-label="Bluetech Sanitaire — accueil">%(logo)s</a>
-    <p>Installations sanitaires à Prilly et dans la région lausannoise.</p>
+    <p>Installations sanitaires à Prilly, à Lausanne et dans tout le canton de Vaud.</p>
    </div>
    <nav class="ft__col" aria-label="Services"><p class="mono">Services</p><ul>%(svc)s</ul></nav>
    <nav class="ft__col" aria-label="Entreprise"><p class="mono">Entreprise</p><ul><li><a href="{R}realisations">Réalisations</a></li><li><a href="{R}entreprise">L’entreprise</a></li><li><a href="{R}contact">Contact & devis</a></li><li><a href="{R}mentions-legales">Mentions légales</a></li></ul></nav>
@@ -296,7 +297,7 @@ def jsonld_business():
          "address": {"@type": "PostalAddress", "streetAddress": CO["street"], "postalCode": CO["zip"], "addressLocality": CO["city"],
                      "addressRegion": "VD", "addressCountry": "CH"},
          "geo": {"@type": "GeoCoordinates", "latitude": CO["lat"], "longitude": CO["lng"]},
-         "areaServed": [{"@type": "City", "name": t["name"]} for t in LOCAL] + [{"@type": "AdministrativeArea", "name": "Ouest lausannois"}],
+         "areaServed": [{"@type": "City", "name": t["name"]} for t in LOCAL] + [{"@type": "AdministrativeArea", "name": "Canton de Vaud"}],
          "foundingDate": CO["founded"], "taxID": CO["ide"],
          "knowsAbout": ["Plomberie", "Installations sanitaires", "Rénovation de salles de bains", "Dépannage sanitaire", "Entretien sanitaire"],
          "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": x["title"], "url": BASE + "services/" + x["slug"]}} for x in SERVICES]}
@@ -435,6 +436,7 @@ def zone_section(num="07"):
         towns.append('<g class="tw%s"><circle cx="%.1f" cy="%.1f" r="%s"/><text x="%.1f" y="%.1f" text-anchor="%s">%s</text></g>' % (
             " tw--big" if big else "", x, y, 3.2 if big else 2.4, x + dx, y + 4, anchor, name))
     lk = {t["name"]: t["slug"] for t in LOCAL}
+    lk["Montreux"] = "plombier-vevey-montreux"
     chips = "".join(('<li><a href="{R}%s">%s</a></li>' % (lk[t[0]], t[0])) if t[0] in lk else "<li>%s</li>" % t[0] for t in TOWNS)
     return '''
 <section class="zone sec">
@@ -459,7 +461,7 @@ def zone_section(num="07"):
   </figure>
  </div>
 </section>''' % (sec_head(num, "Zone d’intervention", "Depuis Prilly, au cœur de l’Ouest lausannois.",
-                      "Nous sommes basés à deux pas de Malley. Nous intervenons à Prilly, à Lausanne et dans les communes voisines — n’hésitez pas à nous demander pour une adresse plus éloignée."),
+                      "Nous sommes basés à deux pas de Malley. Nous intervenons à Prilly, à Lausanne et dans tout le canton de Vaud, de Nyon à Yverdon et de Morges à Montreux."),
                  chips, MAPS, PIN, e(CO["name"]), e(ADDR), ARROW_UR, lake, hq[0], hq[1], "".join(towns), hq[0], hq[1])
 
 
@@ -587,7 +589,7 @@ def page_home():
  <div class="hero__in wrap" data-hero-in>
   <h1 class="kicker"><span>[Devis gratuit]</span> Bluetech Sanitaire Sàrl, plombier à Prilly et Lausanne</h1>
   <p class="hero__t">La précision derrière chaque mur.</p>
-  <p class="hero__p">Votre plombier à Prilly : Bluetech Sanitaire installe, rénove, entretient et dépanne vos installations sanitaires, à Lausanne et dans toute la région.</p>
+  <p class="hero__p">Votre plombier à Prilly : Bluetech Sanitaire installe, rénove, entretient et dépanne vos installations sanitaires, à Lausanne et dans tout le canton de Vaud.</p>
   <div class="hero__b">
    %(cta1)s
    <a class="btn btn--line" href="{R}realisations"><span class="btn__fill"></span><span class="btn__t">Nos réalisations</span>%(arrow)s</a>
@@ -684,7 +686,7 @@ def page_home():
            work=work, nwork=len(WORK), process=process_section(), reviews=reviews_section(), zone=zone_section(), cta=cta_band())
     body = FALLBACK_SYMBOL + body
     return render("index.html", "Bluetech Sanitaire Sàrl | Plombier à Prilly et Lausanne",
-                  "Bluetech Sanitaire Sàrl, plombier à Prilly (VD) : installations sanitaires, salles de bains, dépannage et entretien à Lausanne et environs. Devis gratuit, 079 552 24 70.",
+                  "Bluetech Sanitaire Sàrl, plombier à Prilly : installations sanitaires, salles de bains, dépannage et entretien dans tout le canton de Vaud. Devis gratuit.",
                   body, key="home", body_cls="p-home",
                   scripts='''<script>addEventListener("load",function(){var f=function(){var s=document.createElement("script");s.type="module";s.src="{R}assets/js/hero3d.js?v={V}";document.head.appendChild(s)};"requestIdleCallback"in window?requestIdleCallback(f,{timeout:1200}):setTimeout(f,300)})</script>''')
 
@@ -783,7 +785,7 @@ def page_service(s):
     faqld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in s["faq"]]}
     svld = {"@context": "https://schema.org", "@type": "Service", "name": s["title"], "serviceType": s["title"], "description": s["md"],
-            "provider": {"@id": BASE + "#entreprise"}, "areaServed": "Prilly, Lausanne et environs"}
+            "provider": {"@id": BASE + "#entreprise"}, "areaServed": {"@type": "AdministrativeArea", "name": "Canton de Vaud"}}
     bc = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Accueil", "item": BASE},
         {"@type": "ListItem", "position": 2, "name": "Services", "item": BASE + "services/"},
@@ -1035,7 +1037,7 @@ def page_town(t):
     lk = {x["slug"]: x for x in LOCAL}
     w = wmap[t["photo"]]
     cards = "".join('<li class="it" data-r><span class="it__c mono">%02d</span><h3><a href="%s">%s</a></h3><p>%s</p></li>' % (n + 1, svc_url(by[k]), by[k]["title"], v) for n, (k, v) in enumerate(t["svc"].items()))
-    near = "".join('<a class="rel" href="{R}%s"><span class="rel__n mono">%d km</span><b>%s</b><em>%s</em>%s</a>' % (x, km(lk[x]), lk[x]["head"], lk[x]["name"] + " (VD)", ARROW) for x in t["near"])
+    near = "".join('<a class="rel" href="{R}%s"><span class="rel__n mono">%d km de Prilly</span><b>%s</b><em>%s</em>%s</a>' % (x, km(lk[x]), lk[x]["head"], lk[x]["name"] + " (VD)", ARROW) for x in t["near"])
     dist = "" if t["name"] == "Prilly" else '<p data-r>%s se trouve à environ %d km de notre base de Prilly, à vol d’oiseau.</p>' % (t["name"], km(t))
     body = '''
 <section class="pg-hero">
@@ -1084,7 +1086,7 @@ def page_town(t):
                      shead=sec_head("01", t["name"], "Votre plombier, à %s et autour." % t["name"]), p1=t["paras"][0], p2=t["paras"][1], dist=dist,
                      ihead=sec_head("02", "Services", "Nos services à %s." % t["name"]), cards=cards,
                      fhead=sec_head("03", "Questions", "Questions fréquentes à %s." % t["name"]), faq=faq_block(t["faq"]),
-                     rhead=sec_head("04", "À proximité", "Communes voisines."), near=near, arrow=ARROW, ctab=cta_band())
+                     rhead=sec_head("04", "Dans le canton", "Autres villes."), near=near, arrow=ARROW, ctab=cta_band())
     faqld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in t["faq"]]}
     svld = {"@context": "https://schema.org", "@type": "Service", "name": t["head"], "serviceType": "Plomberie et installations sanitaires", "description": t["desc"],
@@ -1095,16 +1097,16 @@ def page_town(t):
 
 def page_zone():
     cards = "".join('<a class="rel" href="{R}%s"><span class="rel__n mono">%s</span><b>%s</b><em>%s</em>%s</a>' % (
-        t["slug"], "Notre siège" if t["name"] == "Prilly" else "%d km" % km(t), t["head"], t["name"] + " (VD)", ARROW) for t in LOCAL)
+        t["slug"], "Notre siège" if t["name"] == "Prilly" else "%d km de Prilly" % km(t), t["head"], t["name"] + " (VD)", ARROW) for t in LOCAL)
     body = '''
 <section class="pg-hero">
  <div class="hero__grid" aria-hidden="true"></div>
  <div class="pg-hero__art" data-art data-intro aria-hidden="true">{RUN}</div>
  <div class="wrap">
   <nav class="crumbs mono" aria-label="Fil d’Ariane" data-intro><a href="{HOME}">Accueil</a><span>/</span><span aria-current="page">Zone d’intervention</span></nav>
-  <p class="kicker" data-intro><span>[Devis gratuit]</span> Ouest lausannois · Lausanne</p>
-  <h1 class="pg-hero__h" data-intro data-split>Plombier dans la région lausannoise.</h1>
-  <p class="pg-hero__p" data-intro>Basée à Prilly, Bluetech Sanitaire Sàrl intervient à Lausanne et dans l’Ouest lausannois pour les installations sanitaires, les rénovations de salles de bains, les dépannages et l’entretien.</p>
+  <p class="kicker" data-intro><span>[Devis gratuit]</span> Canton de Vaud</p>
+  <h1 class="pg-hero__h" data-intro data-split>Plombier dans tout le canton de Vaud.</h1>
+  <p class="pg-hero__p" data-intro>Basée à Prilly, Bluetech Sanitaire Sàrl intervient dans tout le canton de Vaud pour les installations sanitaires, les rénovations de salles de bains, les dépannages et l’entretien.</p>
  </div>
 </section>
 <section class="rels sec">
@@ -1114,9 +1116,9 @@ def page_zone():
  </div>
 </section>
 %s
-%s''' % (sec_head("01", "Communes", "Choisissez votre commune."), cards, zone_section("02"), cta_band())
-    return render("zone-intervention.html", "Plombier région lausannoise : nos communes | Bluetech Sàrl",
-                  "Plombier à Prilly, Lausanne, Renens, Crissier, Ecublens, Morges et environs. Bluetech Sanitaire Sàrl : installations, salles de bains, dépannage. Devis gratuit.",
+%s''' % (sec_head("01", "Villes", "Choisissez votre ville."), cards, zone_section("02"), cta_band())
+    return render("zone-intervention.html", "Plombier dans le canton de Vaud : nos villes | Bluetech Sàrl",
+                  "Plombier dans tout le canton de Vaud : Lausanne, Prilly, Renens, Morges, Nyon, Vevey, Montreux, Yverdon. Installations, salles de bains, dépannage. Devis gratuit.",
                   body, key="zone", body_cls="p-zone", jsonld=[crumbs_ld(("Accueil", ""), ("Zone d’intervention", "zone-intervention"))])
 
 
