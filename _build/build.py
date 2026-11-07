@@ -12,7 +12,7 @@ BASE = "https://bluetech-sarl.com/"
 DOMAIN = "bluetech-sarl.com"
 LASTMOD = "2026-11-06"
 GSC_TOKEN = ""             # Google Search Console "HTML tag" verification code, if used
-V = "17"
+V = "18"
 NOINDEX = False
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -338,6 +338,7 @@ def render(path, title, desc, body, key="", jsonld=None, scripts="", body_cls=""
 <meta property="og:title" content="%(title)s"><meta property="og:description" content="%(desc)s"><meta property="og:url" content="%(canon)s">
 <meta property="og:image" content="%(base)sassets/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="%(R)sfavicon.ico" sizes="48x48">
 <link rel="icon" href="%(R)sassets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="%(R)sassets/img/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="%(R)sassets/img/apple-touch-icon.png">
