@@ -155,6 +155,7 @@ WORK_TAGS = [("all", "Tout"), ("encastre", "Installations encastrées"), ("evac"
 REVIEWS_ARE_EXAMPLES = False
 REVIEWS = [
     ("Arton S.", "Avis Google", "Très satisfait du service ! L’entreprise est venue remplacer mon lavabo et effectuer le raccordement pour ma machine à laver. Travail propre, rapide et soigné, avec des finitions vraiment impeccables. Le résultat est à la hauteur de mes attentes. Professionnalisme et sympathie au rendez-vous ! Je recommande sans hésiter ! Merci encore pour l’excellent travail 😊"),
+    ("Qendrim O.", "Avis Google", "Entreprise très professionnelle, travail soigné et de grande qualité. Équipe sérieuse, ponctuelle et à l’écoute des clients. Je recommande vivement Bluetech Sanitaire Sàrl !"),
     ("Ilir K.", "Avis Google", "J’ai fait appel à cette entreprise pour une intervention sanitaire. Ils ont été très réactifs, rapides et professionnels. Un service efficace et de qualité. Je recommande vivement !"),
     ("Hashim A.", "Avis Google", "Une entreprise du bâtiment sérieuse et professionnelle qui fait du bon travail. Les échanges sont clairs et les réponses aux questions sont précises. Je recommande cette entreprise pour vos projets de travaux."),
     ("Shirine", "Avis Google", "Hello, je recommande énormément, j’ai eu un problème de fuite, ils ont su trouver la fuite d’eau en très peu de temps. Merci à Bluetech Sanitaire Sàrl pour son intervention."),
