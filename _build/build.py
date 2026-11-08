@@ -12,7 +12,7 @@ BASE = "https://bluetech-sarl.com/"
 DOMAIN = "bluetech-sarl.com"
 LASTMOD = "2026-11-06"
 GSC_TOKEN = ""             # Google Search Console "HTML tag" verification code, if used
-V = "18"
+V = "19"
 NOINDEX = False
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -85,13 +85,13 @@ SERVICES = [
               ("Puis-je fournir mes propres appareils ?", "C’est possible. Nous vérifions ensemble leur compatibilité avec l’installation avant la pose."),
               ("Vous occupez-vous du carrelage ?", "Notre métier est le sanitaire. Pour le carrelage et les finitions, nous coordonnons nos interventions avec votre carreleur.")],
          photos=["salle-de-bains-sauge", "salle-de-bains-gros-oeuvre"]),
-    dict(slug="depannage", icon="tap", art="tap", title="Dépannage & réparations", short="Fuites · WC · Robinetterie",
-         spec="Diagnostic · Réparation · Remplacement",
-         card="Fuite, WC qui coule, écoulement bouché, robinet qui goutte : diagnostic clair, réparation propre.",
+    dict(slug="depannage", icon="tap", art="tap", title="Dépannage & réparations", short="24h/24 · 7j/7",
+         spec="Fuites · WC · Robinetterie · 24h/24",
+         card="Fuite, WC qui coule, écoulement bouché, robinet qui goutte : joignable 24h/24, 7j/7, diagnostic clair, réparation propre.",
          h1="Plombier dépannage : une fuite ? On s’en occupe.",
-         lead="Robinet qui goutte, WC qui coule, écoulement bouché, raccord qui fuit : nous diagnostiquons, réparons ou remplaçons — et nous vous expliquons ce qui s’est passé.",
-         mt="Plombier dépannage à Lausanne et Prilly",
-         md="Dépannage sanitaire à Lausanne, Prilly et dans le canton de Vaud : fuites, WC qui coule, robinetterie, écoulements bouchés, vannes d’arrêt. Appelez ou écrivez sur WhatsApp.",
+         lead="Joignables 24h/24, 7j/7. Robinet qui goutte, WC qui coule, écoulement bouché, raccord qui fuit : nous diagnostiquons, réparons ou remplaçons — et nous vous expliquons ce qui s’est passé.",
+         mt="Plombier dépannage 24h/24 à Lausanne et Prilly",
+         md="Plombier dépannage 24h/24, 7j/7 à Lausanne, Prilly et dans le canton de Vaud : fuites, WC qui coule, robinetterie, écoulements bouchés. Appelez le 079 552 24 70.",
          items=[("Fuites", "Recherche et réparation de fuites sur robinetterie, raccords et conduites apparentes."),
                 ("WC & chasses d’eau", "Mécanismes de chasse, robinets flotteurs, réservoirs encastrés : réglage ou remplacement."),
                 ("Robinetterie", "Remplacement de cartouches, mitigeurs, flexibles et robinets d’arrêt."),
@@ -106,7 +106,7 @@ SERVICES = [
                ("Coupez le courant", "Si l’eau approche d’une prise, d’un appareil ou d’un tableau électrique."),
                ("Protégez", "Épongez, déplacez ce qui craint l’eau, prévenez le voisin du dessous."),
                ("Photographiez", "Envoyez-nous une photo ou une vidéo sur WhatsApp : nous voyons tout de suite de quoi il s’agit.")],
-         faq=[("Intervenez-vous rapidement ?", "Nous faisons le maximum pour intervenir au plus vite, selon l’urgence et nos disponibilités. Le plus efficace : nous appeler, ou nous écrire sur WhatsApp avec une photo."),
+         faq=[("Êtes-vous joignables la nuit et le week-end ?", "Oui, nous sommes joignables 24h/24 et 7j/7, y compris le dimanche et les jours fériés. Le plus efficace : nous appeler au 079 552 24 70, ou nous écrire sur WhatsApp avec une photo."),
               ("Où se trouve ma vanne d’arrêt principale ?", "Le plus souvent près du compteur d’eau, à la cave ou dans une gaine technique. En appartement, il existe souvent des vannes sur le collecteur de l’étage et sous chaque appareil."),
               ("Connaîtrai-je le prix avant la réparation ?", "Nous vous expliquons le problème et la solution avant d’intervenir. Pour des travaux plus importants, vous recevez un devis."),
               ("Intervenez-vous pour les régies et les PPE ?", "Oui, pour les locataires, les propriétaires, les copropriétés et les régies.")],
@@ -269,7 +269,7 @@ def footer():
    </div>
    <nav class="ft__col" aria-label="Services"><p class="mono">Services</p><ul>%(svc)s</ul></nav>
    <nav class="ft__col" aria-label="Entreprise"><p class="mono">Entreprise</p><ul><li><a href="{R}realisations">Réalisations</a></li><li><a href="{R}entreprise">L’entreprise</a></li><li><a href="{R}contact">Contact & devis</a></li><li><a href="{R}mentions-legales">Mentions légales</a></li></ul></nav>
-   <div class="ft__col"><p class="mono">Contact</p><ul><li><a href="%(tel)s">%(phd)s</a></li><li><a href="%(wa)s" target="_blank" rel="noopener">WhatsApp</a></li>%(mail)s<li><a href="%(maps)s" target="_blank" rel="noopener">%(street)s<br>%(zip)s %(city)s</a></li><li class="ft__h">Lun – sam : 7h – 18h</li></ul></div>
+   <div class="ft__col"><p class="mono">Contact</p><ul><li><a href="%(tel)s">%(phd)s</a></li><li><a href="%(wa)s" target="_blank" rel="noopener">WhatsApp</a></li>%(mail)s<li><a href="%(maps)s" target="_blank" rel="noopener">%(street)s<br>%(zip)s %(city)s</a></li><li class="ft__h">Ouvert 24h/24, 7j/7</li></ul></div>
   </div>
   <nav class="ft__zones" aria-label="Zones et conseils">
    <p><a class="mono" href="{R}zone-intervention">Zone d’intervention</a>%(zones)s</p>
@@ -304,7 +304,7 @@ def jsonld_business():
                      "addressRegion": "VD", "addressCountry": "CH"},
          "geo": {"@type": "GeoCoordinates", "latitude": CO["lat"], "longitude": CO["lng"]},
          "areaServed": [{"@type": "City", "name": t["name"]} for t in LOCAL] + [{"@type": "AdministrativeArea", "name": "Canton de Vaud"}],
-         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "07:00", "closes": "18:00"}],
+         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "00:00", "closes": "23:59"}],
          "foundingDate": CO["founded"], "taxID": CO["ide"],
          "knowsAbout": ["Plomberie", "Installations sanitaires", "Rénovation de salles de bains", "Dépannage sanitaire", "Entretien sanitaire"],
          "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": x["title"], "url": BASE + "services/" + x["slug"]}} for x in SERVICES]}
@@ -982,7 +982,7 @@ def page_contact():
     <a class="ccard__l" href="%(wa)s" target="_blank" rel="noopener">%(waic)s<span><b>WhatsApp</b>Photos et vidéos bienvenues</span></a>
     %(mailcard)s
     <a class="ccard__l" href="%(maps)s" target="_blank" rel="noopener">%(pin)s<span><b>%(street)s</b>%(zip)s %(city)s</span></a>
-    <p class="ccard__h"><b>Horaires</b>Lundi – samedi : 7h – 18h<br>Dimanche : fermé</p>
+    <p class="ccard__h"><b>Horaires</b>Ouvert 24h/24, 7j/7</p>
    </div>
    <div class="mapf" data-r>
     <iframe title="Plan d’accès : %(addr)s" src="%(embed)s" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
