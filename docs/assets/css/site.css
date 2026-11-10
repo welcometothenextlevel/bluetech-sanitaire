@@ -927,3 +927,14 @@ a:hover>.crop,button:hover>.crop,.story__ph .crop{opacity:1;inset:18px}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .xr__f,.art .fl{animation:none}
 }
+
+/* social links */
+.soc{display:flex;gap:10px;margin:18px 0 0}
+.soc a{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);color:var(--ink);transition:color .3s,border-color .3s,background .3s}
+.soc a:hover{color:#fff;background:var(--blue);border-color:var(--blue)}
+.soc .ic{width:19px;height:19px}
+.soc--menu{grid-column:1/-1;margin:0}
+.soc--menu a{border-color:rgba(255,255,255,.18);color:#fff}
+.ccard__soc{margin:10px 0 0;padding:4px 16px;font-size:15px}
+.ccard__soc b{display:block;color:var(--ink);font-weight:600}
+.ccard__soc .soc{margin-top:8px}

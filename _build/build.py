@@ -4,7 +4,7 @@ CSS and JS are hand-written in docs/assets; bump V after editing them (cache-bus
 import os, json, html, math
 from urllib.parse import quote
 from seo_content import LOCAL, GUIDES
-from svg import LOGO, LOGO_SYMBOL, ARROW, ARROW_UR, PHONE, MAIL, PIN, PLUS, CLOSE, CHECK, CHEV, LEFT, RIGHT, WA, GOOGLE, STAR, STARS, SICON, ART
+from svg import LOGO, LOGO_SYMBOL, ARROW, ARROW_UR, PHONE, MAIL, PIN, PLUS, CLOSE, CHECK, CHEV, LEFT, RIGHT, WA, GOOGLE, IG, FB, STAR, STARS, SICON, ART
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "docs")
@@ -12,7 +12,7 @@ BASE = "https://bluetech-sarl.com/"
 DOMAIN = "bluetech-sarl.com"
 LASTMOD = "2026-11-06"
 GSC_TOKEN = ""             # Google Search Console "HTML tag" verification code, if used
-V = "19"
+V = "20"
 NOINDEX = False
 
 # ------------------------------------------------------------------ contact (phone from the user 2026-10-08; e-mail still unknown)
@@ -37,6 +37,8 @@ CO = dict(name="Bluetech Sanitaire Sàrl", brand="Bluetech Sanitaire", street="R
           lat=46.52856, lng=6.60343)
 ADDR = "%s, %s %s" % (CO["street"], CO["zip"], CO["city"])
 MAPS = GBP_URL
+IG_URL = "https://www.instagram.com/bluetech.sarl/"
+FB_URL = "https://www.facebook.com/profile.php?id=61596293855043"
 MAP_EMBED = "https://maps.google.com/maps?q=" + quote(ADDR) + "&z=16&output=embed"
 
 # ------------------------------------------------------------------ services
@@ -251,10 +253,16 @@ def header(key):
    <a class="btn btn--wa" href="%(wa)s" target="_blank" rel="noopener"><span class="btn__fill"></span><span class="btn__t">WhatsApp</span>%(waic)s</a>
    %(mailbtn)s
    <p class="mono">%(addr)s</p>
+   %(soc)s
   </div>
  </div>
 </div>''' % dict(logo=LOGO, chev=CHEV, mega=mega, arrow=ARROW, nav=nav, tel=TEL, phone=PHONE, phd=PHONE_DISPLAY, msvc=msvc,
-                  rv=REVIEWS_URL, g=GOOGLE, s5=STAR * 5, wa=WA_HELLO, waic=WA, addr=e(ADDR), mailbtn=('<a class="btn btn--glass menu__mail" href="mailto:%s"><span class="btn__fill"></span><span class="btn__t">E-mail</span>%s</a>' % (EMAIL, MAIL)) if EMAIL else "", nsvc="%02d" % len(SERVICES), svccur=" is-cur" if key == "services" else "")
+                  rv=REVIEWS_URL, g=GOOGLE, s5=STAR * 5, wa=WA_HELLO, waic=WA, addr=e(ADDR), mailbtn=('<a class="btn btn--glass menu__mail" href="mailto:%s"><span class="btn__fill"></span><span class="btn__t">E-mail</span>%s</a>' % (EMAIL, MAIL)) if EMAIL else "", nsvc="%02d" % len(SERVICES), soc=socials("soc soc--menu"), svccur=" is-cur" if key == "services" else "")
+
+
+def socials(cls="soc"):
+    return '<div class="%s">' % cls + "".join('<a href="%s" target="_blank" rel="noopener" aria-label="%s">%s</a>' % (u, l, ic) for u, l, ic in
+        ((IG_URL, "Bluetech Sanitaire sur Instagram", IG), (FB_URL, "Bluetech Sanitaire sur Facebook", FB))) + "</div>"
 
 
 def footer():
@@ -267,6 +275,7 @@ def footer():
    <div class="ft__brand">
     <a class="ft__logo" href="{HOME}" aria-label="Bluetech Sanitaire — accueil">%(logo)s</a>
     <p>Installations sanitaires à Prilly, à Lausanne et dans tout le canton de Vaud.</p>
+    %(soc)s
    </div>
    <nav class="ft__col" aria-label="Services"><p class="mono">Services</p><ul>%(svc)s</ul></nav>
    <nav class="ft__col" aria-label="Entreprise"><p class="mono">Entreprise</p><ul><li><a href="{R}realisations">Réalisations</a></li><li><a href="{R}entreprise">L’entreprise</a></li><li><a href="{R}contact">Contact & devis</a></li><li><a href="{R}mentions-legales">Mentions légales</a></li></ul></nav>
@@ -292,7 +301,7 @@ def footer():
         zones="".join('<a href="{R}%s">%s</a>' % (t["slug"], t["head"]) for t in LOCAL),
         guides="".join('<a href="{R}conseils/%s">%s</a>' % (g["slug"], g["mt"].split(" :")[0]) for g in GUIDES),
         logo=LOGO, svc=svc, tel=TEL, phd=PHONE_DISPLAY, wa=WA_HELLO, waic=WA, phone=PHONE, mail=("<li>%s</li>" % mail) if mail else "",
-        maps=MAPS, street=e(CO["street"]), zip=CO["zip"], city=CO["city"], name=e(CO["name"]), ide=CO["ide"], arrowur=ARROW_UR)
+        maps=MAPS, street=e(CO["street"]), zip=CO["zip"], city=CO["city"], name=e(CO["name"]), ide=CO["ide"], arrowur=ARROW_UR, soc=socials())
 
 
 def jsonld_business():
@@ -300,7 +309,7 @@ def jsonld_business():
          "alternateName": ["Bluetech Sanitaire", "Bluetech Sàrl", "BlueTech Sanitaire Sàrl Prilly"],
          "description": "Plombier et installateur sanitaire à Prilly (VD) : installations sanitaires, rénovation de salles de bains, dépannage et entretien dans tout le canton de Vaud. Devis gratuit.",
          "url": BASE, "logo": BASE + "assets/img/logo.png", "image": BASE + "assets/img/og.jpg",
-         "telephone": PHONE_TEL, "email": EMAIL, "hasMap": GBP_URL, "sameAs": [GBP_URL],
+         "telephone": PHONE_TEL, "email": EMAIL, "hasMap": GBP_URL, "sameAs": [GBP_URL, IG_URL, FB_URL],
          "address": {"@type": "PostalAddress", "streetAddress": CO["street"], "postalCode": CO["zip"], "addressLocality": CO["city"],
                      "addressRegion": "VD", "addressCountry": "CH"},
          "geo": {"@type": "GeoCoordinates", "latitude": CO["lat"], "longitude": CO["lng"]},
@@ -984,6 +993,7 @@ def page_contact():
     %(mailcard)s
     <a class="ccard__l" href="%(maps)s" target="_blank" rel="noopener">%(pin)s<span><b>%(street)s</b>%(zip)s %(city)s</span></a>
     <p class="ccard__h"><b>Horaires</b>Ouvert 24h/24, 7j/7</p>
+    <div class="ccard__soc"><b>Suivez nos chantiers</b>%(soc)s</div>
    </div>
    <div class="mapf" data-r>
     <iframe title="Plan d’accès : %(addr)s" src="%(embed)s" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -997,7 +1007,7 @@ def page_contact():
                      mailbtn=('<button class="btn btn--line" type="submit" data-via="mail" hidden><span class="btn__fill"></span><span class="btn__t">Envoyer par e-mail</span>%s</button>' % MAIL) if EMAIL else "",
                      ormail=" ou par e-mail" if EMAIL else "", tel=TEL, phone=PHONE, phd=PHONE_DISPLAY, wa=WA_HELLO, maps=MAPS, pin=PIN,
                      mailcard=('<a class="ccard__l" href="mailto:%s">%s<span><b>%s</b>E-mail</span></a>' % (EMAIL, MAIL, EMAIL)) if EMAIL else "",
-                     street=e(CO["street"]), zip=CO["zip"], city=CO["city"], addr=e(ADDR), embed=MAP_EMBED)
+                     street=e(CO["street"]), zip=CO["zip"], city=CO["city"], addr=e(ADDR), embed=MAP_EMBED, soc=socials())
     return render("contact.html", "Contact et devis gratuit | Bluetech Sanitaire Sàrl, Prilly",
                   "Demandez un devis à Bluetech Sanitaire : installations sanitaires, salles de bains, dépannage et entretien dans tout le canton de Vaud.",
                   body, key="contact", body_cls="p-contact", jsonld=[crumbs_ld(("Accueil", ""), ("Contact et devis", "contact"))])
